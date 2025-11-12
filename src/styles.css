@@ -1,1 +1,85 @@
+@font-face {
+  font-family: "Raleway";
+  src: url("/fonts/Raleway-VariableFont_wght.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inconsolata";
+  src: url("/fonts/Inconsolata.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --richblack: #000e22;
+  --navy: #001533;
+  --seablue: #2e4a66;
+  --slate-gray: #b4b9c0;
+  --anti-flash-white: #efefef;
+  --screaming-green: #4cd625;
+  --background-lines: #2e4a6620;
+
+  --text-size-h1: clamp(48px, 6vw, 240px);
+  --text-size-h2: clamp(28px, 2.5vw, 144px);
+  --text-size-h3: clamp(24px, 1.8vw, 48px);
+  --text-size-md: clamp(16px, 0.8vw, 28px);
+  --text-size-ms: clamp(16px, 0.8vw, 28px);
+  --text-size-xs: clamp(12px, 0.4vw, 16px);
+
+  --button-padding: clamp(0.6rem, 0.75vw, 1.7rem) clamp(1.2rem, 1.5vw, 3rem);
+  --tag-padding: clamp(0.4rem, 0.5vw, 0.8rem) clamp(0.8rem, 1vw, 1.6rem);
+  --tag-border-radius: clamp(2rem, 2vw, 4rem);
+
+  --max-screen-width: 3840px;
+}
+
+html,
+body {
+  font-family: "Inconsolata", Inter, Roboto, "Helvetica Neue", "Arial Nova",
+    "Nimbus Sans", Arial, sans-serif;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--anti-flash-white);
+  scroll-behavior: smooth;
+  scroll-padding: 2rem;
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--navy);
+  background-image: linear-gradient(
+      to right,
+      var(--background-lines) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, var(--background-lines) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
 @import "tailwindcss";
+
+@theme {
+  --color-richblack: var(--richblack);
+  --color-navy: var(--navy);
+  --color-seablue: var(--seablue);
+  --color-slate-gray: var(--slate-gray);
+  --color-anti-flash-white: var(--anti-flash-white);
+  --color-screaming-green: var(--screaming-green);
+  --color-background-lines: var(--background-lines);
+
+  --font-size-h1: var(--text-size-h1);
+  --font-size-h2: var(--text-size-h2);
+  --font-size-h3: var(--text-size-h3);
+  --font-size-md: var(--text-size-md);
+  --font-size-ms: var(--text-size-ms);
+  --font-size-xs: var(--text-size-xs);
+
+  --spacing-button-padding: var(--button-padding);
+  --spacing-tag-padding: var(--tag-padding);
+  --spacing-tag-border-radius: var(--tag-border-radius);
+}

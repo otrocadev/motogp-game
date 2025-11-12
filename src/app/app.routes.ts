@@ -14,6 +14,10 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./auth/components/log-in/log-in.component'),
       },
+      {
+        path: '**',
+        redirectTo: 'log-in',
+      },
     ],
   },
 ];
