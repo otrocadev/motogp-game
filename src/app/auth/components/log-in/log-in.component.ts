@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../../data-access/auth.service';
+import { Router } from '@angular/router';
 
 interface LogInForm {
   email: FormControl<string | null>;
@@ -16,6 +17,7 @@ interface LogInForm {
 export default class LogInComponent {
   private _formBuilder = inject(FormBuilder);
   private _authService = inject(AuthService);
+  private _router = inject(Router);
 
   form = this._formBuilder.group<LogInForm>({
     email: this._formBuilder.control(null, [
@@ -35,6 +37,8 @@ export default class LogInComponent {
       email: this.form.value.email!,
       password: this.form.value.password!,
     });
+
+    this._router.navigate(['/']);
 
     console.log(authResponse);
   }
