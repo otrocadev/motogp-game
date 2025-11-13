@@ -59,8 +59,6 @@ body {
   --color-screaming-green: var(--screaming-green);
   --color-background-lines: var(--background-lines);
 
-  --font-family-primary: "Inconsolata", Inter, Roboto, "Helvetica Neue",
-    "Arial Nova", "Nimbus Sans", Arial, sans-serif;
-  --font-family-secondary: "Raleway", Inter, Roboto, "Helvetica Neue",
-    "Arial Nova", "Nimbus Sans", Arial, sans-serif;
+  --font-secondary: "Raleway", Inter, Roboto, "Helvetica Neue", "Arial Nova",
+    "Nimbus Sans", Arial, sans-serif;
 }
