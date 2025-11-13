@@ -59,6 +59,13 @@ body {
   --color-screaming-green: var(--screaming-green);
   --color-background-lines: var(--background-lines);
 
+<<<<<<< HEAD
   --font-secondary: "Raleway", Inter, Roboto, "Helvetica Neue", "Arial Nova",
     "Nimbus Sans", Arial, sans-serif;
+=======
+  --font-family-primary: "Inconsolata", Inter, Roboto, "Helvetica Neue",
+    "Arial Nova", "Nimbus Sans", Arial, sans-serif;
+  --font-family-secondary: "Raleway", Inter, Roboto, "Helvetica Neue",
+    "Arial Nova", "Nimbus Sans", Arial, sans-serif;
+>>>>>>> 5596c10 (feat: add secondary font family and create films search component)
 }
