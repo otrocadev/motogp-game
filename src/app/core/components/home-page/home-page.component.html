@@ -1,0 +1,7 @@
+<main class="h-screen w-screen">
+  @if (authState()) {
+  <app-films-search></app-films-search>
+  } @if (!authState()) {
+  <p>User not logged in!</p>
+  }
+</main>

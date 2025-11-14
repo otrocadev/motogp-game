@@ -1,5 +1,5 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { SupabaseService } from '../../shared/data-access/supabase.service';
+import { SupabaseService } from '../../core/data-access/supabase.service';
 import {
   SignInWithPasswordCredentials,
   SignUpWithPasswordCredentials,
@@ -10,7 +10,7 @@ import {
 })
 export class AuthService {
   private _supabaseClient = inject(SupabaseService).supabaseClient;
-  private _isSessionActive = signal(false);
+  private _isSessionActive = signal(true);
   isSessionActive = this._isSessionActive.asReadonly();
 
   signUp(credentials: SignUpWithPasswordCredentials) {
