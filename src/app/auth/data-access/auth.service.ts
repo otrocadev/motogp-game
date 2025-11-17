@@ -10,7 +10,7 @@ import {
 })
 export class AuthService {
   private _supabaseClient = inject(SupabaseService).supabaseClient;
-  private _isSessionActive = signal(true);
+  private _isSessionActive = signal(false);
   isSessionActive = this._isSessionActive.asReadonly();
 
   signUp(credentials: SignUpWithPasswordCredentials) {
