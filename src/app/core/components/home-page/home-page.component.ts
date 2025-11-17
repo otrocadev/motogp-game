@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../auth/data-access/auth.service';
-import { FilmsSearchComponent } from '../../../films-search/films-search.component';
+import { FilmsSearchComponent } from '../../../films-search/components/films-search.component';
 import { HeroBannerComponent } from './hero-banner/hero-banner.component';
 
 @Component({

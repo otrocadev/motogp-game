@@ -39,7 +39,5 @@ export default class LogInComponent {
     });
 
     this._router.navigate(['/']);
-
-    console.log(authResponse);
   }
 }

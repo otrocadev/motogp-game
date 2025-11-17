@@ -1,6 +1,7 @@
-<form class="mx-auto">
+<form class="mx-auto" [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="flex items-center justify-center gap-2">
     <input
+      formControlName="searchInput"
       type="search"
       id="search"
       class="block w-full p-3 ps-9 font-secondary bg-richblack border border-slate-gray text-anti-flash-white text-sm rounded-lg focus:ring-screaming-green focus:border-screaming-green shadow placeholder:text-anti-flash-white/60"
