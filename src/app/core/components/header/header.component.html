@@ -1,0 +1,22 @@
+<header>
+  <nav class="bg-richblack border-b border-slate-gray px-4 lg:px-6 py-2.5">
+    <div class="flex flex-wrap justify-between items-center mx-auto max-w-7xl">
+      <a href="/" class="flex items-center">
+        <img
+          src="/images/popcorn_icon.webp"
+          class="mr-3 h-6 sm:h-9"
+          alt="OMDB popcorn icon"
+        />
+        <span
+          class="self-center font-secondary text-xl font-semibold whitespace-nowrap text-screaming-green"
+          >OMDB</span
+        >
+      </a>
+      @if (!isSessionActive()) {
+      <app-not-authenticated-menu></app-not-authenticated-menu>
+      } @if (isSessionActive()) {
+      <app-user-authenticated-menu></app-user-authenticated-menu>
+      }
+    </div>
+  </nav>
+</header>
