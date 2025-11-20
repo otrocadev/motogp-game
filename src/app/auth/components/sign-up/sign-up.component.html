@@ -29,6 +29,14 @@
           required=""
           formControlName="email"
         />
+        @if (form.controls.email.invalid && form.controls.email.touched) {
+        <p class="mt-1 text-sm text-red-500">
+          @if (form.controls.email.errors?.['required']) { The email is required
+          } @else if (form.controls.email.errors?.['email'] ||
+          form.controls.email.errors?.['strictEmail']) { Invalid email format.
+          Must include &#64; and domain (e.g., .com, .es) }
+        </p>
+        }
       </div>
       <div>
         <label
@@ -45,12 +53,36 @@
           required=""
           formControlName="password"
         />
+        @if (form.controls.password.invalid && form.controls.password.touched) {
+        <p class="mt-1 text-sm text-red-500">
+          @if (form.controls.password.errors?.['required']) { The password is
+          required } @else if (form.controls.password.errors?.['minlength']) {
+          The password must have at least 6 characters }
+        </p>
+        }
       </div>
+      @if (errorMessage()) {
+      <div class="p-4 text-sm text-red-500 bg-red-100 rounded-lg" role="alert">
+        {{ errorMessage() }}
+      </div>
+      } @if (successMessage()) {
+      <div
+        class="p-4 text-sm text-green-700 bg-green-100 rounded-lg"
+        role="alert"
+      >
+        {{ successMessage() }}
+      </div>
+      }
       <button
         type="submit"
-        class="w-full font-secondary text-navy bg-screaming-green hover:bg-screaming-green/90 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+        [disabled]="isLoading()"
+        class="w-full font-secondary text-navy bg-screaming-green hover:bg-screaming-green/90 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Create an account
+        @if (isLoading()) {
+        <span>Loading...</span>
+        } @else {
+        <span>Create an account</span>
+        }
       </button>
       <p class="text-sm font-light text-anti-flash-white">
         Already have an account?
