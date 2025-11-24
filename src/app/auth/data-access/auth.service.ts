@@ -11,20 +11,30 @@ import {
 })
 export class AuthService {
   private _supabaseClient = inject(SupabaseService).supabaseClient;
-  private _isSessionActive = signal(environment.SESSION_ACTIVE_DEFAULT);
+  private _isSessionActive = signal<boolean | null>(null);
+
   isSessionActive = this._isSessionActive.asReadonly();
+
+  constructor() {
+    this._supabaseClient.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_OUT') this._isSessionActive.set(false);
+      if (event === 'SIGNED_IN') this._isSessionActive.set(true);
+    });
+  }
+
+  session() {
+    return this._supabaseClient.auth.getSession();
+  }
 
   signUp(credentials: SignUpWithPasswordCredentials) {
     return this._supabaseClient.auth.signUp(credentials);
   }
 
   logIn(credentials: SignInWithPasswordCredentials) {
-    this._isSessionActive.set(true);
     return this._supabaseClient.auth.signInWithPassword(credentials);
   }
 
   signOut() {
-    this._isSessionActive.set(false);
     return this._supabaseClient.auth.signOut();
   }
 }

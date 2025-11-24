@@ -1,12 +1,12 @@
 <section class="flex items-center">
   <a
-    href="/auth/log-in"
-    class="font-secondary text-anti-flash-white hover:text-screaming-green focus:ring-4 focus:ring-slate-gray font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none transition-colors"
+    (click)="goToLogIn()"
+    class="font-secondary text-anti-flash-white hover:text-screaming-green focus:ring-4 focus:ring-slate-gray font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none transition-colors hover:cursor-pointer"
     >Log in</a
   >
   <a
-    href="/auth/sign-up"
-    class="font-secondary text-navy bg-screaming-green hover:bg-screaming-green/90 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none transition-colors"
+    (click)="goToSignUp()"
+    class="font-secondary text-navy bg-screaming-green hover:bg-screaming-green/90 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none transition-colors hover:cursor-pointer"
     >Get started</a
   >
 </section>

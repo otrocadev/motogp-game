@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../../auth/data-access/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-authenticated-menu',
@@ -9,8 +10,10 @@ import { AuthService } from '../../../../auth/data-access/auth.service';
 })
 export class UserAuthenticatedMenuComponent {
   private _authService = inject(AuthService);
+  private _router = inject(Router);
 
-  signOut() {
-    this._authService.signOut();
+  async signOut() {
+    await this._authService.signOut();
+    this._router.navigate(['/auth/log-in']);
   }
 }

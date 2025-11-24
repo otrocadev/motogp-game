@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { privateGuard, publicGuard } from './auth/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -8,6 +9,7 @@ export const routes: Routes = [
   },
   {
     path: 'movie/:id',
+    canActivate: [privateGuard],
     loadComponent: () =>
       import('./movie-info/components/movie-info.component').then(
         (m) => m.MovieInfoComponent
@@ -18,11 +20,13 @@ export const routes: Routes = [
     children: [
       {
         path: 'sign-up',
+        canActivate: [publicGuard],
         loadComponent: () =>
           import('./auth/components/sign-up/sign-up.component'),
       },
       {
         path: 'log-in',
+        canActivate: [publicGuard],
         loadComponent: () =>
           import('./auth/components/log-in/log-in.component'),
       },
