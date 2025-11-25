@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { AuthService } from '../../../auth/data-access/auth.service';
+import { AuthService } from '../../auth/data-access/auth.service';
 import { HeroBannerComponent } from './hero-banner/hero-banner.component';
 
 @Component({
