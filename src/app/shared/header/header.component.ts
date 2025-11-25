@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { AuthService } from '../../../auth/data-access/auth.service';
+import { AuthService } from '../../auth/data-access/auth.service';
 import { NotAuthenticatedMenuComponent } from './not-authenticated-menu/not-authenticated-menu.component';
 import { UserAuthenticatedMenuComponent } from './user-authenticated-menu/user-authenticated-menu.component';
 
