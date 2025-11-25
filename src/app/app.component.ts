@@ -9,5 +9,5 @@ import { HeaderComponent } from './core/components/header/header.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'omdb-front-page';
+  title = 'motogp-game';
 }

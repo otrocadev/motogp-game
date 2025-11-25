@@ -7,57 +7,49 @@
 }
 
 @font-face {
-  font-family: "Inconsolata";
-  src: url("/fonts/Inconsolata.ttf") format("truetype");
-  font-weight: 400;
+  font-family: "Science Gothic";
+  src: url("/fonts/ScienceGothic-VariableFont.ttf") format("truetype");
+  font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 :root {
-  --richblack: #000e22;
-  --navy: #001533;
-  --seablue: #2e4a66;
-  --slate-gray: #b4b9c0;
-  --anti-flash-white: #efefef;
-  --screaming-green: #4cd625;
-  --background-lines: #2e4a6620;
+  --theme1: #000e22;
+  --theme2: #001533;
+  --theme3: #2e4a66;
+  --theme4: #b4b9c0;
+  --theme5: #efefef;
+  --theme6: #4cd625;
 }
 
 html,
 body {
-  font-family: "Inconsolata", Inter, Roboto, "Helvetica Neue", "Arial Nova",
+  font-family: "Science Gothic", Inter, Roboto, "Helvetica Neue", "Arial Nova",
     "Nimbus Sans", Arial, sans-serif;
   margin: 0;
   width: 100%;
   height: 100%;
-  color: var(--anti-flash-white);
+  color: var(--theme5);
   scroll-behavior: smooth;
   scroll-padding: 2rem;
   position: absolute;
   inset: 0;
   height: 100%;
   width: 100%;
-  background-color: var(--navy);
-  background-image: linear-gradient(
-      to right,
-      var(--background-lines) 1px,
-      transparent 1px
-    ),
-    linear-gradient(to bottom, var(--background-lines) 1px, transparent 1px);
-  background-size: 64px 64px;
+  background-image: url("/images/bg-image.jpg");
+  background-size: cover;
 }
 
 @import "tailwindcss";
 
 @theme {
-  --color-richblack: var(--richblack);
-  --color-navy: var(--navy);
-  --color-seablue: var(--seablue);
-  --color-slate-gray: var(--slate-gray);
-  --color-anti-flash-white: var(--anti-flash-white);
-  --color-screaming-green: var(--screaming-green);
-  --color-background-lines: var(--background-lines);
+  --color-theme1: var(--theme1);
+  --color-theme2: var(--theme2);
+  --color-theme3: var(--theme3);
+  --color-theme4: var(--theme4);
+  --color-theme5: var(--theme5);
+  --color-theme6: var(--theme6);
 
   --font-secondary: "Raleway", Inter, Roboto, "Helvetica Neue", "Arial Nova",
     "Nimbus Sans", Arial, sans-serif;

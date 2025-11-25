@@ -53,6 +53,13 @@ export default class SignUpComponent {
       const authResponse = await this._authService.signUp({
         email: this.form.value.email!,
         password: this.form.value.password!,
+        options: {
+          data: {
+            first_name: 'John',
+            last_name: 'Doe',
+            display_name: 'Johndoe99',
+          },
+        },
       });
 
       if (authResponse.error) {

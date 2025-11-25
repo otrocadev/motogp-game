@@ -8,14 +8,6 @@ export const routes: Routes = [
       import('./core/components/home-page/home-page.component'),
   },
   {
-    path: 'movie/:id',
-    canActivate: [privateGuard],
-    loadComponent: () =>
-      import('./movie-info/components/movie-info.component').then(
-        (m) => m.MovieInfoComponent
-      ),
-  },
-  {
     path: 'auth',
     children: [
       {
