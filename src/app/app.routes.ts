@@ -11,6 +11,17 @@ export const routes: Routes = [
     loadComponent: () => import('./home-page/home-page.component'),
   },
   {
+    path: 'grand-prix-management',
+    canActivate: [privateGuard, adminGuard],
+    children: [
+      {
+        path: 'calendar-view',
+        loadComponent: () =>
+          import('./admin/grand-prix-calendar/grand-prix-calendar.component'),
+      },
+    ],
+  },
+  {
     path: 'create-race',
     canActivate: [privateGuard, adminGuard],
     loadComponent: () => import('./admin/create-race/create-race.component'),

@@ -1,9 +1,9 @@
 export const mainMenuOptions = {
   admin: [
     {
-      title: 'CREATE A NEW GRAND PRIX',
+      title: 'MANAGE GRAND PRIX EVENTS',
       image: 'calendar.png',
-      url: '/create-race',
+      url: '/grand-prix-management/calendar-view',
     },
   ],
   user: [

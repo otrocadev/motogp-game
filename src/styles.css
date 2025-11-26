@@ -54,3 +54,35 @@ body {
   --font-secondary: "Raleway", Inter, Roboto, "Helvetica Neue", "Arial Nova",
     "Nimbus Sans", Arial, sans-serif;
 }
+
+/* FullCalendar */
+
+.fc .fc-toolbar {
+  @apply px-4 py-2 bg-theme3 flex items-center justify-between gap-3;
+}
+
+.fc .fc-toolbar-title {
+  @apply text-2xl font-semibold text-theme6 font-secondary rounded-xl px-3 py-1;
+}
+
+.fc .fc-button {
+  @apply bg-theme6 text-theme1 rounded-md px-3 py-1 text-xs font-semibold uppercase
+         hover:bg-theme6/80 focus-visible:ring-theme6/70
+         disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  @apply bg-theme6/50 border-2 border-theme6;
+}
+
+.fc .fc-col-header {
+  @apply bg-theme3/90;
+}
+
+.fc .fc-col-header-cell {
+  @apply text-xs font-secondary uppercase text-theme6 font-bold;
+}
+
+.fc .fc-col-header-cell-cushion {
+  @apply py-2;
+}
