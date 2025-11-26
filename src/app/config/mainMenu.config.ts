@@ -1,14 +1,14 @@
 export const mainMenuOptions = {
   admin: [
     {
-      title: 'CREATE A NEW RACE',
+      title: 'CREATE A NEW GRAND PRIX',
       image: 'calendar.png',
       url: '/create-race',
     },
   ],
   user: [
     {
-      title: 'GRAN PRIX CALENDAR',
+      title: 'GRAND PRIX CALENDAR',
       image: 'racetrack.png',
       url: '/not-found',
     },
