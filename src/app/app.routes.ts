@@ -4,7 +4,7 @@ import { privateGuard, publicGuard } from './auth/guards/auth.guard';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./shared/home-page/home-page.component'),
+    loadComponent: () => import('./home-page/home-page.component'),
   },
   {
     path: 'auth',
