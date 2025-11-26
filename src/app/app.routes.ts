@@ -7,6 +7,10 @@ export const routes: Routes = [
     loadComponent: () => import('./home-page/home-page.component'),
   },
   {
+    path: 'create-race',
+    loadComponent: () => import('./admin/create-race/create-race.component'),
+  },
+  {
     path: 'auth',
     children: [
       {
