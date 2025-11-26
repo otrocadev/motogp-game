@@ -14,7 +14,9 @@ export class BentoElementComponent {
   backgroundImage = input<string>();
   url = input<string>();
 
-  backgroundImageURL = computed(() => `url(${this.backgroundImage()})`);
+  backgroundImageURL = computed(
+    () => `url(images/icons/${this.backgroundImage()})`
+  );
 
   navigateTo() {
     this._router.navigate([this.url()]);

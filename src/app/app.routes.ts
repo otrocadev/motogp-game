@@ -1,5 +1,9 @@
 import { Routes } from '@angular/router';
-import { privateGuard, publicGuard } from './auth/guards/auth.guard';
+import {
+  privateGuard,
+  publicGuard,
+  adminGuard,
+} from './auth/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -8,6 +12,7 @@ export const routes: Routes = [
   },
   {
     path: 'create-race',
+    canActivate: [privateGuard, adminGuard],
     loadComponent: () => import('./admin/create-race/create-race.component'),
   },
   {
