@@ -1,6 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { SupabaseService } from '../../auth/data-access/supabase.service';
 import { EventInput } from '@fullcalendar/core';
+import { GrandPrixEvent } from '../../admin/create-race/create-race-types';
 
 @Injectable({
   providedIn: 'root',
@@ -37,5 +38,35 @@ export class GrandPrixService {
 
     this._grandPrixCalendarEvents.set(calendarEvents);
     return this._grandPrixCalendarEvents();
+  }
+
+  async getGrandPrixInfoById(id: string) {
+    const { data, error } = await this._supabaseService.supabaseClient
+      .from('2026_grand_prixes')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error(error);
+      return null;
+    }
+
+    return data;
+  }
+
+  async updateGrandPrixInfoById(eventData: GrandPrixEvent) {
+    const { data, error } = await this._supabaseService.supabaseClient
+      .from('2026_grand_prixes')
+      .update(eventData)
+      .eq('id', eventData.id)
+      .single();
+
+    if (error) {
+      console.error(error);
+      return null;
+    }
+
+    return data;
   }
 }

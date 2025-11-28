@@ -71,6 +71,18 @@ body {
          disabled:opacity-50 disabled:cursor-not-allowed;
 }
 
+.fc .fc-daygrid-event {
+  @apply w-full px-3 py-1 mt-1
+         rounded-md bg-theme1
+         text-sm font-extrabold
+         flex flex-col gap-0.5
+         cursor-pointer;
+}
+
+.fc .fc-daygrid-day-events {
+  @apply px-1 py-1;
+}
+
 .fc .fc-daygrid-day.fc-day-today {
   @apply bg-theme6/50 border-2 border-theme6;
 }

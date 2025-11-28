@@ -10,6 +10,9 @@ import {
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { GrandPrixService } from '../../shared/data-access/grand-prix.service';
+import { Dialog } from '@angular/cdk/dialog';
+import { CreateRaceComponent } from '../create-race/create-race.component';
+import { EventMode } from '../create-race/create-race-types';
 
 @Component({
   selector: 'app-grand-prix-calendar',
@@ -18,6 +21,7 @@ import { GrandPrixService } from '../../shared/data-access/grand-prix.service';
 })
 export default class GrandPrixCalendarComponent {
   private _grandPrixService = inject(GrandPrixService);
+  private _dialog = inject(Dialog);
 
   calendarOptions = signal<CalendarOptions>({
     plugins: [interactionPlugin, dayGridPlugin],
@@ -54,15 +58,29 @@ export default class GrandPrixCalendarComponent {
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
-    // TODO: Use a modal to create a new event
+    this.openCreateEventModal('create', selectInfo);
   }
 
   handleEventClick(clickInfo: EventClickArg) {
-    // TODO: Use a modal to edit the event
+    this.openCreateEventModal('edit', undefined, clickInfo.event.id);
   }
 
   handleEvents(events: EventApi[]) {
     this.currentEvents.set(events);
     this.changeDetector.detectChanges();
+  }
+
+  openCreateEventModal(
+    mode: EventMode,
+    selectInfo?: DateSelectArg,
+    eventId?: string
+  ) {
+    this._dialog.open(CreateRaceComponent, {
+      data: {
+        mode: mode,
+        dateInfo: selectInfo,
+        eventId: eventId,
+      },
+    });
   }
 }

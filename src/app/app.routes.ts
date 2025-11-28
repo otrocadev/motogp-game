@@ -22,11 +22,6 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'create-race',
-    canActivate: [privateGuard, adminGuard],
-    loadComponent: () => import('./admin/create-race/create-race.component'),
-  },
-  {
     path: 'auth',
     children: [
       {
