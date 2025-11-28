@@ -1,11 +1,11 @@
 <section
-  class="flex flex-col items-center justify-center mx-auto min-h-full lg:py-0 h-[calc(100vh-12rem)] w-[calc(100vw-12rem)] max-w-5xl bg-theme2/50"
+  class="flex flex-col items-center justify-center mx-auto min-h-full lg:py-0 h-fit max-h-[calc(100vh-12rem)] w-[calc(100vw-12rem)] max-w-5xl bg-theme2/50"
 >
   <article
-    class="bg-theme1 w-full h-full border border-theme4 rounded-lg shadow p-6 space-y-4 md:space-y-6 sm:p-8 md:mt-0"
+    class="bg-theme1 w-full h-fit border border-theme4 rounded-lg shadow p-6 space-y-4 md:space-y-6 sm:p-8 md:mt-0 overflow-scroll"
   >
     <h1
-      class="text-2xl font-secondary leading-tight tracking-tight text-theme6 md:text-2xl"
+      class="text-xl font-secondary leading-tight tracking-tight text-theme6 md:text-2xl"
     >
       @if (formMode() === 'create') { Create Grand Prix } @else { Edit Grand
       Prix }
@@ -145,13 +145,6 @@
       @if (errorMessage()) {
       <div class="p-4 text-sm text-red-500 bg-red-100 rounded-lg" role="alert">
         {{ errorMessage() }}
-      </div>
-      } @if (successMessage()) {
-      <div
-        class="p-4 text-sm text-green-700 bg-green-100 rounded-lg"
-        role="alert"
-      >
-        {{ successMessage() }}
       </div>
       }
       <button

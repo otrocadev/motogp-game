@@ -69,4 +69,18 @@ export class GrandPrixService {
 
     return data;
   }
+
+  async createGrandPrixEvent(eventData: GrandPrixEvent) {
+    const { data, error } = await this._supabaseService.supabaseClient
+      .from('2026_grand_prixes')
+      .insert(eventData)
+      .single();
+
+    if (error) {
+      console.error(error);
+      return null;
+    }
+
+    return data;
+  }
 }

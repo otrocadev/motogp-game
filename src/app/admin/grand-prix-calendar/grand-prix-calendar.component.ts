@@ -75,12 +75,18 @@ export default class GrandPrixCalendarComponent {
     selectInfo?: DateSelectArg,
     eventId?: string
   ) {
-    this._dialog.open(CreateRaceComponent, {
+    const dialogRef = this._dialog.open(CreateRaceComponent, {
       data: {
         mode: mode,
         dateInfo: selectInfo,
         eventId: eventId,
       },
+    });
+
+    dialogRef.closed.subscribe((result) => {
+      if (result === 'created' || result === 'updated') {
+        this.loadEvents(); // re-fetch from Supabase
+      }
     });
   }
 }

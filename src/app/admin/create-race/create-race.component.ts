@@ -6,7 +6,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import { DIALOG_DATA } from '@angular/cdk/dialog';
+import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { DateSelectArg } from '@fullcalendar/core';
 import { GrandPrixService } from '../../shared/data-access/grand-prix.service';
 import {
@@ -31,9 +31,34 @@ interface CreateRaceForm {
 export class CreateRaceComponent {
   private _formBuilder = inject(FormBuilder);
   private _grandPrixService = inject(GrandPrixService);
-
   private _formMode = signal<EventMode>('create');
+  private dialogRef = inject(DialogRef);
+
   formMode = this._formMode.asReadonly();
+
+  isLoading = signal(false);
+  errorMessage = signal<string | null>(null);
+
+  form = this._formBuilder.group<CreateRaceForm>({
+    name: this._formBuilder.control(null, [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+    location: this._formBuilder.control(null, [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+    circuit: this._formBuilder.control(null, [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+    start_date: this._formBuilder.control<string | null>(null, [
+      Validators.required,
+    ]),
+    end_date: this._formBuilder.control<string | null>(null, [
+      Validators.required,
+    ]),
+  });
 
   constructor(@Inject(DIALOG_DATA) public data: CreateRaceDialogData) {
     this._formMode.set(data.mode);
@@ -54,10 +79,6 @@ export class CreateRaceComponent {
       }
     }
   }
-
-  isLoading = signal(false);
-  errorMessage = signal<string | null>(null);
-  successMessage = signal<string | null>(null);
 
   private addNewEventDates(datesInfo: DateSelectArg) {
     const dates = datesInfo;
@@ -87,55 +108,54 @@ export class CreateRaceComponent {
     });
   }
 
-  form = this._formBuilder.group<CreateRaceForm>({
-    name: this._formBuilder.control(null, [
-      Validators.required,
-      Validators.minLength(3),
-    ]),
-    location: this._formBuilder.control(null, [
-      Validators.required,
-      Validators.minLength(3),
-    ]),
-    circuit: this._formBuilder.control(null, [
-      Validators.required,
-      Validators.minLength(3),
-    ]),
-    start_date: this._formBuilder.control<string | null>(null, [
-      Validators.required,
-    ]),
-    end_date: this._formBuilder.control<string | null>(null, [
-      Validators.required,
-    ]),
-  });
-
   private createEventData(): GrandPrixEvent {
     const eventData = {
-      name: this.form.value.name!,
-      location: this.form.value.location!,
-      circuit: this.form.value.circuit!,
+      name: this.form.value.name!.toUpperCase(),
+      location: this.form.value.location!.toUpperCase(),
+      circuit: this.form.value.circuit!.toUpperCase(),
       start_date: this.form.value.start_date!,
       end_date: this.form.value.end_date!,
     };
     return eventData;
   }
+
   private patchEventData(): GrandPrixEvent {
     const eventData = {
       id: this.data.eventId!,
-      name: this.form.value.name!,
-      location: this.form.value.location!,
-      circuit: this.form.value.circuit!,
+      name: this.form.value.name!.toUpperCase(),
+      location: this.form.value.location!.toUpperCase(),
+      circuit: this.form.value.circuit!.toUpperCase(),
       start_date: this.form.value.start_date!,
       end_date: this.form.value.end_date!,
     };
     return eventData;
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.data.mode === 'create') {
-      this.createEventData();
+      this.isLoading.set(true);
+      try {
+        await this._grandPrixService.createGrandPrixEvent(
+          this.createEventData()
+        );
+        this.dialogRef.close('created');
+      } catch (error) {
+        this.errorMessage.set('Error creating grand prix');
+      } finally {
+        this.isLoading.set(false);
+      }
     } else if (this.data.mode === 'edit') {
-      console.log(this.patchEventData());
-      this._grandPrixService.updateGrandPrixInfoById(this.patchEventData());
+      this.isLoading.set(true);
+      try {
+        await this._grandPrixService.updateGrandPrixInfoById(
+          this.patchEventData()
+        );
+        this.dialogRef.close('updated');
+      } catch (error) {
+        this.errorMessage.set('Error updating grand prix');
+      } finally {
+        this.isLoading.set(false);
+      }
     } else {
       console.error('Invalid mode');
     }
