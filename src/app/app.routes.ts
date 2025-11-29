@@ -17,7 +17,9 @@ export const routes: Routes = [
       {
         path: 'calendar-view',
         loadComponent: () =>
-          import('./admin/grand-prix-calendar/grand-prix-calendar.component'),
+          import(
+            './admin/grand-prix-calendar-admin/grand-prix-calendar-admin.component'
+          ),
       },
     ],
   },

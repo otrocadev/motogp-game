@@ -1,38 +1,28 @@
 import { Component, Inject, inject, signal } from '@angular/core';
-
-import {
-  FormBuilder,
-  ReactiveFormsModule,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Dialog } from '@angular/cdk/dialog';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { DateSelectArg } from '@fullcalendar/core';
 import { GrandPrixService } from '../../shared/data-access/grand-prix.service';
+import { DeletionConfirmationModalComponent } from '../../shared/components/deletion-confirmation-modal/deletion-confirmation-modal.component';
 import {
   EventMode,
   GrandPrixEvent,
   CreateRaceDialogData,
-} from './create-race-types';
-
-interface CreateRaceForm {
-  name: FormControl<string | null>;
-  location: FormControl<string | null>;
-  circuit: FormControl<string | null>;
-  start_date: FormControl<string | null>;
-  end_date: FormControl<string | null>;
-}
+  CreateRaceForm,
+} from '../../shared/types/race.types';
 
 @Component({
-  selector: 'app-create-race',
+  selector: 'app-manage-race',
   imports: [ReactiveFormsModule],
-  templateUrl: './create-race.component.html',
+  templateUrl: './manage-race.component.html',
 })
-export class CreateRaceComponent {
+export class ManageRaceComponent {
   private _formBuilder = inject(FormBuilder);
   private _grandPrixService = inject(GrandPrixService);
   private _formMode = signal<EventMode>('create');
-  private dialogRef = inject(DialogRef);
+  dialogRef = inject(DialogRef);
+  private _dialog = inject(Dialog);
 
   formMode = this._formMode.asReadonly();
 
@@ -129,6 +119,28 @@ export class CreateRaceComponent {
       end_date: this.form.value.end_date!,
     };
     return eventData;
+  }
+
+  openDeleteConfirmationDialog(): void {
+    const confirmDeletionRef = this._dialog.open(
+      DeletionConfirmationModalComponent,
+      {
+        data: {
+          functionOnConfirm: async () => {
+            await this._grandPrixService.deleteGrandPrixInfoById(
+              this.data.eventId!
+            );
+          },
+          messageOnConfirm: 'The grand prix has been deleted successfully',
+        },
+      }
+    );
+
+    confirmDeletionRef.closed.subscribe((result) => {
+      if (result === 'confirmed') {
+        this.dialogRef.close('deleted');
+      }
+    });
   }
 
   async onSubmit() {

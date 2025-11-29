@@ -1,0 +1,26 @@
+<div class="p-4 w-full max-w-md h-full md:h-auto">
+  <div
+    class="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5"
+  >
+    <p class="mb-4 text-gray-500 dark:text-gray-300">
+      Are you sure you want to delete the grand prix and all the info related to
+      it?
+    </p>
+    <div class="flex justify-center items-center space-x-4">
+      <button
+        (click)="closeModal()"
+        type="button"
+        class="w-fit font-secondary text-theme2 bg-theme4 hover:bg-theme4/90 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer"
+      >
+        No, cancel
+      </button>
+      <button
+        (click)="confirmAction()"
+        type="button"
+        class="w-fit font-secondary inline-flex items-center text-theme2 bg-red-400 hover:bg-red-400/90 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer"
+      >
+        Yes, I'm sure
+      </button>
+    </div>
+  </div>
+</div>

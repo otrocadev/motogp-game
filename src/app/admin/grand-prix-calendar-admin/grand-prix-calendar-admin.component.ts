@@ -11,13 +11,13 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { GrandPrixService } from '../../shared/data-access/grand-prix.service';
 import { Dialog } from '@angular/cdk/dialog';
-import { CreateRaceComponent } from '../create-race/create-race.component';
-import { EventMode } from '../create-race/create-race-types';
+import { ManageRaceComponent } from '../manage-race/manage-race.component';
+import { EventMode } from '../../shared/types/race.types';
 
 @Component({
   selector: 'app-grand-prix-calendar',
   imports: [CommonModule, FullCalendarModule],
-  templateUrl: './grand-prix-calendar.component.html',
+  templateUrl: './grand-prix-calendar-admin.component.html',
 })
 export default class GrandPrixCalendarComponent {
   private _grandPrixService = inject(GrandPrixService);
@@ -75,7 +75,7 @@ export default class GrandPrixCalendarComponent {
     selectInfo?: DateSelectArg,
     eventId?: string
   ) {
-    const dialogRef = this._dialog.open(CreateRaceComponent, {
+    const dialogRef = this._dialog.open(ManageRaceComponent, {
       data: {
         mode: mode,
         dateInfo: selectInfo,
@@ -84,8 +84,12 @@ export default class GrandPrixCalendarComponent {
     });
 
     dialogRef.closed.subscribe((result) => {
-      if (result === 'created' || result === 'updated') {
-        this.loadEvents(); // re-fetch from Supabase
+      if (
+        result === 'created' ||
+        result === 'updated' ||
+        result === 'deleted'
+      ) {
+        this.loadEvents();
       }
     });
   }
