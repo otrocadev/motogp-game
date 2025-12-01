@@ -23,15 +23,16 @@ export class GrandPrixService {
     }
 
     const calendarEvents = data.map((event) => {
-      const end = new Date(event.end_date);
+      const end = new Date(`${event.end_date}T00:00:00Z`);
       // This is because the end date is not included in the event by the calendar library
-      end.setDate(end.getDate() + 1);
+      end.setUTCDate(end.getUTCDate() + 1);
+      const endStr = end.toISOString().slice(0, 10);
 
       return {
         id: event.id,
         title: event.name,
         start: event.start_date,
-        end: end.toISOString().slice(0, 10),
+        end: endStr,
         allDay: true,
       };
     });
