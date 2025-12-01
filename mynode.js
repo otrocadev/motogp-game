@@ -17,7 +17,7 @@ const envFileProd = `export const environment = {
     SUPABASE_URL: '${process.env.SUPABASE_URL}',
     SUPABASE_KEY: '${process.env.SUPABASE_KEY}',
     MAPBOX_KEY: '${process.env.MAPBOX_KEY}',
-e};
+};
 `;
 
 const targetPathDev = path.join(
