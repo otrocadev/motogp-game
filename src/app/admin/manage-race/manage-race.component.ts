@@ -11,10 +11,11 @@ import {
   CreateRaceDialogData,
   CreateRaceForm,
 } from '../../shared/types/race.types';
+import { MapboxViewComponent } from '../../shared/components/mapbox-view/mapbox-view.component';
 
 @Component({
   selector: 'app-manage-race',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MapboxViewComponent],
   templateUrl: './manage-race.component.html',
 })
 export class ManageRaceComponent {
@@ -49,6 +50,12 @@ export class ManageRaceComponent {
       Validators.required,
     ]),
   });
+
+  mapboxPosition = signal<[number, number]>([2.26, 41.57]);
+
+  onPositionChange([lng, lat]: [number, number]) {
+    this.mapboxPosition.set([lng, lat]);
+  }
 
   constructor(@Inject(DIALOG_DATA) public data: CreateRaceDialogData) {
     this._formMode.set(data.mode);
@@ -96,6 +103,8 @@ export class ManageRaceComponent {
       start_date: start.toISOString().slice(0, 10),
       end_date: end.toISOString().slice(0, 10),
     });
+
+    this.mapboxPosition.set([grandPrixInfo.longitude, grandPrixInfo.latitude]);
   }
 
   private createEventData(): GrandPrixEvent {
@@ -105,6 +114,8 @@ export class ManageRaceComponent {
       circuit: this.form.value.circuit!.toUpperCase(),
       start_date: this.form.value.start_date!,
       end_date: this.form.value.end_date!,
+      longitude: this.mapboxPosition()[0],
+      latitude: this.mapboxPosition()[1],
     };
     return eventData;
   }
@@ -117,6 +128,8 @@ export class ManageRaceComponent {
       circuit: this.form.value.circuit!.toUpperCase(),
       start_date: this.form.value.start_date!,
       end_date: this.form.value.end_date!,
+      longitude: this.mapboxPosition()[0],
+      latitude: this.mapboxPosition()[1],
     };
     return eventData;
   }

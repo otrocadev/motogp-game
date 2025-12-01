@@ -51,7 +51,6 @@ export class GrandPrixService {
       console.error(error);
       return null;
     }
-
     return data;
   }
 

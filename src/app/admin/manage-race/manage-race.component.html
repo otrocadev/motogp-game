@@ -140,7 +140,12 @@
             }
           </div>
         </section>
-        <section>here goes the map lol</section>
+        <section>
+          <app-mapbox-view
+            [initialPosition]="mapboxPosition()"
+            (onPositionChange)="onPositionChange($event)"
+          ></app-mapbox-view>
+        </section>
       </main>
       @if (errorMessage()) {
       <div class="p-4 text-sm text-red-500 bg-red-100 rounded-lg" role="alert">

@@ -98,3 +98,39 @@ body {
 .fc .fc-col-header-cell-cushion {
   @apply py-2;
 }
+
+.mapboxgl-ctrl-geocoder {
+  @apply w-full bg-theme5 rounded-lg font-secondary text-theme3 p-2;
+
+  width: 25rem;
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    "icon input clear"
+    "results results results";
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
+.mapboxgl-ctrl-geocoder--input {
+  grid-area: input;
+  width: 100%;
+}
+
+.mapboxgl-ctrl-geocoder--icon-search {
+  grid-area: icon;
+}
+
+.mapboxgl-ctrl-geocoder--pin-right {
+  grid-area: clear;
+}
+
+.suggestions-wrapper {
+  grid-area: results;
+  width: 100%;
+}
+
+.mapboxgl-ctrl-geocoder--icon-loading {
+  display: none !important;
+}
