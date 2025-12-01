@@ -10,6 +10,8 @@ export class DeletionConfirmationModalComponent {
   dialogRef = inject(DialogRef);
   data = inject(DIALOG_DATA);
 
+  deletionItemText = this.data.deletionItemText;
+
   closeModal() {
     this.dialogRef.close();
   }

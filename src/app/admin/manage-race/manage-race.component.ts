@@ -132,6 +132,7 @@ export class ManageRaceComponent {
             );
           },
           messageOnConfirm: 'The grand prix has been deleted successfully',
+          deletionItemText: 'grand prix',
         },
       }
     );
