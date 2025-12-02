@@ -11,19 +11,6 @@ export const routes: Routes = [
     loadComponent: () => import('./home-page/home-page.component'),
   },
   {
-    path: 'grand-prix-management',
-    canActivate: [privateGuard, adminGuard],
-    children: [
-      {
-        path: 'calendar-view',
-        loadComponent: () =>
-          import(
-            './admin/grand-prix-calendar-admin/grand-prix-calendar-admin.component'
-          ),
-      },
-    ],
-  },
-  {
     path: 'auth',
     children: [
       {
@@ -41,6 +28,24 @@ export const routes: Routes = [
       {
         path: '**',
         redirectTo: 'log-in',
+      },
+    ],
+  },
+  {
+    path: 'season-calendar',
+    canActivate: [privateGuard],
+    loadComponent: () => import('./grand-prix-list/grand-prix-list.component'),
+  },
+  {
+    path: 'grand-prix-management',
+    canActivate: [privateGuard, adminGuard],
+    children: [
+      {
+        path: 'calendar-view',
+        loadComponent: () =>
+          import(
+            './admin/grand-prix-calendar-admin/grand-prix-calendar-admin.component'
+          ),
       },
     ],
   },

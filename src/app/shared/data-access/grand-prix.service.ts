@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { SupabaseService } from '../../auth/data-access/supabase.service';
+import { SupabaseService } from './supabase.service';
 import { EventInput } from '@fullcalendar/core';
 import { GrandPrixEvent } from '../types/race.types';
 
@@ -15,7 +15,8 @@ export class GrandPrixService {
   async getGrandPrixCalendarEvents() {
     const { data, error } = await this._supabaseService.supabaseClient
       .from('2026_grand_prixes')
-      .select('*');
+      .select('*')
+      .order('id', { ascending: true });
 
     if (error) {
       console.error(error);
@@ -32,6 +33,9 @@ export class GrandPrixService {
         id: event.id,
         title: event.name,
         start: event.start_date,
+        flag_img: event.flag_img,
+        location: event.location,
+        circuit: event.circuit,
         end: endStr,
         allDay: true,
       };

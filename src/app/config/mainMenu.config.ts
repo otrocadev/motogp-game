@@ -10,7 +10,7 @@ export const mainMenuOptions = {
     {
       title: 'GRAND PRIX CALENDAR',
       image: 'racetrack.png',
-      url: '/not-found',
+      url: '/season-calendar',
     },
   ],
 };

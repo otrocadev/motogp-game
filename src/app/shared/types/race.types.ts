@@ -10,6 +10,9 @@ export interface GrandPrixEvent {
   circuit: string;
   start_date: string;
   end_date: string;
+  longitude: number;
+  latitude: number;
+  flag_img: string;
 }
 
 export interface CreateRaceDialogData {

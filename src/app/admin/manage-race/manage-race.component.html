@@ -139,6 +139,20 @@
             </p>
             }
           </div>
+          <div>
+            <label
+              for="flag"
+              class="block mb-2 text-sm font-secondary text-theme5"
+              >Grand Prix flag</label
+            >
+            <input
+              type="file"
+              id="flag"
+              accept="image/svg+xml,image/png"
+              (change)="onFlagSelected($event)"
+              class="text-sm text-theme1 bg-theme5 h-8 w-full rounded-lg p-1.5"
+            />
+          </div>
         </section>
         <section>
           <app-mapbox-view

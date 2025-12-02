@@ -12,6 +12,7 @@ import {
   CreateRaceForm,
 } from '../../shared/types/race.types';
 import { MapboxViewComponent } from '../../shared/components/mapbox-view/mapbox-view.component';
+import { UploadImageService } from '../../shared/data-access/upload-image.service';
 
 @Component({
   selector: 'app-manage-race',
@@ -20,12 +21,14 @@ import { MapboxViewComponent } from '../../shared/components/mapbox-view/mapbox-
 })
 export class ManageRaceComponent {
   private _formBuilder = inject(FormBuilder);
-  private _grandPrixService = inject(GrandPrixService);
   private _formMode = signal<EventMode>('create');
+  private _grandPrixService = inject(GrandPrixService);
+  private uploadImageService = inject(UploadImageService);
   dialogRef = inject(DialogRef);
   private _dialog = inject(Dialog);
 
   formMode = this._formMode.asReadonly();
+  filePath = signal<string | null>(null);
 
   isLoading = signal(false);
   errorMessage = signal<string | null>(null);
@@ -55,6 +58,18 @@ export class ManageRaceComponent {
 
   onPositionChange([lng, lat]: [number, number]) {
     this.mapboxPosition.set([lng, lat]);
+  }
+
+  async onFlagSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file) return;
+
+    const path = await this.uploadImageService.uploadImage(file, 'flags');
+
+    if (path) {
+      this.filePath.set(path);
+    }
   }
 
   constructor(@Inject(DIALOG_DATA) public data: CreateRaceDialogData) {
@@ -116,6 +131,7 @@ export class ManageRaceComponent {
       end_date: this.form.value.end_date!,
       longitude: this.mapboxPosition()[0],
       latitude: this.mapboxPosition()[1],
+      flag_img: this.filePath()!,
     };
     return eventData;
   }
@@ -130,6 +146,7 @@ export class ManageRaceComponent {
       end_date: this.form.value.end_date!,
       longitude: this.mapboxPosition()[0],
       latitude: this.mapboxPosition()[1],
+      flag_img: this.filePath()!,
     };
     return eventData;
   }

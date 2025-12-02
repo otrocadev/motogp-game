@@ -1,5 +1,5 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { SupabaseService } from './supabase.service';
+import { SupabaseService } from '../../shared/data-access/supabase.service';
 import { environment } from '../../../environments/environment';
 import {
   SignInWithPasswordCredentials,
