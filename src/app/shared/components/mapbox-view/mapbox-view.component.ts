@@ -20,7 +20,12 @@ export class MapboxViewComponent implements OnInit {
       const [lng, lat] = this.initialPosition();
 
       if (this.map && this.marker) {
-        this.map.flyTo({ center: [lng, lat], zoom: 13 });
+        this.map.flyTo({
+          center: [lng, lat],
+          zoom: 13,
+          duration: 5000,
+          easing: (t) => t,
+        });
         this.marker.setLngLat([lng, lat]);
       }
     });
@@ -35,7 +40,7 @@ export class MapboxViewComponent implements OnInit {
       container: 'mapbox-container',
       style: 'mapbox://styles/otrocadev/cminawj1i00rd01qwbkv979ap',
       center: [lng, lat],
-      zoom: 13,
+      zoom: 2,
     });
 
     this.createMarker(lng, lat);
