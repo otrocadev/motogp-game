@@ -1,10 +1,14 @@
 import { Routes } from '@angular/router';
-import { privateGuard, publicGuard } from './auth/guards/auth.guard';
+import {
+  privateGuard,
+  publicGuard,
+  adminGuard,
+} from './auth/guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./shared/home-page/home-page.component'),
+    loadComponent: () => import('./home-page/home-page.component'),
   },
   {
     path: 'auth',
@@ -26,5 +30,19 @@ export const routes: Routes = [
         redirectTo: 'log-in',
       },
     ],
+  },
+  {
+    path: 'season-calendar',
+    canActivate: [privateGuard],
+    loadComponent: () =>
+      import('./grand-prix/user/grand-prix-list/grand-prix-list.component'),
+  },
+  {
+    path: 'grand-prix-management',
+    canActivate: [privateGuard, adminGuard],
+    loadComponent: () =>
+      import(
+        './grand-prix/admin/grand-prix-calendar-admin/grand-prix-calendar-admin.component'
+      ),
   },
 ];

@@ -8,6 +8,7 @@ const envFile = `export const environment = {
     production: false,
     SUPABASE_URL: '${process.env.SUPABASE_URL}',
     SUPABASE_KEY: '${process.env.SUPABASE_KEY}',
+    MAPBOX_KEY: '${process.env.MAPBOX_KEY}',
 };
 `;
 
@@ -15,6 +16,7 @@ const envFileProd = `export const environment = {
     production: true,
     SUPABASE_URL: '${process.env.SUPABASE_URL}',
     SUPABASE_KEY: '${process.env.SUPABASE_KEY}',
+    MAPBOX_KEY: '${process.env.MAPBOX_KEY}',
 };
 `;
 

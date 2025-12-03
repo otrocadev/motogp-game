@@ -2,7 +2,7 @@
   class="flex flex-col items-center justify-center px-6 py-8 mx-auto min-h-full lg:py-0"
 >
   <article
-    class="w-full bg-theme1 border border-theme4 rounded-lg shadow p-6 space-y-4 md:space-y-6 sm:p-8 md:mt-0 max-w-md"
+    class="w-full bg-theme1 border border-theme4 rounded-lg shadow p-6 space-y-4 md:space-y-6 sm:p-8 md:mt-0 max-w-3xl"
   >
     <h1
       class="text-2xl font-secondary leading-tight tracking-tight text-theme6 md:text-2xl"
@@ -14,52 +14,126 @@
       [formGroup]="form"
       (ngSubmit)="onSubmit()"
     >
-      <div>
-        <label for="email" class="block mb-2 text-sm font-secondary text-theme5"
-          >Your email</label
-        >
-        <input
-          type="email"
-          name="email"
-          id="email"
-          class="bg-theme5 border border-theme4 text-theme1 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-          placeholder="name@company.com"
-          required=""
-          formControlName="email"
-        />
-        @if (form.controls.email.invalid && form.controls.email.touched) {
-        <p class="mt-1 text-sm text-red-500">
-          @if (form.controls.email.errors?.['required']) { The email is required
-          } @else if (form.controls.email.errors?.['email'] ||
-          form.controls.email.errors?.['strictEmail']) { Invalid email format.
-          Must include &#64; and domain (e.g., .com, .es) }
-        </p>
-        }
-      </div>
-      <div>
-        <label
-          for="password"
-          class="block mb-2 text-sm font-secondary text-theme5"
-          >Password</label
-        >
-        <input
-          type="password"
-          autocomplete="new-password"
-          name="password"
-          id="password"
-          placeholder="••••••••"
-          class="bg-theme5 border border-theme4 text-theme1 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-          required=""
-          formControlName="password"
-        />
-        @if (form.controls.password.invalid && form.controls.password.touched) {
-        <p class="mt-1 text-sm text-red-500">
-          @if (form.controls.password.errors?.['required']) { The password is
-          required } @else if (form.controls.password.errors?.['minlength']) {
-          The password must have at least 6 characters }
-        </p>
-        }
-      </div>
+      <section class="md:grid md:grid-cols-2 md:gap-6">
+        <div>
+          <label
+            for="name"
+            class="block mb-2 text-sm font-secondary text-theme5"
+            >Name</label
+          >
+          <input
+            type="text"
+            name="name"
+            id="name"
+            class="bg-theme5 border border-theme4 text-theme1 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+            placeholder="Fast"
+            required=""
+            formControlName="name"
+          />
+          @if (form.controls.name.invalid && form.controls.name.touched) {
+          <p class="mt-1 text-sm text-red-500">
+            @if (form.controls.name.errors?.['required']) { The name is required
+            } @else if (form.controls.name.errors?.['minlength']) { The name
+            must have at least 2 characters }
+          </p>
+          }
+        </div>
+        <div>
+          <label
+            for="surname"
+            class="block mb-2 text-sm font-secondary text-theme5"
+            >Surname</label
+          >
+          <input
+            type="text"
+            name="surname"
+            id="surname"
+            class="bg-theme5 border border-theme4 text-theme1 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+            placeholder="Rider"
+            required=""
+            formControlName="surname"
+          />
+          @if (form.controls.name.invalid && form.controls.name.touched) {
+          <p class="mt-1 text-sm text-red-500">
+            @if (form.controls.name.errors?.['required']) { The surname is
+            required } @else if (form.controls.name.errors?.['minlength']) { The
+            surname must have at least 2 characters }
+          </p>
+          }
+        </div>
+        <div>
+          <label
+            for="username"
+            class="block mb-2 text-sm font-secondary text-theme5"
+            >Username</label
+          >
+          <input
+            type="text"
+            name="username"
+            id="username"
+            class="bg-theme5 border border-theme4 text-theme1 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+            placeholder="fastrider93"
+            required=""
+            formControlName="username"
+          />
+          @if (form.controls.name.invalid && form.controls.name.touched) {
+          <p class="mt-1 text-sm text-red-500">
+            @if (form.controls.name.errors?.['required']) { The username is
+            required } @else if (form.controls.name.errors?.['minlength']) { The
+            username must have at least 2 characters }
+          </p>
+          }
+        </div>
+        <div>
+          <label
+            for="email"
+            class="block mb-2 text-sm font-secondary text-theme5"
+            >Email</label
+          >
+          <input
+            type="email"
+            name="email"
+            id="email"
+            class="bg-theme5 border border-theme4 text-theme1 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+            placeholder="fast.rider@moto-gp.com"
+            required=""
+            formControlName="email"
+          />
+          @if (form.controls.email.invalid && form.controls.email.touched) {
+          <p class="mt-1 text-sm text-red-500">
+            @if (form.controls.email.errors?.['required']) { The email is
+            required } @else if (form.controls.email.errors?.['email'] ||
+            form.controls.email.errors?.['strictEmail']) { Invalid email format.
+            Must include &#64; and domain (e.g., .com, .es) }
+          </p>
+          }
+        </div>
+        <div>
+          <label
+            for="password"
+            class="block mb-2 text-sm font-secondary text-theme5"
+            >Password</label
+          >
+          <input
+            type="password"
+            autocomplete="new-password"
+            name="password"
+            id="password"
+            placeholder="••••••••"
+            class="bg-theme5 border border-theme4 text-theme1 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+            required=""
+            formControlName="password"
+          />
+          @if (form.controls.password.invalid && form.controls.password.touched)
+          {
+          <p class="mt-1 text-sm text-red-500">
+            @if (form.controls.password.errors?.['required']) { The password is
+            required } @else if (form.controls.password.errors?.['minlength']) {
+            The password must have at least 6 characters }
+          </p>
+          }
+        </div>
+      </section>
       @if (errorMessage()) {
       <div class="p-4 text-sm text-red-500 bg-red-100 rounded-lg" role="alert">
         {{ errorMessage() }}
@@ -72,23 +146,25 @@
         {{ successMessage() }}
       </div>
       }
-      <button
-        type="submit"
-        [disabled]="isLoading()"
-        class="w-full font-secondary text-theme2 bg-theme6 hover:bg-theme6/90 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer"
-      >
-        @if (isLoading()) {
-        <span>Loading...</span>
-        } @else {
-        <span>Create an account</span>
-        }
-      </button>
-      <p class="text-sm font-light text-theme5">
-        Already have an account?
-        <a href="/auth/log-in" class="font-medium text-theme6 hover:underline"
-          >Login here</a
+      <div class="flex flex-col items-center gap-4">
+        <button
+          type="submit"
+          [disabled]="isLoading()"
+          class="w-fit font-secondary text-theme2 bg-theme6 hover:bg-theme6/90 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer"
         >
-      </p>
+          @if (isLoading()) {
+          <span>Loading...</span>
+          } @else {
+          <span>Create an account</span>
+          }
+        </button>
+        <p class="text-sm font-light text-theme5">
+          Already have an account?
+          <a href="/auth/log-in" class="font-medium text-theme6 hover:underline"
+            >Login here</a
+          >
+        </p>
+      </div>
     </form>
   </article>
 </section>

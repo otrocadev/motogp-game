@@ -8,8 +8,12 @@ import {
   ValidationErrors,
 } from '@angular/forms';
 import { AuthService } from '../../data-access/auth.service';
+import { Router } from '@angular/router';
 
 interface SignUpForm {
+  name: FormControl<string | null>;
+  surname: FormControl<string | null>;
+  username: FormControl<string | null>;
   email: FormControl<string | null>;
   password: FormControl<string | null>;
 }
@@ -22,12 +26,25 @@ interface SignUpForm {
 export default class SignUpComponent {
   private _formBuilder = inject(FormBuilder);
   private _authService = inject(AuthService);
+  private _router = inject(Router);
 
   isLoading = signal(false);
   errorMessage = signal<string | null>(null);
   successMessage = signal<string | null>(null);
 
   form = this._formBuilder.group<SignUpForm>({
+    name: this._formBuilder.control(null, [
+      Validators.required,
+      Validators.minLength(2),
+    ]),
+    surname: this._formBuilder.control(null, [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+    username: this._formBuilder.control(null, [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
     email: this._formBuilder.control(null, [
       Validators.required,
       Validators.email,
@@ -55,9 +72,9 @@ export default class SignUpComponent {
         password: this.form.value.password!,
         options: {
           data: {
-            first_name: 'John',
-            last_name: 'Doe',
-            display_name: 'Johndoe99',
+            first_name: this.form.value.name!,
+            last_name: this.form.value.surname!,
+            display_name: this.form.value.username!,
           },
         },
       });
@@ -68,7 +85,7 @@ export default class SignUpComponent {
       }
 
       this.successMessage.set('Account created successfully!');
-      this.form.reset();
+      await this._router.navigate(['/']);
     } catch (error) {
       this.errorMessage.set('Unexpected error. Please try again later.');
       console.error('Sign up error:', error);

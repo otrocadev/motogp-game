@@ -1,0 +1,204 @@
+<section
+  class="flex flex-col items-center justify-center mx-auto min-h-full lg:py-0 h-fit max-h-[calc(100vh-12rem)] w-[calc(100vw-12rem)] max-w-5xl bg-theme2/50"
+>
+  <article
+    class="bg-theme1 w-full h-fit border border-theme4 rounded-lg shadow p-6 space-y-4 md:space-y-6 sm:p-8 md:mt-0 overflow-scroll"
+  >
+    <h1
+      class="text-xl font-secondary leading-tight tracking-tight text-theme6 md:text-2xl"
+    >
+      @if (formMode() === 'create') { Create Grand Prix } @else { Edit Grand
+      Prix }
+    </h1>
+    <form
+      class="space-y-4 md:space-y-6"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+    >
+      <main class="md:grid md:grid-cols-2 md:gap-6">
+        <section class="space-y-4 md:space-y-6">
+          <div>
+            <label
+              for="name"
+              class="block mb-2 text-sm font-secondary text-theme5"
+              >Grand Prix Name</label
+            >
+            <input
+              type="text"
+              name="name"
+              id="name"
+              class="bg-theme5 border border-theme4 text-theme1 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+              placeholder="CATALUNYA"
+              required=""
+              formControlName="name"
+            />
+            @if (form.controls.name.invalid && form.controls.name.touched) {
+            <p class="mt-1 text-sm text-red-500">
+              @if (form.controls.name.errors?.['required']) { The name is
+              required } @else if (form.controls.name.errors?.['minlength']) {
+              The name must have at least 2 characters }
+            </p>
+            }
+          </div>
+          <div>
+            <label
+              for="location"
+              class="block mb-2 text-sm font-secondary text-theme5"
+              >Grand Prix Location</label
+            >
+            <input
+              type="text"
+              name="location"
+              id="location"
+              class="bg-theme5 border border-theme4 text-theme1 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+              placeholder="BARCELONA"
+              required=""
+              formControlName="location"
+            />
+            @if (form.controls.location.invalid &&
+            form.controls.location.touched) {
+            <p class="mt-1 text-sm text-red-500">
+              @if (form.controls.location.errors?.['required']) { The location
+              is required } @else if
+              (form.controls.location.errors?.['minlength']) { The location must
+              have at least 2 characters }
+            </p>
+            }
+          </div>
+          <div>
+            <label
+              for="circuit"
+              class="block mb-2 text-sm font-secondary text-theme5"
+              >Hosting Circuit</label
+            >
+            <input
+              type="text"
+              name="circuit"
+              id="circuit"
+              class="bg-theme5 border border-theme4 text-theme1 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+              placeholder="Circuit de Barcelona - Catalunya"
+              required=""
+              formControlName="circuit"
+            />
+            @if (form.controls.circuit.invalid && form.controls.circuit.touched)
+            {
+            <p class="mt-1 text-sm text-red-500">
+              @if (form.controls.circuit.errors?.['required']) { The circuit is
+              required } @else if (form.controls.circuit.errors?.['minlength'])
+              { The circuit must have at least 2 characters }
+            </p>
+            }
+          </div>
+          <div>
+            <label
+              for="start"
+              class="block mb-2 text-sm font-secondary text-theme5"
+              >Starting Date</label
+            >
+            <input
+              type="date"
+              name="start"
+              id="start"
+              class="bg-theme5 border border-theme4 text-theme1 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+              placeholder="Circuit de Barcelona - Catalunya"
+              required=""
+              formControlName="start_date"
+            />
+            @if (form.controls.start_date.invalid &&
+            form.controls.start_date.touched) {
+            <p class="mt-1 text-sm text-red-500">
+              @if (form.controls.start_date.errors?.['required']) { The start
+              date is required } @else if
+              (form.controls.start_date.errors?.['minlength']) { The start date
+              must have at least 2 characters }
+            </p>
+            }
+          </div>
+          <div>
+            <label
+              for="end"
+              class="block mb-2 text-sm font-secondary text-theme5"
+              >Ending Date</label
+            >
+            <input
+              type="date"
+              name="end_date"
+              id="end_date"
+              class="bg-theme5 border border-theme4 text-theme1 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+              placeholder="Circuit de Barcelona - Catalunya"
+              required=""
+              formControlName="end_date"
+            />
+            @if (form.controls.end_date.invalid &&
+            form.controls.end_date.touched) {
+            <p class="mt-1 text-sm text-red-500">
+              @if (form.controls.end_date.errors?.['required']) { The end date
+              is required } @else if
+              (form.controls.end_date.errors?.['minlength']) { The end date must
+              have at least 2 characters }
+            </p>
+            }
+          </div>
+          <div>
+            <label
+              for="flag"
+              class="block mb-2 text-sm font-secondary text-theme5"
+              >Grand Prix flag</label
+            >
+            <input
+              type="file"
+              id="flag"
+              accept="image/svg+xml,image/png"
+              (change)="onFlagSelected($event)"
+              class="text-sm text-theme1 bg-theme5 h-8 w-full rounded-lg p-1.5"
+            />
+          </div>
+        </section>
+        <section>
+          @defer (on timer(1000ms)) {
+          <app-mapbox-view
+            [initialPosition]="mapboxPosition()"
+            (onPositionChange)="onPositionChange($event)"
+          ></app-mapbox-view
+          >}@placeholder {
+          <div class="flex items-center justify-center gap-2 text-theme5">
+            <span
+              class="h-5 w-5 border-2 border-theme5 border-t-transparent rounded-full animate-spin"
+            ></span>
+            <span>Loading map...</span>
+          </div>
+          }
+        </section>
+      </main>
+      @if (errorMessage()) {
+      <div class="p-4 text-sm text-red-500 bg-red-100 rounded-lg" role="alert">
+        {{ errorMessage() }}
+      </div>
+      }
+      <div class="flex justify-end gap-2">
+        <button
+          (click)="this.dialogRef.close()"
+          type="button"
+          class="w-fit font-secondary text-theme2 bg-theme4 hover:bg-theme4/90 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer"
+        >
+          @if (formMode() === 'create') { Cancel creation } @else { Cancel
+          update }
+        </button>
+        <button
+          type="submit"
+          [disabled]="isLoading()"
+          class="w-fit font-secondary text-theme2 bg-theme6 hover:bg-theme6/90 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer"
+        >
+          @if (isLoading()) {
+          <span>Loading...</span>
+          } @else {
+          <span
+            >@if (formMode() === 'create') { Save new Grand Prix information }
+            @else { Update Grand Prix information }</span
+          >
+          }
+        </button>
+      </div>
+    </form>
+  </article>
+</section>

@@ -37,7 +37,7 @@ body {
   inset: 0;
   height: 100%;
   width: 100%;
-  background-image: url("/images/bg-image.jpg");
+  background-image: url("/images/bg-image.webp");
   background-size: cover;
 }
 
@@ -53,4 +53,84 @@ body {
 
   --font-secondary: "Raleway", Inter, Roboto, "Helvetica Neue", "Arial Nova",
     "Nimbus Sans", Arial, sans-serif;
+}
+
+/* FullCalendar */
+
+.fc .fc-toolbar {
+  @apply px-4 py-2 bg-theme3 flex items-center justify-between gap-3;
+}
+
+.fc .fc-toolbar-title {
+  @apply text-2xl font-semibold text-theme6 font-secondary rounded-xl px-3 py-1;
+}
+
+.fc .fc-button {
+  @apply bg-theme6 text-theme1 rounded-md px-3 py-1 text-xs font-semibold uppercase
+         hover:bg-theme6/80 focus-visible:ring-theme6/70
+         disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.fc .fc-daygrid-event {
+  @apply w-full px-3 py-1 mt-1
+         rounded-md bg-theme5
+         text-sm font-extrabold
+         flex flex-col gap-0.5
+         cursor-pointer;
+}
+
+.fc .fc-daygrid-day-events {
+  @apply px-1 py-1;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  @apply bg-theme6/50 border-2 border-theme6;
+}
+
+.fc .fc-col-header {
+  @apply bg-theme3/90;
+}
+
+.fc .fc-col-header-cell {
+  @apply text-xs font-secondary uppercase text-theme6 font-bold;
+}
+
+.fc .fc-col-header-cell-cushion {
+  @apply py-2;
+}
+
+.mapboxgl-ctrl-geocoder {
+  @apply w-full bg-theme5 rounded-lg font-secondary text-theme3 p-2;
+
+  width: 25rem;
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    "icon input clear"
+    "results results results";
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
+.mapboxgl-ctrl-geocoder--input {
+  grid-area: input;
+  width: 100%;
+}
+
+.mapboxgl-ctrl-geocoder--icon-search {
+  grid-area: icon;
+}
+
+.mapboxgl-ctrl-geocoder--pin-right {
+  grid-area: clear;
+}
+
+.suggestions-wrapper {
+  grid-area: results;
+  width: 100%;
+}
+
+.mapboxgl-ctrl-geocoder--icon-loading {
+  display: none !important;
 }
