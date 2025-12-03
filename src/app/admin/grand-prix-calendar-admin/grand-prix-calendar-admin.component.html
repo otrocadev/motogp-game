@@ -44,10 +44,11 @@
       New Grand Prix Event
     </article>
     @for (grandPrix of grandPrixEvents(); track grandPrix.id){
-    <app-grand-prix-card
-      (click)="openCreateEventModal('edit', undefined, grandPrix.id)"
+    <app-grand-prix-card-admin
       [grandPrix]="grandPrix"
-    ></app-grand-prix-card>
+      (edit)="openCreateEventModal('edit', undefined, $event)"
+      (delete)="openDeleteConfirmation($event)"
+    ></app-grand-prix-card-admin>
     }
   </section>
 </main>

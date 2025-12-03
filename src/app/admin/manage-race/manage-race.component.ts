@@ -1,10 +1,8 @@
 import { Component, Inject, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Dialog } from '@angular/cdk/dialog';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { DateSelectArg } from '@fullcalendar/core';
 import { GrandPrixService } from '../../shared/data-access/grand-prix.service';
-import { DeletionConfirmationModalComponent } from '../../shared/components/deletion-confirmation-modal/deletion-confirmation-modal.component';
 import {
   EventMode,
   GrandPrixEvent,
@@ -27,7 +25,6 @@ export class ManageRaceComponent {
   private toastNotificationService = inject(ToastNotificationService);
   private uploadImageService = inject(UploadImageService);
   dialogRef = inject(DialogRef);
-  private _dialog = inject(Dialog);
 
   formMode = this._formMode.asReadonly();
   filePath = signal<string>('');
@@ -152,29 +149,6 @@ export class ManageRaceComponent {
       flag_img: this.filePath(),
     };
     return eventData;
-  }
-
-  openDeleteConfirmationDialog(): void {
-    const confirmDeletionRef = this._dialog.open(
-      DeletionConfirmationModalComponent,
-      {
-        data: {
-          functionOnConfirm: async () => {
-            await this._grandPrixService.deleteGrandPrixInfoById(
-              this.data.eventId!
-            );
-          },
-          messageOnConfirm: 'The grand prix has been deleted successfully',
-          deletionItemText: 'grand prix',
-        },
-      }
-    );
-
-    confirmDeletionRef.closed.subscribe((result) => {
-      if (result === 'confirmed') {
-        this.dialogRef.close('deleted');
-      }
-    });
   }
 
   async onSubmit() {

@@ -12,13 +12,14 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import { GrandPrixService } from '../../shared/data-access/grand-prix.service';
 import { Dialog } from '@angular/cdk/dialog';
 import { ManageRaceComponent } from '../manage-race/manage-race.component';
-import { GrandPrixCardComponent } from '../../grand-prix-list/grand-prix-card/grand-prix-card.component';
+import { DeletionConfirmationModalComponent } from '../../shared/components/deletion-confirmation-modal/deletion-confirmation-modal.component';
+import { GrandPrixCardAdminComponent } from './grand-prix-card-admin/grand-prix-card-admin.component';
 import { EventMode } from '../../shared/types/race.types';
-import { baseImgUrl } from '../../config/calendarView.config';
+import { baseImgUrl } from '../../config/endpoints';
 
 @Component({
   selector: 'app-grand-prix-calendar',
-  imports: [CommonModule, FullCalendarModule, GrandPrixCardComponent],
+  imports: [CommonModule, FullCalendarModule, GrandPrixCardAdminComponent],
   templateUrl: './grand-prix-calendar-admin.component.html',
 })
 export default class GrandPrixCalendarComponent {
@@ -74,12 +75,33 @@ export default class GrandPrixCalendarComponent {
     this.changeDetector.detectChanges();
   }
 
+  openDeleteConfirmation(eventId: string) {
+    const confirmDeletionRef = this._dialog.open(
+      DeletionConfirmationModalComponent,
+      {
+        data: {
+          functionOnConfirm: async () => {
+            await this._grandPrixService.deleteGrandPrixInfoById(eventId);
+          },
+          messageOnConfirm: 'The grand prix has been deleted successfully',
+          deletionItemText: 'grand prix',
+        },
+      }
+    );
+
+    confirmDeletionRef.closed.subscribe((result) => {
+      if (result === 'confirmed') {
+        this.loadEvents();
+      }
+    });
+  }
+
   openCreateEventModal(
     mode: EventMode,
     selectInfo?: DateSelectArg,
     eventId?: string
   ) {
-    const dialogRef = this._dialog.open(ManageRaceComponent, {
+    const creationModalRef = this._dialog.open(ManageRaceComponent, {
       data: {
         mode: mode,
         dateInfo: selectInfo,
@@ -87,7 +109,7 @@ export default class GrandPrixCalendarComponent {
       },
     });
 
-    dialogRef.closed.subscribe((result) => {
+    creationModalRef.closed.subscribe((result) => {
       if (
         result === 'created' ||
         result === 'updated' ||
