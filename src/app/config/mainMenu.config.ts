@@ -3,7 +3,7 @@ export const mainMenuOptions = {
     {
       title: 'MANAGE GRAND PRIX EVENTS',
       image: 'calendar.png',
-      url: '/grand-prix-management/calendar-view',
+      url: '/grand-prix-management',
     },
   ],
   user: [

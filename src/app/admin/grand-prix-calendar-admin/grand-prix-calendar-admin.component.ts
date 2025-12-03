@@ -12,16 +12,20 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import { GrandPrixService } from '../../shared/data-access/grand-prix.service';
 import { Dialog } from '@angular/cdk/dialog';
 import { ManageRaceComponent } from '../manage-race/manage-race.component';
+import { GrandPrixCardComponent } from '../../grand-prix-list/grand-prix-card/grand-prix-card.component';
 import { EventMode } from '../../shared/types/race.types';
+import { baseImgUrl } from '../../config/calendarView.config';
 
 @Component({
   selector: 'app-grand-prix-calendar',
-  imports: [CommonModule, FullCalendarModule],
+  imports: [CommonModule, FullCalendarModule, GrandPrixCardComponent],
   templateUrl: './grand-prix-calendar-admin.component.html',
 })
 export default class GrandPrixCalendarComponent {
   private _grandPrixService = inject(GrandPrixService);
   private _dialog = inject(Dialog);
+  grandPrixEvents = this._grandPrixService.grandPrixCalendarEvents;
+  baseImgUrl = baseImgUrl;
 
   calendarOptions = signal<CalendarOptions>({
     plugins: [interactionPlugin, dayGridPlugin],
@@ -31,7 +35,7 @@ export default class GrandPrixCalendarComponent {
       right: 'prev,next',
     },
     initialView: 'dayGridMonth',
-    events: this._grandPrixService.grandPrixCalendarEvents(),
+    events: this.grandPrixEvents,
     weekends: true,
     editable: true,
     selectable: true,

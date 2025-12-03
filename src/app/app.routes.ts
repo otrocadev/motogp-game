@@ -39,14 +39,9 @@ export const routes: Routes = [
   {
     path: 'grand-prix-management',
     canActivate: [privateGuard, adminGuard],
-    children: [
-      {
-        path: 'calendar-view',
-        loadComponent: () =>
-          import(
-            './admin/grand-prix-calendar-admin/grand-prix-calendar-admin.component'
-          ),
-      },
-    ],
+    loadComponent: () =>
+      import(
+        './admin/grand-prix-calendar-admin/grand-prix-calendar-admin.component'
+      ),
   },
 ];
