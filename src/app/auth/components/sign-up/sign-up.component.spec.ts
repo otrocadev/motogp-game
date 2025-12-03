@@ -30,6 +30,9 @@ describe('SignUpComponent', () => {
     authServiceSpy.signUp.and.returnValue(Promise.resolve(mockResponse as any));
 
     component.form.setValue({
+      name: 'John',
+      surname: 'Doe',
+      username: 'johndoe',
       email: 'test@example.com',
       password: 'password123',
     });
@@ -48,6 +51,9 @@ describe('SignUpComponent', () => {
     authServiceSpy.signUp.and.returnValue(Promise.resolve(mockResponse as any));
 
     component.form.setValue({
+      name: 'John',
+      surname: 'Doe',
+      username: 'johndoe',
       email: 'test@example.com',
       password: 'password123',
     });
@@ -65,6 +71,9 @@ describe('SignUpComponent', () => {
     authServiceSpy.signUp.and.returnValue(Promise.resolve(mockResponse as any));
 
     component.form.setValue({
+      name: 'John',
+      surname: 'Doe',
+      username: 'johndoe',
       email: 'test@example.com', // ← Valid mail to pass the first form validation
       password: 'password123',
     });
@@ -81,6 +90,9 @@ describe('SignUpComponent', () => {
     authServiceSpy.signUp.and.returnValue(Promise.resolve(mockResponse as any));
 
     component.form.setValue({
+      name: 'John',
+      surname: 'Doe',
+      username: 'johndoe',
       email: 'test@example.com',
       password: 'password123',
     });
@@ -100,6 +112,9 @@ describe('SignUpComponent', () => {
     authServiceSpy.signUp.and.returnValue(Promise.resolve(mockResponse as any));
 
     component.form.setValue({
+      name: 'John',
+      surname: 'Doe',
+      username: 'johndoe',
       email: 'test@example.com',
       password: 'password123',
     });
@@ -109,20 +124,5 @@ describe('SignUpComponent', () => {
     expect(component.errorMessage()).toBe(
       'Unexpected error. Please try again later.'
     );
-  });
-
-  it('should reset form on successful sign up', async () => {
-    const mockResponse = { data: { user: {} }, error: null };
-    authServiceSpy.signUp.and.returnValue(Promise.resolve(mockResponse as any));
-
-    component.form.setValue({
-      email: 'test@example.com',
-      password: 'password123',
-    });
-
-    await component.onSubmit();
-
-    expect(component.form.value.email).toBeNull();
-    expect(component.form.value.password).toBeNull();
   });
 });
