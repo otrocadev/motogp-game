@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { SupabaseService } from './supabase.service';
+import { SupabaseService } from '../shared/data-access/supabase.service';
 import { EventInput } from '@fullcalendar/core';
-import { GrandPrixEvent } from '../types/race.types';
+import { GrandPrixEvent } from '../shared/types/race.types';
 
 @Injectable({
   providedIn: 'root',

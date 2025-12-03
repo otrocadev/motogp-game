@@ -1,17 +1,15 @@
-import { Component, computed, input, output } from '@angular/core';
-import { baseImgUrl } from '../../../config/endpoints';
-import { getMonthName } from '../../../shared/helpers/utils';
+import { Component, computed, input } from '@angular/core';
+import { baseImgUrl } from '../../../../config/endpoints';
+import { getMonthName } from '../../../../shared/utils/utils';
 
 @Component({
-  selector: 'app-grand-prix-card-admin',
+  selector: 'app-grand-prix-card',
   imports: [],
-  templateUrl: './grand-prix-card-admin.component.html',
+  templateUrl: './grand-prix-card.component.html',
   styles: ``,
 })
-export class GrandPrixCardAdminComponent {
+export class GrandPrixCardComponent {
   grandPrix = input<any>();
-  edit = output<string>();
-  delete = output<string>();
 
   constructor() {
     this.grandPrix();
@@ -25,6 +23,10 @@ export class GrandPrixCardAdminComponent {
     return `${baseImgUrl}${this.grandPrix()?.flag_img}`;
   });
 
+  grandPrixLocation = computed(() => {
+    return this.grandPrix()?.location;
+  });
+
   grandPrixDates = computed(() => {
     const startDate = new Date(this.grandPrix()?.start);
     const endDate = new Date(this.grandPrix()?.end);
@@ -35,12 +37,4 @@ export class GrandPrixCardAdminComponent {
       endDate.getDate() + ' ' + getMonthName(endDate.getMonth());
     return displayStartDate + ' - ' + displayEndDate;
   });
-
-  onEditClick() {
-    this.edit.emit(this.grandPrix()?.id);
-  }
-
-  onDeleteClick() {
-    this.delete.emit(this.grandPrix()?.id);
-  }
 }

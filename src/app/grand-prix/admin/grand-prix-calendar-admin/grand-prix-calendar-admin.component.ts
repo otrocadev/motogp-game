@@ -9,13 +9,13 @@ import {
 } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import { GrandPrixService } from '../../shared/data-access/grand-prix.service';
+import { GrandPrixService } from '../../grand-prix.service';
 import { Dialog } from '@angular/cdk/dialog';
 import { ManageRaceComponent } from '../manage-race/manage-race.component';
-import { DeletionConfirmationModalComponent } from '../../shared/components/deletion-confirmation-modal/deletion-confirmation-modal.component';
+import { DeletionConfirmationModalComponent } from '../../../shared/components/deletion-confirmation-modal/deletion-confirmation-modal.component';
 import { GrandPrixCardAdminComponent } from './grand-prix-card-admin/grand-prix-card-admin.component';
-import { EventMode } from '../../shared/types/race.types';
-import { baseImgUrl } from '../../config/endpoints';
+import { EventMode } from '../../../shared/types/race.types';
+import { baseImgUrl } from '../../../config/endpoints';
 
 @Component({
   selector: 'app-grand-prix-calendar',

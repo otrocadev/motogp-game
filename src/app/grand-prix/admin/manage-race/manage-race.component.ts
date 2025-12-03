@@ -2,16 +2,16 @@ import { Component, Inject, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { DateSelectArg } from '@fullcalendar/core';
-import { GrandPrixService } from '../../shared/data-access/grand-prix.service';
+import { GrandPrixService } from '../../grand-prix.service';
 import {
   EventMode,
   GrandPrixEvent,
   CreateRaceDialogData,
   CreateRaceForm,
-} from '../../shared/types/race.types';
-import { MapboxViewComponent } from '../../shared/components/mapbox-view/mapbox-view.component';
-import { UploadImageService } from '../../shared/data-access/upload-image.service';
-import { ToastNotificationService } from '../../shared/components/toast-notification/toast-notification.service';
+} from '../../../shared/types/race.types';
+import { MapboxViewComponent } from '../../../shared/components/mapbox-view/mapbox-view.component';
+import { UploadImageService } from '../../../shared/data-access/upload-image.service';
+import { ToastNotificationService } from '../../../shared/components/toast-notification/toast-notification.service';
 
 @Component({
   selector: 'app-manage-race',
