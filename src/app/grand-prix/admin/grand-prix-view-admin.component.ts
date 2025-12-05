@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { GrandPrixListAdminComponent } from './grand-prix-list-admin/grand-prix-list-admin.component';
 import { GrandPrixCalendarAdminComponent } from './grand-prix-calendar-admin/grand-prix-calendar-admin.component';
 
@@ -8,4 +8,6 @@ import { GrandPrixCalendarAdminComponent } from './grand-prix-calendar-admin/gra
   templateUrl: './grand-prix-view-admin.component.html',
   styles: ``,
 })
-export class GrandPrixViewAdminComponent {}
+export class GrandPrixViewAdminComponent {
+  grandPrixMenuOption = signal<string>('calendar');
+}
