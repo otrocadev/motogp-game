@@ -10,21 +10,18 @@ import {
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { GrandPrixService } from '../../grand-prix.service';
-import { Dialog } from '@angular/cdk/dialog';
-import { ManageRaceComponent } from '../manage-race/manage-race.component';
-import { DeletionConfirmationModalComponent } from '../../../shared/components/deletion-confirmation-modal/deletion-confirmation-modal.component';
-import { GrandPrixCardAdminComponent } from './grand-prix-card-admin/grand-prix-card-admin.component';
+import { GrandPrixModalService } from '../../grand-prix-modal.service';
 import { EventMode } from '../../../shared/types/race.types';
 import { baseImgUrl } from '../../../config/endpoints';
 
 @Component({
-  selector: 'app-grand-prix-calendar',
-  imports: [CommonModule, FullCalendarModule, GrandPrixCardAdminComponent],
+  selector: 'app-grand-prix-calendar-admin',
+  imports: [CommonModule, FullCalendarModule],
   templateUrl: './grand-prix-calendar-admin.component.html',
 })
-export default class GrandPrixCalendarComponent {
+export class GrandPrixCalendarAdminComponent {
   private _grandPrixService = inject(GrandPrixService);
-  private _dialog = inject(Dialog);
+  private _modalService = inject(GrandPrixModalService);
   grandPrixEvents = this._grandPrixService.grandPrixCalendarEvents;
   baseImgUrl = baseImgUrl;
 
@@ -76,24 +73,15 @@ export default class GrandPrixCalendarComponent {
   }
 
   openDeleteConfirmation(eventId: string) {
-    const confirmDeletionRef = this._dialog.open(
-      DeletionConfirmationModalComponent,
-      {
-        data: {
-          functionOnConfirm: async () => {
-            await this._grandPrixService.deleteGrandPrixInfoById(eventId);
-          },
-          messageOnConfirm: 'The grand prix has been deleted successfully',
-          deletionItemText: 'grand prix',
-        },
-      }
-    );
-
-    confirmDeletionRef.closed.subscribe((result) => {
-      if (result === 'confirmed') {
-        this.loadEvents();
-      }
-    });
+    this._modalService
+      .openDeleteConfirmation(async () => {
+        await this._grandPrixService.deleteGrandPrixInfoById(eventId);
+      })
+      .subscribe((result) => {
+        if (result === 'confirmed') {
+          this.loadEvents();
+        }
+      });
   }
 
   openCreateEventModal(
@@ -101,22 +89,16 @@ export default class GrandPrixCalendarComponent {
     selectInfo?: DateSelectArg,
     eventId?: string
   ) {
-    const creationModalRef = this._dialog.open(ManageRaceComponent, {
-      data: {
-        mode: mode,
-        dateInfo: selectInfo,
-        eventId: eventId,
-      },
-    });
-
-    creationModalRef.closed.subscribe((result) => {
-      if (
-        result === 'created' ||
-        result === 'updated' ||
-        result === 'deleted'
-      ) {
-        this.loadEvents();
-      }
-    });
+    this._modalService
+      .openManageRaceModal(mode, selectInfo, eventId)
+      .subscribe((result) => {
+        if (
+          result === 'created' ||
+          result === 'updated' ||
+          result === 'deleted'
+        ) {
+          this.loadEvents();
+        }
+      });
   }
 }

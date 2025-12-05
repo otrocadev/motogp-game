@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
-import { baseImgUrl } from '../../../../config/endpoints';
-import { getMonthName } from '../../../../shared/utils/utils';
+import { baseImgUrl } from '../../../config/endpoints';
+import { getMonthName } from '../../../shared/utils/utils';
 
 @Component({
   selector: 'app-grand-prix-card',
