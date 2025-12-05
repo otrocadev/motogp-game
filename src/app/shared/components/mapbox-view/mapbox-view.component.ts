@@ -2,12 +2,14 @@ import { Component, OnInit, input, output, effect } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import { baseImgUrl } from '../../../config/endpoints';
 
 export interface MapMarker {
   position: [number, number];
   color?: string;
   label?: string;
   id?: string;
+  flagUrl?: string;
 }
 
 @Component({
@@ -58,12 +60,33 @@ export class MapboxViewComponent implements OnInit {
 
         // Create new markers
         currentMarkers.forEach((markerData) => {
-          const marker = new mapboxgl.Marker({
-            color: markerData.color || 'var(--theme6)',
-            draggable: false,
-          })
-            .setLngLat(markerData.position)
-            .addTo(this.map);
+          let marker: mapboxgl.Marker;
+
+          if (markerData.flagUrl) {
+            const el = document.createElement('div');
+            el.className = 'custom-flag-marker';
+            el.style.width = '3.2rem';
+            el.style.height = '2rem';
+            el.style.borderRadius = '12%';
+            el.style.backgroundImage = `url(${
+              baseImgUrl + markerData.flagUrl
+            })`;
+            el.style.backgroundSize = 'cover';
+            el.style.backgroundPosition = 'center';
+            el.style.border = '3px solid var(--theme5)';
+            el.style.cursor = 'pointer';
+
+            marker = new mapboxgl.Marker({ element: el, draggable: false })
+              .setLngLat(markerData.position)
+              .addTo(this.map);
+          } else {
+            marker = new mapboxgl.Marker({
+              color: markerData.color || 'var(--theme6)',
+              draggable: false,
+            })
+              .setLngLat(markerData.position)
+              .addTo(this.map);
+          }
 
           if (markerData.label) {
             const popup = new mapboxgl.Popup({ offset: 25 }).setText(
