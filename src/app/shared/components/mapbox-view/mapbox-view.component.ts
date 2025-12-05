@@ -49,60 +49,16 @@ export class MapboxViewComponent implements OnInit {
       }
     });
 
-    // Effect to update markers when they change
     effect(() => {
       const currentMarkers = this.markers();
 
-      if (this.map && currentMarkers.length > 0) {
-        // Remove old markers
-        this.markerInstances.forEach((m) => m.remove());
-        this.markerInstances = [];
-
-        // Create new markers
-        currentMarkers.forEach((markerData) => {
-          let marker: mapboxgl.Marker;
-
-          if (markerData.flagUrl) {
-            const el = document.createElement('div');
-            el.className = 'custom-flag-marker';
-            el.style.width = '3.2rem';
-            el.style.height = '2rem';
-            el.style.borderRadius = '12%';
-            el.style.backgroundImage = `url(${
-              baseImgUrl + markerData.flagUrl
-            })`;
-            el.style.backgroundSize = 'cover';
-            el.style.backgroundPosition = 'center';
-            el.style.border = '3px solid var(--theme5)';
-            el.style.cursor = 'pointer';
-
-            marker = new mapboxgl.Marker({ element: el, draggable: false })
-              .setLngLat(markerData.position)
-              .addTo(this.map);
-          } else {
-            marker = new mapboxgl.Marker({
-              color: markerData.color || 'var(--theme6)',
-              draggable: false,
-            })
-              .setLngLat(markerData.position)
-              .addTo(this.map);
-          }
-
-          if (markerData.label) {
-            const popup = new mapboxgl.Popup({ offset: 25 }).setText(
-              markerData.label
-            );
-            marker.setPopup(popup);
-          }
-
-          this.markerInstances.push(marker);
-        });
+      if (this.map && this.map.loaded() && currentMarkers.length > 0) {
+        this.createMarkersFromData(currentMarkers);
       }
     });
   }
 
   ngOnInit(): void {
-    // Wait for DOM to be ready before initializing map
     setTimeout(() => {
       mapboxgl.accessToken = environment.MAPBOX_KEY;
 
@@ -116,12 +72,17 @@ export class MapboxViewComponent implements OnInit {
         projection: 'mercator',
       });
 
-      // Create main draggable marker if enabled
-      if (this.draggableMarker()) {
-        this.createMarker(lng, lat);
-      }
+      this.map.on('load', () => {
+        if (this.draggableMarker()) {
+          this.createMarker(lng, lat);
+        }
 
-      // Add geocoder if enabled
+        const currentMarkers = this.markers();
+        if (currentMarkers.length > 0) {
+          this.createMarkersFromData(currentMarkers);
+        }
+      });
+
       if (this.showGeocoder()) {
         const geocoder = new MapboxGeocoder({
           accessToken: environment.MAPBOX_KEY,
@@ -158,5 +119,47 @@ export class MapboxViewComponent implements OnInit {
         this.onPositionChange.emit([lng, lat]);
       });
     }
+  }
+
+  createMarkersFromData(currentMarkers: MapMarker[]) {
+    this.markerInstances.forEach((m) => m.remove());
+    this.markerInstances = [];
+
+    currentMarkers.forEach((markerData) => {
+      let marker: mapboxgl.Marker;
+
+      if (markerData.flagUrl) {
+        const el = document.createElement('div');
+        el.className = 'custom-flag-marker';
+        el.style.width = '3.2rem';
+        el.style.height = '2rem';
+        el.style.borderRadius = '12%';
+        el.style.backgroundImage = `url(${baseImgUrl + markerData.flagUrl})`;
+        el.style.backgroundSize = 'cover';
+        el.style.backgroundPosition = 'center';
+        el.style.border = '3px solid var(--theme5)';
+        el.style.cursor = 'pointer';
+
+        marker = new mapboxgl.Marker({ element: el, draggable: false })
+          .setLngLat(markerData.position)
+          .addTo(this.map);
+      } else {
+        marker = new mapboxgl.Marker({
+          color: markerData.color || 'var(--theme6)',
+          draggable: false,
+        })
+          .setLngLat(markerData.position)
+          .addTo(this.map);
+      }
+
+      if (markerData.label) {
+        const popup = new mapboxgl.Popup({ offset: 25 }).setText(
+          markerData.label
+        );
+        marker.setPopup(popup);
+      }
+
+      this.markerInstances.push(marker);
+    });
   }
 }
