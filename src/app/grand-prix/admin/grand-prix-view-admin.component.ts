@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { GrandPrixListAdminComponent } from './grand-prix-list-admin/grand-prix-list-admin.component';
+import { GrandPrixCalendarAdminComponent } from './grand-prix-calendar-admin/grand-prix-calendar-admin.component';
 
 @Component({
   selector: 'app-grand-prix-view-admin',
-  imports: [],
+  imports: [GrandPrixListAdminComponent, GrandPrixCalendarAdminComponent],
   templateUrl: './grand-prix-view-admin.component.html',
-  styles: ``
+  styles: ``,
 })
-export class GrandPrixViewAdminComponent {
-
-}
+export class GrandPrixViewAdminComponent {}
