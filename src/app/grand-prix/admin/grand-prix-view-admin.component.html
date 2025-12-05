@@ -1,6 +1,24 @@
+<nav class="flex gap-2">
+  <button (click)="grandPrixMenuOption.set('map')">Map view</button>
+  <button (click)="grandPrixMenuOption.set('calendar')">Calendar view</button>
+</nav>
 <main class="grid grid-cols-8 gap-2">
-  <section class="col-span-5">
+  <section class="col-span-5 relative">
+    <app-mapbox-view
+      [initialPosition]="[10, 30]"
+      [initialZoom]="1"
+      [markers]="markers()"
+      [draggableMarker]="false"
+      [showGeocoder]="false"
+      [class]="
+        grandPrixMenuOption() === 'map'
+          ? 'block w-full'
+          : 'absolute -left-[9999px]'
+      "
+    ></app-mapbox-view>
+    @if (grandPrixMenuOption() === 'calendar') {
     <app-grand-prix-calendar-admin></app-grand-prix-calendar-admin>
+    }
   </section>
   <section class="col-span-3">
     <app-grand-prix-list-admin></app-grand-prix-list-admin>

@@ -36,6 +36,8 @@ export class GrandPrixService {
         flag_img: event.flag_img,
         location: event.location,
         circuit: event.circuit,
+        latitude: event.latitude,
+        longitude: event.longitude,
         end: endStr,
         allDay: true,
       };

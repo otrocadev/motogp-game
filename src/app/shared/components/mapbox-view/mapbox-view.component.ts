@@ -3,17 +3,34 @@ import { environment } from '../../../../environments/environment';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 
+export interface MapMarker {
+  position: [number, number];
+  color?: string;
+  label?: string;
+  id?: string;
+}
+
 @Component({
   selector: 'app-mapbox-view',
   imports: [],
   templateUrl: './mapbox-view.component.html',
 })
 export class MapboxViewComponent implements OnInit {
-  initialPosition = input<[number, number]>([2.26, 41.57]);
+  private static instanceCounter = 0;
+
+  initialPosition = input<[number, number]>([0, 30]);
+  initialZoom = input<number>(1);
+  flyToZoom = input<number>(13);
+  markers = input<MapMarker[]>([]);
+  showGeocoder = input<boolean>(true);
+  draggableMarker = input<boolean>(true);
   onPositionChange = output<[number, number]>();
 
   map!: mapboxgl.Map;
   marker!: mapboxgl.Marker;
+  markerInstances: mapboxgl.Marker[] = [];
+
+  readonly mapContainerId = `mapbox-container-${++MapboxViewComponent.instanceCounter}`;
 
   constructor() {
     effect(() => {
@@ -22,57 +39,101 @@ export class MapboxViewComponent implements OnInit {
       if (this.map && this.marker) {
         this.map.flyTo({
           center: [lng, lat],
-          zoom: 13,
-          duration: 5000,
+          zoom: this.flyToZoom(),
+          duration: 300,
           easing: (t) => t,
         });
         this.marker.setLngLat([lng, lat]);
       }
     });
+
+    // Effect to update markers when they change
+    effect(() => {
+      const currentMarkers = this.markers();
+
+      if (this.map && currentMarkers.length > 0) {
+        // Remove old markers
+        this.markerInstances.forEach((m) => m.remove());
+        this.markerInstances = [];
+
+        // Create new markers
+        currentMarkers.forEach((markerData) => {
+          const marker = new mapboxgl.Marker({
+            color: markerData.color || 'var(--theme6)',
+            draggable: false,
+          })
+            .setLngLat(markerData.position)
+            .addTo(this.map);
+
+          if (markerData.label) {
+            const popup = new mapboxgl.Popup({ offset: 25 }).setText(
+              markerData.label
+            );
+            marker.setPopup(popup);
+          }
+
+          this.markerInstances.push(marker);
+        });
+      }
+    });
   }
 
   ngOnInit(): void {
-    mapboxgl.accessToken = environment.MAPBOX_KEY;
+    // Wait for DOM to be ready before initializing map
+    setTimeout(() => {
+      mapboxgl.accessToken = environment.MAPBOX_KEY;
 
-    const [lng, lat] = this.initialPosition();
+      const [lng, lat] = this.initialPosition();
 
-    this.map = new mapboxgl.Map({
-      container: 'mapbox-container',
-      style: 'mapbox://styles/otrocadev/cminawj1i00rd01qwbkv979ap',
-      center: [lng, lat],
-      zoom: 2,
-    });
+      this.map = new mapboxgl.Map({
+        container: this.mapContainerId,
+        style: 'mapbox://styles/otrocadev/cminawj1i00rd01qwbkv979ap',
+        center: [lng, lat],
+        zoom: this.initialZoom(),
+        projection: 'mercator',
+      });
 
-    this.createMarker(lng, lat);
+      // Create main draggable marker if enabled
+      if (this.draggableMarker()) {
+        this.createMarker(lng, lat);
+      }
 
-    const geocoder = new MapboxGeocoder({
-      accessToken: environment.MAPBOX_KEY,
-      useBrowserFocus: true,
-      mapboxgl: mapboxgl as any,
-      marker: false,
-    }) as any;
+      // Add geocoder if enabled
+      if (this.showGeocoder()) {
+        const geocoder = new MapboxGeocoder({
+          accessToken: environment.MAPBOX_KEY,
+          useBrowserFocus: true,
+          mapboxgl: mapboxgl as any,
+          marker: false,
+        }) as any;
 
-    this.map.addControl(geocoder);
+        this.map.addControl(geocoder);
 
-    geocoder.on('result', (e: any) => {
-      const [newLng, newLat] = e.result.center;
-      this.map.flyTo({ center: [newLng, newLat], zoom: 13 });
-      this.marker.setLngLat([newLng, newLat]);
-      this.onPositionChange.emit([newLng, newLat]);
-    });
+        geocoder.on('result', (e: any) => {
+          const [newLng, newLat] = e.result.center;
+          this.map.flyTo({ center: [newLng, newLat], zoom: this.flyToZoom() });
+          if (this.marker) {
+            this.marker.setLngLat([newLng, newLat]);
+          }
+          this.onPositionChange.emit([newLng, newLat]);
+        });
+      }
+    }, 0);
   }
 
   createMarker(lng: number, lat: number) {
     this.marker = new mapboxgl.Marker({
       color: 'var(--theme6)',
-      draggable: true,
+      draggable: this.draggableMarker(),
     })
       .setLngLat([lng, lat])
       .addTo(this.map);
 
-    this.marker.on('dragend', () => {
-      const { lng, lat } = this.marker.getLngLat();
-      this.onPositionChange.emit([lng, lat]);
-    });
+    if (this.draggableMarker()) {
+      this.marker.on('dragend', () => {
+        const { lng, lat } = this.marker.getLngLat();
+        this.onPositionChange.emit([lng, lat]);
+      });
+    }
   }
 }
