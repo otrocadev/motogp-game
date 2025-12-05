@@ -1,16 +1,32 @@
-export const mainMenuOptions = {
+export interface MenuItem {
+  title: string;
+  url: string;
+  icon: string;
+}
+
+export const mainMenuOptions: { admin: MenuItem[]; user: MenuItem[] } = {
   admin: [
     {
-      title: 'MANAGE GRAND PRIX EVENTS',
-      image: 'calendar.png',
-      url: '/grand-prix-management',
+      title: 'GRAND PRIX',
+      icon: 'calendar',
+      url: '/season-calendar',
+    },
+    {
+      title: 'RIDERS',
+      icon: 'helmet',
+      url: 'riders',
     },
   ],
   user: [
     {
-      title: 'GRAND PRIX CALENDAR',
-      image: 'racetrack.png',
+      title: 'GRAND PRIX',
+      icon: 'calendar',
       url: '/season-calendar',
+    },
+    {
+      title: 'RIDERS',
+      icon: 'helmet',
+      url: 'riders',
     },
   ],
 };
