@@ -1,6 +1,28 @@
-<nav class="flex gap-2">
-  <button (click)="grandPrixMenuOption.set('map')">Map view</button>
-  <button (click)="grandPrixMenuOption.set('calendar')">Calendar view</button>
+<nav
+  class="flex gap-2 border border-theme4 rounded-lg w-fit font-secondary bg-theme1 mb-2"
+>
+  <button
+    class="p-2 rounded-lg cursor-pointer"
+    [class]="
+      grandPrixMenuOption() === 'map'
+        ? 'bg-theme6 text-theme5 font-bold scale-105'
+        : ''
+    "
+    (click)="grandPrixMenuOption.set('map')"
+  >
+    Map view
+  </button>
+  <button
+    class="p-2 rounded-lg cursor-pointer"
+    [class]="
+      grandPrixMenuOption() === 'calendar'
+        ? 'bg-theme6 text-theme5 font-bold scale-105'
+        : ''
+    "
+    (click)="grandPrixMenuOption.set('calendar')"
+  >
+    Calendar view
+  </button>
 </nav>
 <main class="grid grid-cols-8 gap-2">
   <section class="col-span-5 relative">
