@@ -32,12 +32,6 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'season-calendar',
-    canActivate: [privateGuard],
-    loadComponent: () =>
-      import('./grand-prix/user/grand-prix-list/grand-prix-list.component'),
-  },
-  {
     path: 'grand-prix-management',
     canActivate: [privateGuard, adminGuard],
     loadComponent: () =>

@@ -9,7 +9,7 @@ import { GrandPrixCardComponent } from './grand-prix-card/grand-prix-card.compon
   templateUrl: './grand-prix-list.component.html',
   styles: ``,
 })
-export default class GrandPrixListComponent {
+export class GrandPrixListComponent {
   grandPrixService = inject(GrandPrixService);
   grandPrixCalendarEvents = this.grandPrixService.grandPrixCalendarEvents;
   baseImgUrl = baseImgUrl;
