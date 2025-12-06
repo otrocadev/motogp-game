@@ -1,4 +1,4 @@
-import { DateSelectArg } from '@fullcalendar/core/index.js';
+import { DateSelectArg, EventInput } from '@fullcalendar/core/index.js';
 import { FormControl } from '@angular/forms';
 
 export type EventMode = 'create' | 'edit';
@@ -13,6 +13,17 @@ export interface GrandPrixEvent {
   longitude: number;
   latitude: number;
   flag_img: string;
+}
+
+export interface GrandPrixCalendarEvent extends EventInput {
+  id?: string;
+  title?: string;
+  start?: string;
+  end?: string;
+  flag_img?: string;
+  longitude?: number;
+  latitude?: number;
+  location?: string;
 }
 
 export interface CreateRaceDialogData {

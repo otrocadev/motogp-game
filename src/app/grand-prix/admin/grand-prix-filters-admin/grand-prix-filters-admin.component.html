@@ -1,0 +1,43 @@
+<section
+  class="flex w-fit border-2 border-theme4 bg-theme1 rounded-lg mb-2 p-2"
+>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="flex items-center gap-4"
+  >
+    <span class="flex items-center gap-2">
+      <label for="search">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="icon icon-tabler icons-tabler-outline icon-tabler-search"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+          <path d="M21 21l-6 -6" />
+        </svg>
+      </label>
+      <input
+        formControlName="search"
+        id="search"
+        class="w-sm rounded-lg p-2 border border-theme4 bg-theme3"
+        type="text"
+        placeholder="Search a grand prix..."
+      />
+    </span>
+    <button
+      type="submit"
+      class="p-2 rounded-lg cursor-pointer inline-flex items-center bg-theme6 text-theme1 font-secondary"
+    >
+      Search
+    </button>
+  </form>
+</section>

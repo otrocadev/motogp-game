@@ -1,1 +1,5 @@
-export const environment = {};
+export const environment = {
+  SUPABASE_URL: '',
+  SUPABASE_KEY: '',
+  MAPBOX_KEY: '',
+};

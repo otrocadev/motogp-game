@@ -1,0 +1,42 @@
+<header>
+  <app-grand-prix-filters-admin
+    (searchGrandPrixQuery)="searchGrandPrix($event)"
+  ></app-grand-prix-filters-admin>
+</header>
+<main>
+  <app-grand-prix-view-menu-admin></app-grand-prix-view-menu-admin>
+  <content class="grid grid-cols-8 gap-2">
+    <section class="col-span-5 relative">
+      @defer (on timer(500ms)) {
+      <app-mapbox-view
+        [initialPosition]="[10, 30]"
+        [initialZoom]="1.5"
+        [markers]="markers()"
+        [draggableMarker]="false"
+        [showGeocoder]="false"
+        [class]="
+          grandPrixMenuOption() === 'map'
+            ? 'block w-full'
+            : 'absolute -left-[9999px]'
+        "
+      ></app-mapbox-view>
+      } @placeholder {
+      <div class="flex items-center justify-center gap-2 text-theme5">
+        <span
+          class="h-5 w-5 border-2 border-theme5 border-t-transparent rounded-full animate-spin"
+        ></span>
+        <span>Loading map...</span>
+      </div>
+      } @if (grandPrixMenuOption() === 'calendar') {
+      <app-grand-prix-calendar-admin
+        [displayingEvents]="displayingEvents()"
+      ></app-grand-prix-calendar-admin>
+      }
+    </section>
+    <section class="col-span-3 max-h-[calc(100vh-12rem)]">
+      <app-grand-prix-list-admin
+        [displayingEvents]="displayingEvents()"
+      ></app-grand-prix-list-admin>
+    </section>
+  </content>
+</main>

@@ -1,14 +1,17 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { SupabaseService } from '../shared/data-access/supabase.service';
 import { EventInput } from '@fullcalendar/core';
-import { GrandPrixEvent } from '../shared/types/race.types';
+import {
+  GrandPrixEvent,
+  GrandPrixCalendarEvent,
+} from '../shared/types/race.types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GrandPrixService {
   private _supabaseService = inject(SupabaseService);
-  private _grandPrixCalendarEvents = signal<EventInput[]>([]);
+  private _grandPrixCalendarEvents = signal<GrandPrixCalendarEvent[]>([]);
 
   grandPrixCalendarEvents = this._grandPrixCalendarEvents.asReadonly();
 
@@ -36,6 +39,8 @@ export class GrandPrixService {
         flag_img: event.flag_img,
         location: event.location,
         circuit: event.circuit,
+        latitude: event.latitude,
+        longitude: event.longitude,
         end: endStr,
         allDay: true,
       };
