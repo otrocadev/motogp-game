@@ -1,10 +1,12 @@
-<header>
+<header
+  class="flex justify-between w-full items-center bg-theme1 p-2 mb-2 rounded-lg border-2 border-theme4"
+>
+  <app-grand-prix-view-menu-admin></app-grand-prix-view-menu-admin>
   <app-grand-prix-filters-admin
     (searchGrandPrixQuery)="searchGrandPrix($event)"
   ></app-grand-prix-filters-admin>
 </header>
 <main>
-  <app-grand-prix-view-menu-admin></app-grand-prix-view-menu-admin>
   <content class="grid grid-cols-8 gap-2">
     <section class="col-span-5 relative">
       @defer (on timer(500ms)) {
