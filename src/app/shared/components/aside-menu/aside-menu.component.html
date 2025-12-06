@@ -3,10 +3,8 @@
 >
   <button
     (click)="asideMenuService.setMenuOption('grand-prix')"
-    [class]="{
-      'bg-theme6': menuOption() === 'grand-prix',
-    }"
-    class="w-64 overflow-hidden inline-flex gap-2 cursor-pointer items-center py-2 px-4 rounded-2xl hover:bg-theme6"
+    [class]="menuOption() === 'grand-prix' ? 'bg-theme6 text-theme1' : ''"
+    class="w-64 overflow-hidden inline-flex gap-2 cursor-pointer items-center py-2 px-4 rounded-2xl hover:bg-theme6 hover:text-theme1"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -39,10 +37,8 @@
   </button>
   <button
     (click)="asideMenuService.setMenuOption('riders')"
-    [class]="{
-        'bg-theme6': menuOption() === 'riders',
-      }"
-    class="w-64 overflow-hidden inline-flex gap-2 cursor-pointer items-center py-2 px-4 rounded-2xl hover:bg-theme6"
+    [class]="menuOption() === 'riders' ? 'bg-theme6 text-theme1' : ''"
+    class="w-64 overflow-hidden inline-flex gap-2 cursor-pointer items-center py-2 px-4 rounded-2xl hover:bg-theme6 hover:text-theme1"
   >
     <svg
       width="32"

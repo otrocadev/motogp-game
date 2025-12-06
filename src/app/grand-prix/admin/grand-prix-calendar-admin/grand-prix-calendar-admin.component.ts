@@ -1,4 +1,11 @@
-import { Component, signal, ChangeDetectorRef, inject } from '@angular/core';
+import {
+  Component,
+  signal,
+  ChangeDetectorRef,
+  inject,
+  input,
+  effect,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import {
@@ -11,7 +18,10 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { GrandPrixService } from '../../grand-prix.service';
 import { GrandPrixModalService } from '../../grand-prix-modal.service';
-import { EventMode } from '../../../shared/types/race.types';
+import {
+  EventMode,
+  GrandPrixCalendarEvent,
+} from '../../../shared/types/race.types';
 import { baseImgUrl } from '../../../config/endpoints';
 
 @Component({
@@ -22,7 +32,7 @@ import { baseImgUrl } from '../../../config/endpoints';
 export class GrandPrixCalendarAdminComponent {
   private _grandPrixService = inject(GrandPrixService);
   private _modalService = inject(GrandPrixModalService);
-  grandPrixEvents = this._grandPrixService.grandPrixCalendarEvents;
+  displayingEvents = input<GrandPrixCalendarEvent[]>();
   baseImgUrl = baseImgUrl;
 
   calendarOptions = signal<CalendarOptions>({
@@ -33,7 +43,7 @@ export class GrandPrixCalendarAdminComponent {
       right: 'prev,next',
     },
     initialView: 'dayGridMonth',
-    events: this.grandPrixEvents,
+    events: [],
     weekends: true,
     editable: true,
     selectable: true,
@@ -44,19 +54,19 @@ export class GrandPrixCalendarAdminComponent {
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this),
   });
+
   currentEvents = signal<EventApi[]>([]);
 
   constructor(private changeDetector: ChangeDetectorRef) {
-    this.loadEvents();
-  }
-
-  async loadEvents() {
-    const events = await this._grandPrixService.getGrandPrixCalendarEvents();
-
-    this.calendarOptions.update((opts) => ({
-      ...opts,
-      events: events,
-    }));
+    effect(() => {
+      const events = this.displayingEvents();
+      if (events && events.length > 0) {
+        this.calendarOptions.update((opts) => ({
+          ...opts,
+          events: events,
+        }));
+      }
+    });
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
@@ -77,11 +87,7 @@ export class GrandPrixCalendarAdminComponent {
       .openDeleteConfirmation(async () => {
         await this._grandPrixService.deleteGrandPrixInfoById(eventId);
       })
-      .subscribe((result) => {
-        if (result === 'confirmed') {
-          this.loadEvents();
-        }
-      });
+      .subscribe();
   }
 
   openCreateEventModal(
@@ -91,14 +97,6 @@ export class GrandPrixCalendarAdminComponent {
   ) {
     this._modalService
       .openManageRaceModal(mode, selectInfo, eventId)
-      .subscribe((result) => {
-        if (
-          result === 'created' ||
-          result === 'updated' ||
-          result === 'deleted'
-        ) {
-          this.loadEvents();
-        }
-      });
+      .subscribe();
   }
 }

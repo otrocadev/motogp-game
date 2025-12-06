@@ -1,4 +1,5 @@
 <div
-  id="mapbox-container"
-  class="w-full border-2 border-theme4 rounded-lg aspect-square"
+  [id]="mapContainerId"
+  class="w-full h-full border-2 border-theme4 rounded-lg"
+  [class]="draggableMarker() ? 'aspect-square' : 'aspect-4/3'"
 ></div>

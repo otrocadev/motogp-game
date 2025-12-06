@@ -155,7 +155,7 @@
           </div>
         </section>
         <section>
-          @defer (on timer(1000ms)) {
+          @defer (on timer(500ms)) {
           <app-mapbox-view
             [initialPosition]="mapboxPosition()"
             (onPositionChange)="onPositionChange($event)"

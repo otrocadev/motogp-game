@@ -1,6 +1,7 @@
 import { Component, computed, input } from '@angular/core';
 import { baseImgUrl } from '../../../config/endpoints';
 import { getMonthName } from '../../../shared/utils/utils';
+import { GrandPrixCalendarEvent } from '../../../shared/types/race.types';
 
 @Component({
   selector: 'app-grand-prix-card',
@@ -9,7 +10,7 @@ import { getMonthName } from '../../../shared/utils/utils';
   styles: ``,
 })
 export class GrandPrixCardComponent {
-  grandPrix = input<any>();
+  grandPrix = input<GrandPrixCalendarEvent>();
 
   constructor() {
     this.grandPrix();
@@ -28,8 +29,11 @@ export class GrandPrixCardComponent {
   });
 
   grandPrixDates = computed(() => {
-    const startDate = new Date(this.grandPrix()?.start);
-    const endDate = new Date(this.grandPrix()?.end);
+    const gp = this.grandPrix();
+    if (!gp?.start || !gp?.end) return '';
+
+    const startDate = new Date(gp.start as string);
+    const endDate = new Date(gp.end as string);
 
     const displayStartDate =
       startDate.getDate() + ' ' + getMonthName(startDate.getMonth());
