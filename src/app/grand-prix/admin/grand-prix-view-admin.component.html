@@ -1,5 +1,7 @@
 <header>
-  <app-grand-prix-filters-admin></app-grand-prix-filters-admin>
+  <app-grand-prix-filters-admin
+    (searchGrandPrixQuery)="searchGrandPrix($event)"
+  ></app-grand-prix-filters-admin>
 </header>
 <main>
   <app-grand-prix-view-menu-admin></app-grand-prix-view-menu-admin>
@@ -26,11 +28,15 @@
         <span>Loading map...</span>
       </div>
       } @if (grandPrixMenuOption() === 'calendar') {
-      <app-grand-prix-calendar-admin></app-grand-prix-calendar-admin>
+      <app-grand-prix-calendar-admin
+        [displayingEvents]="displayingEvents()"
+      ></app-grand-prix-calendar-admin>
       }
     </section>
     <section class="col-span-3 max-h-[calc(100vh-12rem)]">
-      <app-grand-prix-list-admin></app-grand-prix-list-admin>
+      <app-grand-prix-list-admin
+        [displayingEvents]="displayingEvents()"
+      ></app-grand-prix-list-admin>
     </section>
   </content>
 </main>

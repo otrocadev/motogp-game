@@ -27,16 +27,15 @@ export class GrandPrixViewAdminComponent implements OnInit {
   markers = signal<MapMarker[]>([]);
 
   displayingEvents = signal<any[]>([]);
-  searchQuery = signal<string>('');
 
   async ngOnInit() {
     this.displayingEvents.set(
       await this.grandPrixService.getGrandPrixCalendarEvents()
     );
-    await this.loadGrandPrix();
+    await this.loadGrandPrixMarkers();
   }
 
-  async loadGrandPrix() {
+  async loadGrandPrixMarkers() {
     const newMarkers: MapMarker[] = this.displayingEvents().map((event) => ({
       position: [event['longitude'], event['latitude']] as [number, number],
       label: event['title'],
@@ -46,5 +45,14 @@ export class GrandPrixViewAdminComponent implements OnInit {
     }));
 
     this.markers.set(newMarkers);
+  }
+
+  async searchGrandPrix(query: string) {
+    this.displayingEvents.set(
+      this.grandPrixCalendarEvents().filter((event) =>
+        event?.title?.toLowerCase().includes(query.toLowerCase())
+      )
+    );
+    await this.loadGrandPrixMarkers();
   }
 }

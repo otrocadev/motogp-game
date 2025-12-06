@@ -1,5 +1,5 @@
 <section
-  class="flex flex-col h-fit max-h-full w-full border border-theme4 rounded-lg gap-2 p-2 overflow-scroll mx-auto bg-theme1"
+  class="flex flex-col h-fit max-h-full w-full border-2 border-theme4 rounded-lg gap-2 p-2 overflow-scroll mx-auto bg-theme1"
 >
   <article
     class="items-start inline-flex text-left border border-theme4 rounded-lg hover:cursor-pointer bg-theme3 hover:shadow-xl hover:scale-101 transition-all p-4 gap-4"
@@ -20,7 +20,7 @@
     </svg>
     New Grand Prix Event
   </article>
-  @for (grandPrix of grandPrixEvents(); track grandPrix.id){
+  @for (grandPrix of displayingEvents(); track grandPrix.id){
   <app-grand-prix-card-admin
     [grandPrix]="grandPrix"
     (edit)="openCreateEventModal('edit', undefined, $event)"

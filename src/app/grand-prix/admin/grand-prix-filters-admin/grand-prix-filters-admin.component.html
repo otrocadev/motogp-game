@@ -1,5 +1,11 @@
-<section class="flex w-fit border border-theme4 bg-theme1 rounded-lg mb-2 p-2">
-  <form class="flex items-center gap-4">
+<section
+  class="flex w-fit border-2 border-theme4 bg-theme1 rounded-lg mb-2 p-2"
+>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="flex items-center gap-4"
+  >
     <span class="flex items-center gap-2">
       <label for="search">
         <svg
@@ -20,6 +26,7 @@
         </svg>
       </label>
       <input
+        formControlName="search"
         id="search"
         class="w-sm rounded-lg p-2 border border-theme4 bg-theme3"
         type="text"
@@ -27,6 +34,7 @@
       />
     </span>
     <button
+      type="submit"
       class="p-2 rounded-lg cursor-pointer inline-flex items-center bg-theme6 text-theme1 font-secondary"
     >
       Search

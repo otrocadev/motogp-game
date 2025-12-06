@@ -52,7 +52,7 @@ export class MapboxViewComponent implements OnInit {
     effect(() => {
       const currentMarkers = this.markers();
 
-      if (this.map && this.map.loaded() && currentMarkers.length > 0) {
+      if (this.map && this.map.loaded()) {
         this.createMarkersFromData(currentMarkers);
       }
     });

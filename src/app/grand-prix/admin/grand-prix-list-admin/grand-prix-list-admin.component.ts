@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { GrandPrixCardAdminComponent } from './grand-prix-card-admin/grand-prix-card-admin.component';
 import { GrandPrixService } from '../../grand-prix.service';
 import { GrandPrixModalService } from '../../grand-prix-modal.service';
@@ -13,8 +13,7 @@ import { EventMode } from '../../../shared/types/race.types';
 export class GrandPrixListAdminComponent {
   private _grandPrixService = inject(GrandPrixService);
   private _modalService = inject(GrandPrixModalService);
-
-  grandPrixEvents = this._grandPrixService.grandPrixCalendarEvents;
+  displayingEvents = input<any[]>();
 
   constructor() {
     this.loadEvents();
