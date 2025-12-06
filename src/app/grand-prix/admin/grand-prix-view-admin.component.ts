@@ -4,6 +4,7 @@ import { GrandPrixCalendarAdminComponent } from './grand-prix-calendar-admin/gra
 import { GrandPrixService } from '../grand-prix.service';
 import { MapboxViewComponent } from '../../shared/components/mapbox-view/mapbox-view.component';
 import { MapMarker } from '../../shared/components/mapbox-view/mapbox-view.component';
+import { GrandPrixViewMenuAdminComponent } from './grand-prix-view-menu-admin/grand-prix-view-menu-admin.component';
 
 @Component({
   selector: 'app-grand-prix-view-admin',
@@ -11,6 +12,7 @@ import { MapMarker } from '../../shared/components/mapbox-view/mapbox-view.compo
     GrandPrixListAdminComponent,
     GrandPrixCalendarAdminComponent,
     MapboxViewComponent,
+    GrandPrixViewMenuAdminComponent,
   ],
   templateUrl: './grand-prix-view-admin.component.html',
   styles: ``,
