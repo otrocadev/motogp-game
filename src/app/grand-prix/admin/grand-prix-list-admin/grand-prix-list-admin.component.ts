@@ -2,7 +2,11 @@ import { Component, inject, input } from '@angular/core';
 import { GrandPrixCardAdminComponent } from './grand-prix-card-admin/grand-prix-card-admin.component';
 import { GrandPrixService } from '../../grand-prix.service';
 import { GrandPrixModalService } from '../../grand-prix-modal.service';
-import { EventMode } from '../../../shared/types/race.types';
+import {
+  GrandPrixCalendarEvent,
+  EventMode,
+} from '../../../shared/types/race.types';
+import { DateSelectArg } from '@fullcalendar/core';
 
 @Component({
   selector: 'app-grand-prix-list-admin',
@@ -13,7 +17,7 @@ import { EventMode } from '../../../shared/types/race.types';
 export class GrandPrixListAdminComponent {
   private _grandPrixService = inject(GrandPrixService);
   private _modalService = inject(GrandPrixModalService);
-  displayingEvents = input<any[]>();
+  displayingEvents = input<GrandPrixCalendarEvent[]>();
 
   constructor() {
     this.loadEvents();
@@ -23,7 +27,11 @@ export class GrandPrixListAdminComponent {
     await this._grandPrixService.getGrandPrixCalendarEvents();
   }
 
-  openCreateEventModal(mode: EventMode, selectInfo?: any, eventId?: string) {
+  openCreateEventModal(
+    mode: EventMode,
+    selectInfo?: DateSelectArg,
+    eventId?: string
+  ) {
     this._modalService
       .openManageRaceModal(mode, selectInfo, eventId)
       .subscribe((result) => {

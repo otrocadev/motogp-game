@@ -18,7 +18,10 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { GrandPrixService } from '../../grand-prix.service';
 import { GrandPrixModalService } from '../../grand-prix-modal.service';
-import { EventMode } from '../../../shared/types/race.types';
+import {
+  EventMode,
+  GrandPrixCalendarEvent,
+} from '../../../shared/types/race.types';
 import { baseImgUrl } from '../../../config/endpoints';
 
 @Component({
@@ -29,7 +32,7 @@ import { baseImgUrl } from '../../../config/endpoints';
 export class GrandPrixCalendarAdminComponent {
   private _grandPrixService = inject(GrandPrixService);
   private _modalService = inject(GrandPrixModalService);
-  displayingEvents = input<any[]>();
+  displayingEvents = input<GrandPrixCalendarEvent[]>();
   baseImgUrl = baseImgUrl;
 
   calendarOptions = signal<CalendarOptions>({

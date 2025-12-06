@@ -6,6 +6,7 @@ import { MapboxViewComponent } from '../../shared/components/mapbox-view/mapbox-
 import { MapMarker } from '../../shared/components/mapbox-view/mapbox-view.component';
 import { GrandPrixViewMenuAdminComponent } from './grand-prix-view-menu-admin/grand-prix-view-menu-admin.component';
 import { GrandPrixFiltersAdminComponent } from './grand-prix-filters-admin/grand-prix-filters-admin.component';
+import { GrandPrixCalendarEvent } from '../../shared/types/race.types';
 
 @Component({
   selector: 'app-grand-prix-view-admin',
@@ -26,11 +27,11 @@ export class GrandPrixViewAdminComponent implements OnInit {
   grandPrixCalendarEvents = this.grandPrixService.grandPrixCalendarEvents;
   markers = signal<MapMarker[]>([]);
 
-  displayingEvents = signal<any[]>([]);
+  displayingEvents = signal<GrandPrixCalendarEvent[]>([]);
 
   async ngOnInit() {
     this.displayingEvents.set(
-      await this.grandPrixService.getGrandPrixCalendarEvents()
+      (await this.grandPrixService.getGrandPrixCalendarEvents()) as GrandPrixCalendarEvent[]
     );
     await this.loadGrandPrixMarkers();
   }
@@ -51,7 +52,7 @@ export class GrandPrixViewAdminComponent implements OnInit {
     this.displayingEvents.set(
       this.grandPrixCalendarEvents().filter((event) =>
         event?.title?.toLowerCase().includes(query.toLowerCase())
-      )
+      ) as GrandPrixCalendarEvent[]
     );
     await this.loadGrandPrixMarkers();
   }
