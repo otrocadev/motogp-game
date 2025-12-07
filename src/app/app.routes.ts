@@ -11,6 +11,23 @@ export const routes: Routes = [
     loadComponent: () => import('./home-page/home-page.component'),
   },
   {
+    path: '',
+    canActivate: [privateGuard],
+    loadComponent: () =>
+      import('./home-page/user-home/user-home.component').then(
+        (m) => m.UserHomeComponent
+      ),
+    children: [
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('./grand-prix/user/grand-prix-list.component').then(
+            (m) => m.GrandPrixListComponent
+          ),
+      },
+    ],
+  },
+  {
     path: 'auth',
     children: [
       {
@@ -25,10 +42,15 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./auth/components/log-in/log-in.component'),
       },
-      {
-        path: '**',
-        redirectTo: 'log-in',
-      },
+      { path: '**', redirectTo: 'log-in' },
     ],
+  },
+  {
+    path: 'admin',
+    canActivate: [adminGuard],
+    loadComponent: () =>
+      import('./home-page/admin-home/admin-home.component').then(
+        (m) => m.AdminHomeComponent
+      ),
   },
 ];

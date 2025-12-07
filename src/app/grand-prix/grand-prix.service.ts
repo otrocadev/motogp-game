@@ -19,7 +19,7 @@ export class GrandPrixService {
     const { data, error } = await this._supabaseService.supabaseClient
       .from('2026_grand_prixes')
       .select('*')
-      .order('id', { ascending: true });
+      .order('start_date', { ascending: true });
 
     if (error) {
       console.error(error);
