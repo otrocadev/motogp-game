@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { AsideMenuComponent } from '../../shared/components/aside-menu/aside-menu.component';
 import { GrandPrixViewAdminComponent } from '../../grand-prix/admin/grand-prix-view-admin.component';
 import { AsideMenuService } from '../../shared/components/aside-menu/aside-menu.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-home',
@@ -10,6 +11,16 @@ import { AsideMenuService } from '../../shared/components/aside-menu/aside-menu.
 })
 export class AdminHomeComponent {
   asideMenuService = inject(AsideMenuService);
-
   menuOption = this.asideMenuService.menuOption;
+  private _router = inject(Router);
+
+  handleMenuOptionChange(option: string) {
+    this.asideMenuService.setMenuOption(option);
+
+    if (option === 'grand-prix') {
+      this._router.navigate([`/admin`]);
+    } else {
+      this._router.navigate([`/admin/${option}`]);
+    }
+  }
 }

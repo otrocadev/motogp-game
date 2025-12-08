@@ -28,12 +28,6 @@ export class AsideMenuComponent {
       } else {
         this._router.navigate([`/admin/${option}`]);
       }
-    } else {
-      if (option === 'grand-prix') {
-        this._router.navigate([`/home`]);
-      } else {
-        this._router.navigate([`/${option}`]);
-      }
     }
   }
 }

@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { AsideMenuComponent } from '../../shared/components/aside-menu/aside-menu.component';
 import { AsideMenuService } from '../../shared/components/aside-menu/aside-menu.service';
 import { RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-home',
@@ -10,6 +11,16 @@ import { RouterOutlet } from '@angular/router';
 })
 export class UserHomeComponent {
   asideMenuService = inject(AsideMenuService);
-
   menuOption = this.asideMenuService.menuOption;
+  private _router = inject(Router);
+
+  handleMenuOptionChange(option: string) {
+    this.asideMenuService.setMenuOption(option);
+
+    if (option === 'grand-prix') {
+      this._router.navigate([`/home`]);
+    } else {
+      this._router.navigate([`/${option}`]);
+    }
+  }
 }
