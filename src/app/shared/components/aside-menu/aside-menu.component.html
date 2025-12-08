@@ -2,7 +2,7 @@
   class="bg-theme1 font-secondary text-lg h-[calc(100vh-4rem)] w-full p-4 flex flex-col gap-4 border-r border-theme4"
 >
   <button
-    (click)="asideMenuService.setMenuOption('grand-prix')"
+    (click)="handleMenuOptionChange('grand-prix')"
     [class]="menuOption() === 'grand-prix' ? 'bg-theme6 text-theme1' : ''"
     class="w-64 overflow-hidden inline-flex gap-2 cursor-pointer items-center py-2 px-4 rounded-2xl hover:bg-theme6 hover:text-theme1"
   >
@@ -16,27 +16,47 @@
       stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
-      class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-week"
+      class="icon icon-tabler icons-tabler-outline icon-tabler-trophy"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path
-        d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"
-      />
-      <path d="M16 3v4" />
-      <path d="M8 3v4" />
-      <path d="M4 11h16" />
-      <path d="M7 14h.013" />
-      <path d="M10.01 14h.005" />
-      <path d="M13.01 14h.005" />
-      <path d="M16.015 14h.005" />
-      <path d="M13.015 17h.005" />
-      <path d="M7.01 17h.005" />
-      <path d="M10.01 17h.005" />
+      <path d="M8 21l8 0" />
+      <path d="M12 17l0 4" />
+      <path d="M7 4l10 0" />
+      <path d="M17 4v8a5 5 0 0 1 -10 0v-8" />
+      <path d="M5 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+      <path d="M19 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
     </svg>
     Grand Prix
   </button>
   <button
-    (click)="asideMenuService.setMenuOption('riders')"
+    (click)="handleMenuOptionChange('standings')"
+    [class]="menuOption() === 'standings' ? 'bg-theme6 text-theme1' : ''"
+    class="w-64 overflow-hidden inline-flex gap-2 cursor-pointer items-center py-2 px-4 rounded-2xl hover:bg-theme6 hover:text-theme1"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      height="32"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="icon icon-tabler icons-tabler-outline icon-tabler-list-check"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M3.5 5.5l1.5 1.5l2.5 -2.5" />
+      <path d="M3.5 11.5l1.5 1.5l2.5 -2.5" />
+      <path d="M3.5 17.5l1.5 1.5l2.5 -2.5" />
+      <path d="M11 6l9 0" />
+      <path d="M11 12l9 0" />
+      <path d="M11 18l9 0" />
+    </svg>
+    Standings
+  </button>
+  <button
+    (click)="handleMenuOptionChange('riders')"
     [class]="menuOption() === 'riders' ? 'bg-theme6 text-theme1' : ''"
     class="w-64 overflow-hidden inline-flex gap-2 cursor-pointer items-center py-2 px-4 rounded-2xl hover:bg-theme6 hover:text-theme1"
   >

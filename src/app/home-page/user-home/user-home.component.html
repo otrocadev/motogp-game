@@ -1,1 +1,8 @@
-<app-grand-prix-list></app-grand-prix-list>
+<main class="flex h-[calc(100vh-4rem)]">
+  <aside class="shrink-0 sticky top-16 h-[calc(100vh-4rem)] overflow-hidden">
+    <app-aside-menu></app-aside-menu>
+  </aside>
+  <content class="flex-1 p-4 overflow-y-auto">
+    <router-outlet></router-outlet>
+  </content>
+</main>

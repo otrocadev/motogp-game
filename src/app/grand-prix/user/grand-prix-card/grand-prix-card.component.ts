@@ -12,9 +12,33 @@ import { GrandPrixCalendarEvent } from '../../../shared/types/race.types';
 export class GrandPrixCardComponent {
   grandPrix = input<GrandPrixCalendarEvent>();
 
-  constructor() {
-    this.grandPrix();
-  }
+  startDate = computed(() => {
+    const start = this.grandPrix()?.start;
+    return start ? new Date(start) : new Date();
+  });
+
+  endDate = computed(() => {
+    const end = this.grandPrix()?.end;
+    return end ? new Date(end) : new Date();
+  });
+
+  actualDate = computed(() => new Date());
+
+  eventStatus = computed<'passed' | 'active' | 'upcomming'>(() => {
+    const start = this.startDate();
+    const end = this.endDate();
+    const now = this.actualDate();
+
+    if (start < now) {
+      if (end < now) {
+        return 'passed';
+      } else {
+        return 'active';
+      }
+    } else {
+      return 'upcomming';
+    }
+  });
 
   grandPrixName = computed(() => {
     return this.grandPrix()?.title;
@@ -24,21 +48,14 @@ export class GrandPrixCardComponent {
     return `${baseImgUrl}${this.grandPrix()?.flag_img}`;
   });
 
-  grandPrixLocation = computed(() => {
-    return this.grandPrix()?.location;
-  });
-
   grandPrixDates = computed(() => {
-    const gp = this.grandPrix();
-    if (!gp?.start || !gp?.end) return '';
-
-    const startDate = new Date(gp.start as string);
-    const endDate = new Date(gp.end as string);
+    const start = this.startDate();
+    const end = this.endDate();
 
     const displayStartDate =
-      startDate.getDate() + ' ' + getMonthName(startDate.getMonth());
-    const displayEndDate =
-      endDate.getDate() + ' ' + getMonthName(endDate.getMonth());
+      start.getDate() + ' ' + getMonthName(start.getMonth());
+    const displayEndDate = end.getDate() + ' ' + getMonthName(end.getMonth());
+
     return displayStartDate + ' - ' + displayEndDate;
   });
 }
