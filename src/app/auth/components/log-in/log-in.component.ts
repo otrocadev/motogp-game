@@ -60,7 +60,16 @@ export default class LogInComponent {
         return;
       }
 
-      this._router.navigate(['/']);
+      const session = authResponse.data.session;
+      if (session?.user?.id) {
+        await this._authService.updateUserInfo(session.user.id);
+      }
+
+      if (this._authService.user()?.role === 'admin') {
+        this._router.navigate(['/admin']);
+      } else {
+        this._router.navigate(['/home']);
+      }
     } catch (error) {
       this.errorMessage.set('Unexpected error. Please try again later.');
       console.error('Login error:', error);

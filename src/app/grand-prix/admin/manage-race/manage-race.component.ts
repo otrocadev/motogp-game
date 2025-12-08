@@ -1,5 +1,10 @@
 import { Component, Inject, inject, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { DateSelectArg } from '@fullcalendar/core';
 import { GrandPrixService } from '../../grand-prix.service';
@@ -32,26 +37,31 @@ export class ManageRaceComponent {
   isLoading = signal(false);
   errorMessage = signal<string | null>(null);
 
-  form = this._formBuilder.group<CreateRaceForm>({
-    name: this._formBuilder.control(null, [
-      Validators.required,
-      Validators.minLength(3),
-    ]),
-    location: this._formBuilder.control(null, [
-      Validators.required,
-      Validators.minLength(3),
-    ]),
-    circuit: this._formBuilder.control(null, [
-      Validators.required,
-      Validators.minLength(3),
-    ]),
-    start_date: this._formBuilder.control<string | null>(null, [
-      Validators.required,
-    ]),
-    end_date: this._formBuilder.control<string | null>(null, [
-      Validators.required,
-    ]),
-  });
+  form = this._formBuilder.group<CreateRaceForm>(
+    {
+      name: this._formBuilder.control(null, [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      location: this._formBuilder.control(null, [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      circuit: this._formBuilder.control(null, [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      start_date: this._formBuilder.control<string | null>(null, [
+        Validators.required,
+      ]),
+      end_date: this._formBuilder.control<string | null>(null, [
+        Validators.required,
+      ]),
+    },
+    {
+      validators: [this.startBeforeEndValidator],
+    }
+  );
 
   mapboxPosition = signal<[number, number]>([2.26, 41.57]);
 
@@ -149,6 +159,17 @@ export class ManageRaceComponent {
       flag_img: this.filePath(),
     };
     return eventData;
+  }
+
+  startBeforeEndValidator(group: AbstractControl) {
+    const start = group.get('start_date')?.value;
+    const end = group.get('end_date')?.value;
+
+    if (!start || !end) return null;
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+
+    return startDate <= endDate ? null : { dateRange: true };
   }
 
   async onSubmit() {

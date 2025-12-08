@@ -1,9 +1,7 @@
 <main class="w-full">
-  @if (authState()) { @if (isAdmin()) {
-  <app-admin-home></app-admin-home>
-  } @else {
-  <app-user-home></app-user-home>
-  } } @else {
+  @if (!authState()) {
   <app-hero-banner></app-hero-banner>
+  } @else if (!isAdmin()) {
+  <app-user-home></app-user-home>
   }
 </main>
