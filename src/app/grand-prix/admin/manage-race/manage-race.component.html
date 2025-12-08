@@ -137,6 +137,11 @@
               (form.controls.end_date.errors?.['minlength']) { The end date must
               have at least 2 characters }
             </p>
+            } @if (form.hasError('dateRange') && form.get('end_date')?.touched)
+            {
+            <p class="mt-1 text-sm text-red-500">
+              End date cannot be before the start date.
+            </p>
             }
           </div>
           <div>
