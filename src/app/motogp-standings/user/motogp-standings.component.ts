@@ -15,10 +15,17 @@ export class MotogpStandingsComponent implements OnInit {
     await this.motogpStandingsService.getStandings();
   }
 
+  maxPoints = computed(() =>
+    Math.max(...this.standings().map((standing) => standing.points))
+  );
+
   pageSize = 12;
   currentPage = 0;
   totalPages = computed(() =>
     Math.ceil(this.standings().length / this.pageSize)
+  );
+  pages = computed(() =>
+    Array.from({ length: this.totalPages() }, (_, i) => i)
   );
 
   pagedStandings() {

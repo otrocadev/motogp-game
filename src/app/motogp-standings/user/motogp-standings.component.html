@@ -26,28 +26,113 @@
         <tr class="border-b border-theme4 text-theme5">
           <th
             scope="row"
-            class="px-4 py-3 font-secondary text-theme6 italic text-lg"
+            class="px-4 py-3 font-secondary text-theme5 italic text-lg"
           >
             {{ currentPage * pageSize + position + 1 }}
           </th>
-          <td class="px-4 py-3">
-            <span> {{ standing.rider_id }}</span>
-            <span> {{ standing.rider_name.slice(0, 1) + "." }}</span>
-            <span> {{ standing.rider_surname }}</span>
+          <td class="px-4 py-3 inline-flex gap-2 items-center">
+            <span class="font-bold text-theme6 text-lg italic text-center w-8">
+              {{ standing.rider_id }}
+            </span>
+            <span class="text-lg">
+              {{
+                standing.rider_name.slice(0, 1) + ". " + standing.rider_surname
+              }}</span
+            >
           </td>
           <td class="px-4 py-3">{{ standing.team }}</td>
-          <td class="px-4 py-3 text-center">-</td>
-          <td class="px-4 py-3 text-center">{{ standing.races }}</td>
-          <td class="px-4 py-3 text-center">{{ standing.wins }}</td>
-          <td class="px-4 py-3 text-center">{{ standing.podiums }}</td>
-          <td class="px-4 py-3 text-center">{{ standing.points }}</td>
+          <td class="px-4 py-3 text-center italic">
+            {{ standing.points - maxPoints() }}
+          </td>
+          <td class="px-4 py-3 text-center text-lg font-bold">
+            {{ standing.races }}
+          </td>
+          <td class="px-4 py-3 text-center text-lg font-bold">
+            {{ standing.wins }}
+          </td>
+          <td class="px-4 py-3 text-center text-lg font-bold">
+            {{ standing.podiums }}
+          </td>
+          <td
+            class="px-4 py-3 text-center font-secondary text-xl font-extrabold text-theme6"
+          >
+            {{ standing.points }}
+          </td>
         </tr>
         }
       </tbody>
     </table>
-    <div class="flex gap-2 justify-end mt-2">
-      <button (click)="prevPage()">Previous</button>
-      <button (click)="nextPage()">Next</button>
+    <div
+      class="flex justify-around items-center border-t bg-theme3 border-theme4"
+    >
+      <section class="flex gap-2 justify-center">
+        Showing
+        <span class="italic">
+          {{
+            currentPage === totalPages() - 1
+              ? standings().length - currentPage * pageSize
+              : pageSize
+          }}
+        </span>
+        of <span class="italic">{{ standings().length }}</span> results
+      </section>
+      <section class="flex gap-2 justify-center p-2">
+        <button
+          class="p-2 rounded-full bg-theme4 text-theme1 cursor-pointer"
+          (click)="prevPage()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-left"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M5 12l14 0" />
+            <path d="M5 12l4 4" />
+            <path d="M5 12l4 -4" />
+          </svg>
+        </button>
+        <span class="inline-flex text-xs bg-theme4 rounded-lg">
+          @for (page of pages(); track page) {
+          <button
+            class="w-8 bg-theme4 rounded-lg text-theme1 cursor-pointer"
+            [class]="page === currentPage ? 'bg-theme6 scale-110' : 'bg-theme4'"
+            (click)="currentPage = page"
+          >
+            {{ page + 1 }}
+          </button>
+          }
+        </span>
+        <button
+          class="p-2 rounded-full bg-theme4 text-theme1 cursor-pointer"
+          (click)="nextPage()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-right"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M5 12l14 0" />
+            <path d="M15 16l4 -4" />
+            <path d="M15 8l4 4" />
+          </svg>
+        </button>
+      </section>
     </div>
   </div>
 </main>
