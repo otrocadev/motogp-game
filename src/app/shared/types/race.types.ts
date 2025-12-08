@@ -3,6 +3,16 @@ import { FormControl } from '@angular/forms';
 
 export type EventMode = 'create' | 'edit';
 
+export type NextGrandPrix = {
+  id: number;
+  name: string;
+  location: string;
+  circuit: string;
+  start_date: string;
+  end_date: string;
+  flag_img: string;
+};
+
 export interface GrandPrixEvent {
   id?: string;
   name: string;

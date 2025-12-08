@@ -20,3 +20,11 @@ export function getMonthName(month: number) {
   ];
   return months[month];
 }
+
+export function formatDates(start: Date, end: Date) {
+  const displayStartDate =
+    start.getDate() + ' ' + getMonthName(start.getMonth());
+  const displayEndDate = end.getDate() + ' ' + getMonthName(end.getMonth());
+
+  return displayStartDate + ' - ' + displayEndDate;
+}

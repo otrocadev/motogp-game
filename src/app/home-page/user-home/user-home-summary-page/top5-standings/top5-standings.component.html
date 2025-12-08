@@ -1,0 +1,30 @@
+<article
+  class="text-2xl flex flex-col bg-theme1 rounded-lg overflow-hidden border-2 border-theme4"
+>
+  <div
+    class="p-4 font-bold italic bg-theme3 font-secondary text-theme6 uppercase border-b-2 border-theme4"
+  >
+    TOP 5 CHAMPIONSHIP RIDERS
+  </div>
+  <table class="w-full">
+    <tbody>
+      @for(rider of top5riders(); track rider.number; let position = $index){
+      <tr class="border-b border-theme4 text-theme5">
+        <th class="p-4 italic" scope="row">{{ position + 1 }}</th>
+        <td class="flex items-center gap-4">
+          <span>
+            <img class="pt-2 h-24" [src]="baseImgUrl + rider.img_url" />
+          </span>
+          <span class="font-bold text-theme6 text-xl italic text-center w-8">
+            {{ rider.number }}
+          </span>
+          <span>{{ rider.name.slice(0, 1) + ". " + rider.surname }}</span>
+        </td>
+        <td>
+          {{ rider.points }}
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</article>
