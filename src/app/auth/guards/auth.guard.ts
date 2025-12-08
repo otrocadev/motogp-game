@@ -18,6 +18,10 @@ export const privateGuard: CanActivateFn = async () => {
     await authService.updateUserInfo(session.user.id);
   }
 
+  if (authService.user()?.role === 'admin') {
+    return router.createUrlTree(['/admin']);
+  }
+
   return true;
 };
 
@@ -38,7 +42,7 @@ export const publicGuard: CanActivateFn = async () => {
   }
 
   if (authService.user()?.role === 'admin') {
-    return router.createUrlTree(['/admin/home']);
+    return router.createUrlTree(['/admin']);
   }
 
   return router.createUrlTree(['/home']);
