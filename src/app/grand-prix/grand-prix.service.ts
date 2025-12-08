@@ -1,6 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { SupabaseService } from '../shared/data-access/supabase.service';
-import { EventInput } from '@fullcalendar/core';
 import {
   GrandPrixEvent,
   GrandPrixCalendarEvent,
@@ -75,7 +74,7 @@ export class GrandPrixService {
       console.error(error);
       return null;
     }
-
+    await this.getGrandPrixCalendarEvents();
     return data;
   }
 
@@ -89,7 +88,7 @@ export class GrandPrixService {
       console.error(error);
       return null;
     }
-
+    await this.getGrandPrixCalendarEvents();
     return data;
   }
 
@@ -104,7 +103,7 @@ export class GrandPrixService {
       console.error(error);
       return null;
     }
-
+    await this.getGrandPrixCalendarEvents();
     return data;
   }
 }
