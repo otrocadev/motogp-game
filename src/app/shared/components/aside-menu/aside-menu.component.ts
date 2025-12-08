@@ -32,7 +32,7 @@ export class AsideMenuComponent {
       if (option === 'grand-prix') {
         this._router.navigate([`/home`]);
       } else {
-        this._router.navigate([`/home/${option}`]);
+        this._router.navigate([`/${option}`]);
       }
     }
   }

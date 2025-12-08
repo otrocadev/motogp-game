@@ -1,0 +1,53 @@
+<main class="w-full p-4">
+  <h1 class="font-secondary text-3xl mb-4 text-theme6 text-shadow-lg">
+    MotoGP Standings
+  </h1>
+  <div
+    class="w-full bg-theme1 rounded-lg overflow-hidden border-2 border-theme4"
+  >
+    <table class="w-full text-sm text-left">
+      <thead
+        class="bg-theme3 font-secondary text-theme6 uppercase border-b-2 border-theme4"
+      >
+        <tr>
+          <th scope="col" class="px-4 py-3">pos</th>
+          <th scope="col" class="px-4 py-3">rider</th>
+          <th scope="col" class="px-4 py-3">team</th>
+          <th scope="col" class="px-4 py-3 text-center">gap</th>
+          <th scope="col" class="px-4 py-3 text-center">total races</th>
+          <th scope="col" class="px-4 py-3 text-center">wins</th>
+          <th scope="col" class="px-4 py-3 text-center">podiums</th>
+          <th scope="col" class="px-4 py-3 text-center">points</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (standing of pagedStandings(); track standing.rider_id; let
+        position = $index) {
+        <tr class="border-b border-theme4 text-theme5">
+          <th
+            scope="row"
+            class="px-4 py-3 font-secondary text-theme6 italic text-lg"
+          >
+            {{ currentPage * pageSize + position + 1 }}
+          </th>
+          <td class="px-4 py-3">
+            <span> {{ standing.rider_id }}</span>
+            <span> {{ standing.rider_name.slice(0, 1) + "." }}</span>
+            <span> {{ standing.rider_surname }}</span>
+          </td>
+          <td class="px-4 py-3">{{ standing.team }}</td>
+          <td class="px-4 py-3 text-center">-</td>
+          <td class="px-4 py-3 text-center">{{ standing.races }}</td>
+          <td class="px-4 py-3 text-center">{{ standing.wins }}</td>
+          <td class="px-4 py-3 text-center">{{ standing.podiums }}</td>
+          <td class="px-4 py-3 text-center">{{ standing.points }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    <div class="flex gap-2 justify-end mt-2">
+      <button (click)="prevPage()">Previous</button>
+      <button (click)="nextPage()">Next</button>
+    </div>
+  </div>
+</main>

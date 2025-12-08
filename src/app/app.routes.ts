@@ -25,6 +25,13 @@ export const routes: Routes = [
             (m) => m.GrandPrixListComponent
           ),
       },
+      {
+        path: 'standings',
+        loadComponent: () =>
+          import('./motogp-standings/user/motogp-standings.component').then(
+            (m) => m.MotogpStandingsComponent
+          ),
+      },
     ],
   },
   {
