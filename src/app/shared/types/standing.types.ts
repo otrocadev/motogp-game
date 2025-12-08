@@ -8,3 +8,11 @@ export type StandingInfo = {
   podiums: number;
   points: number;
 };
+
+export type Top5StandingInfo = {
+  number: number;
+  name: string;
+  surname: string;
+  img_url: string;
+  points: number;
+};
