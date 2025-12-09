@@ -21,6 +21,13 @@ export const routes: Routes = [
       {
         path: 'home',
         loadComponent: () =>
+          import(
+            './home-page/user-home/user-home-summary-page/user-home-summary-page.component'
+          ).then((m) => m.UserHomeSummaryPageComponent),
+      },
+      {
+        path: 'grand-prix',
+        loadComponent: () =>
           import('./grand-prix/user/grand-prix-list.component').then(
             (m) => m.GrandPrixListComponent
           ),
@@ -30,6 +37,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./motogp-standings/user/motogp-standings.component').then(
             (m) => m.MotogpStandingsComponent
+          ),
+      },
+      {
+        path: 'riders',
+        loadComponent: () =>
+          import('./riders/user/riders-list.component').then(
+            (m) => m.RidersListComponent
           ),
       },
     ],

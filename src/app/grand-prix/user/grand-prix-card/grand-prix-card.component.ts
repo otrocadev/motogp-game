@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { baseImgUrl } from '../../../config/endpoints';
-import { getMonthName } from '../../../shared/utils/utils';
+import { formatDates } from '../../../shared/utils/utils';
 import { GrandPrixCalendarEvent } from '../../../shared/types/race.types';
 
 @Component({
@@ -52,10 +52,6 @@ export class GrandPrixCardComponent {
     const start = this.startDate();
     const end = this.endDate();
 
-    const displayStartDate =
-      start.getDate() + ' ' + getMonthName(start.getMonth());
-    const displayEndDate = end.getDate() + ' ' + getMonthName(end.getMonth());
-
-    return displayStartDate + ' - ' + displayEndDate;
+    return formatDates(start, end);
   });
 }

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AsideMenuComponent } from '../../shared/components/aside-menu/aside-menu.component';
 import { AsideMenuService } from '../../shared/components/aside-menu/aside-menu.service';
 import { RouterOutlet } from '@angular/router';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   imports: [AsideMenuComponent, RouterOutlet],
   templateUrl: './user-home.component.html',
 })
-export class UserHomeComponent {
+export class UserHomeComponent implements OnInit {
   asideMenuService = inject(AsideMenuService);
   menuOption = this.asideMenuService.menuOption;
   private _router = inject(Router);
@@ -17,10 +17,14 @@ export class UserHomeComponent {
   handleMenuOptionChange(option: string) {
     this.asideMenuService.setMenuOption(option);
 
-    if (option === 'grand-prix') {
+    if (option === 'home') {
       this._router.navigate([`/home`]);
     } else {
       this._router.navigate([`/${option}`]);
     }
+  }
+
+  ngOnInit() {
+    this.handleMenuOptionChange('home');
   }
 }
