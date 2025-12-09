@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { GrandPrixService } from '../grand-prix.service';
-import { baseImgUrl } from '../../config/endpoints';
+import { GrandPrixService } from '../../grand-prix.service';
+import { baseImgUrl } from '../../../config/endpoints';
 import { GrandPrixCardComponent } from './grand-prix-card/grand-prix-card.component';
 
 @Component({

@@ -1,0 +1,61 @@
+<article
+  class="grid grid-cols-3 relative items-start text-left w-full border border-theme4 rounded-lg hover:cursor-pointer hover:shadow-xl hover:scale-101 transition-all p-4 gap-4"
+  [class]="eventStatus() === 'passed' ? 'bg-theme3 opacity-80' : 'bg-theme2'"
+>
+  <section class="flex flex-col items-start h-full justify-between gap-2">
+    <div class="flex flex-col gap-4">
+      <span class="text-theme4 italic text-sm overflow-hidden flex items-end">
+        {{ grandPrixDates() }}
+      </span>
+      <h2
+        class="text-theme6 font-secondary font-bold text-2xl inline-flex items-center gap-2"
+      >
+        <img
+          class="h-6 max-w-8 rounded-sm"
+          [src]="grandPrixFlagUrl()"
+          alt="Flag of the grand prix of {{ grandPrixName() }}"
+        />
+        {{ grandPrixName() }}
+      </h2>
+    </div>
+
+    <span class="inline-flex items-center gap-2 text-lg font-light text-theme4">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-map-pin"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+        <path
+          d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"
+        />
+      </svg>
+      {{ grandPrixLocation() }}</span
+    >
+  </section>
+  <section class="col-span-2">
+    <app-session-buttons-nav></app-session-buttons-nav>
+  </section>
+
+  @if (eventStatus() === 'passed') {
+  <div
+    class="absolute right-2 top-3 bg-theme6 text-theme1 px-3 py-1 rounded-full text-xs opacity-100"
+  >
+    ENDED
+  </div>
+  } @else if (eventStatus() === 'active') {
+  <div
+    class="absolute right-2 top-3 bg-red-600 text-theme5 px-3 py-1 rounded-full text-xs"
+  >
+    LIVE
+  </div>
+  }
+</article>

@@ -28,9 +28,9 @@ export const routes: Routes = [
       {
         path: 'grand-prix',
         loadComponent: () =>
-          import('./grand-prix/user/grand-prix-list.component').then(
-            (m) => m.GrandPrixListComponent
-          ),
+          import(
+            './grand-prix/shared/grand-prix-list/grand-prix-list.component'
+          ).then((m) => m.GrandPrixListComponent),
       },
       {
         path: 'standings',

@@ -1,11 +1,12 @@
 import { Component, computed, input } from '@angular/core';
-import { baseImgUrl } from '../../../config/endpoints';
-import { formatDates } from '../../../shared/utils/utils';
-import { GrandPrixCalendarEvent } from '../../../shared/types/race.types';
+import { baseImgUrl } from '../../../../config/endpoints';
+import { formatDates } from '../../../../shared/utils/utils';
+import { GrandPrixCalendarEvent } from '../../../../shared/types/race.types';
+import { SessionButtonsNavComponent } from '../session-buttons-nav/session-buttons-nav.component';
 
 @Component({
   selector: 'app-grand-prix-card',
-  imports: [],
+  imports: [SessionButtonsNavComponent],
   templateUrl: './grand-prix-card.component.html',
   styles: ``,
 })
@@ -53,5 +54,9 @@ export class GrandPrixCardComponent {
     const end = this.endDate();
 
     return formatDates(start, end);
+  });
+
+  grandPrixLocation = computed(() => {
+    return this.grandPrix()?.location;
   });
 }
