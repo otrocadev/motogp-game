@@ -39,6 +39,13 @@ export const routes: Routes = [
             (m) => m.MotogpStandingsComponent
           ),
       },
+      {
+        path: 'riders',
+        loadComponent: () =>
+          import('./riders/user/riders-list.component').then(
+            (m) => m.RidersListComponent
+          ),
+      },
     ],
   },
   {
