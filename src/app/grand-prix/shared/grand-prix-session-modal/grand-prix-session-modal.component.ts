@@ -4,6 +4,7 @@ import {
   CdkDrag,
   CdkDragDrop,
   moveItemInArray,
+  transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { RidersService } from '../../../riders/riders.service';
 import { RiderInfo } from '../../../shared/types/rider.types';
@@ -21,16 +22,45 @@ import { RiderInfo } from '../../../shared/types/rider.types';
 export class GrandPrixSessionModalComponent implements OnInit {
   private ridersService = inject(RidersService);
 
-  riders = signal<RiderInfo[]>([]);
+  orderedRiders = signal<RiderInfo[]>([]);
+  allRiders = signal<RiderInfo[]>([]);
 
   async ngOnInit() {
     await this.ridersService.getRiders();
-    this.riders.set(this.ridersService.riders());
+    this.allRiders.set(this.ridersService.riders());
   }
 
   drop(event: CdkDragDrop<RiderInfo[]>) {
-    const updatedRiders = [...this.riders()];
-    moveItemInArray(updatedRiders, event.previousIndex, event.currentIndex);
-    this.riders.set(updatedRiders);
+    if (event.previousContainer === event.container) {
+      // Moving within the same list
+      const updatedList = [...event.container.data];
+      moveItemInArray(updatedList, event.previousIndex, event.currentIndex);
+
+      if (event.container.id === 'orderedRidersList') {
+        this.orderedRiders.set(updatedList);
+      } else {
+        this.allRiders.set(updatedList);
+      }
+    } else {
+      // Moving between different lists
+      const sourceList = [...event.previousContainer.data];
+      const targetList = [...event.container.data];
+
+      transferArrayItem(
+        sourceList,
+        targetList,
+        event.previousIndex,
+        event.currentIndex
+      );
+
+      // Update both signals based on which container is the source
+      if (event.previousContainer.id === 'orderedRidersList') {
+        this.orderedRiders.set(sourceList);
+        this.allRiders.set(targetList);
+      } else {
+        this.allRiders.set(sourceList);
+        this.orderedRiders.set(targetList);
+      }
+    }
   }
 }
