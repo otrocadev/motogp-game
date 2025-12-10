@@ -8,6 +8,8 @@ import {
 export const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
+    canActivate: [publicGuard],
     loadComponent: () => import('./home-page/home-page.component'),
   },
   {

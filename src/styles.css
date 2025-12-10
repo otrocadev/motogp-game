@@ -132,3 +132,13 @@ body {
 .mapboxgl-ctrl-geocoder--icon-loading {
   display: none !important;
 }
+
+/* Drag-n-drop */
+
+.cdk-drag-preview {
+  @apply bg-theme3;
+}
+
+.cdk-drag-placeholder {
+  @apply bg-theme3 border-dashed border-2 border-theme4;
+}

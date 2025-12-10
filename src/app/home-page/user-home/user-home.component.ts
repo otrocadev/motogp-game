@@ -25,6 +25,7 @@ export class UserHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.handleMenuOptionChange('home');
+    const currentPath = this._router.url.split('/')[1] || 'home';
+    this.asideMenuService.setMenuOption(currentPath);
   }
 }

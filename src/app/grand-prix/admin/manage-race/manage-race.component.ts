@@ -148,7 +148,7 @@ export class ManageRaceComponent {
 
   private patchEventData(): GrandPrixEvent {
     const eventData = {
-      id: this.data.eventId!,
+      id: parseInt(this.data.eventId!, 10),
       name: this.form.value.name!.toUpperCase(),
       location: this.form.value.location!.toUpperCase(),
       circuit: this.form.value.circuit!.toUpperCase(),

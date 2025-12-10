@@ -1,0 +1,32 @@
+<ul
+  cdkDropList
+  (cdkDropListDropped)="drop($event)"
+  class="bg-theme1 grid grid-cols-4 w-fit h-fit border border-theme4 rounded-lg shadow py-12 p-12 gap-x-12 gap-y-6 overflow-scroll"
+>
+  @for (rider of riders(); track rider.number; let index = $index) {
+  <span class="w-full relative p-2 h-fit">
+    <div class="absolute -top-4 -left-4 w-72 border-8 border-b-0 border-theme4">
+      <span class="mt-2 ml-2 w-8 text-center"> {{ index + 1 }} </span>
+    </div>
+    <li
+      cdkDrag
+      class="ml-2 font-secondary inline-flex items-center justify-between w-full text-2xl font-bold bg-theme3 border-2 border-theme4 rounded-lg p-2 mb-0"
+      data-atropos-offset="5"
+    >
+      <div class="flex items-center gap-4 w-54">
+        <span
+          class="relative text-5xl bottom-2 -rotate-6 font-bold text-theme6"
+        >
+          {{ rider.number }}
+        </span>
+        <span class="">
+          <p class="text-sm font-bold text-theme5">{{ rider.name }}</p>
+          <p class="text-sm font-extrabold text-theme5">
+            {{ rider.surname }}
+          </p>
+        </span>
+      </div>
+    </li>
+  </span>
+  }
+</ul>

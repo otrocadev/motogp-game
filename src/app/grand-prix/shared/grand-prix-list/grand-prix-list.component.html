@@ -3,7 +3,7 @@
     Grand Prix Calendar
   </h1>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    @for(grandPrix of grandPrixCalendarEvents(); track grandPrix.id) {
+    @for(grandPrix of grandPrixEvents(); track grandPrix.id) {
     <app-grand-prix-card [grandPrix]="grandPrix"></app-grand-prix-card>
     }
   </div>

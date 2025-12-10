@@ -11,7 +11,7 @@ import { GrandPrixCardComponent } from './grand-prix-card/grand-prix-card.compon
 })
 export class GrandPrixListComponent {
   grandPrixService = inject(GrandPrixService);
-  grandPrixCalendarEvents = this.grandPrixService.grandPrixCalendarEvents;
+  grandPrixEvents = this.grandPrixService.grandPrixEvents;
   baseImgUrl = baseImgUrl;
 
   ngOnInit() {

@@ -1,5 +1,5 @@
 <article
-  class="grid grid-cols-3 relative items-start text-left w-full border border-theme4 rounded-lg hover:cursor-pointer hover:shadow-xl hover:scale-101 transition-all p-4 gap-4"
+  class="grid grid-cols-3 relative items-start text-left w-full border border-theme4 rounded-lg transition-all p-4 gap-4"
   [class]="eventStatus() === 'passed' ? 'bg-theme3 opacity-80' : 'bg-theme2'"
 >
   <section class="flex flex-col items-start h-full justify-between gap-2">
@@ -42,7 +42,9 @@
     >
   </section>
   <section class="col-span-2">
-    <app-session-buttons-nav></app-session-buttons-nav>
+    <app-session-buttons-nav
+      [grandPrixId]="grandPrixId()"
+    ></app-session-buttons-nav>
   </section>
 
   @if (eventStatus() === 'passed') {
