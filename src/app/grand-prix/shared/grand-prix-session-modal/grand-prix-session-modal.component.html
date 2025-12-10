@@ -1,8 +1,8 @@
 <main
-  class="bg-theme1 flex border-2 border-theme4 rounded-lg shadow max-h-[calc(100vh-8rem)] xl:h-[calc(100vw-8rem)]"
+  class="bg-theme1 grid grid-cols-[minmax(0,1fr)_18rem] border-2 border-theme4 rounded-lg shadow max-h-[calc(100vh-8rem)] xl:h-[calc(100vw-8rem)] xl:min-w-[1496px]"
 >
   <div
-    class="flex flex-col w-[calc(100%-18rem)] h-full bg-cover bg-[url('/images/resources/tarmac.jpg')]"
+    class="flex flex-col h-full bg-cover bg-[url('/images/resources/tarmac.jpg')]"
   >
     <h1 class="pt-8 px-8 font-secondary text-theme6 font-bold text-2xl">
       Your guesses
@@ -15,9 +15,14 @@
       [cdkDropListConnectedTo]="[allRidersList]"
       (cdkDropListDropped)="drop($event)"
       cdkDropListOrientation="mixed"
-      class="grid grid-cols-2 xl:grid-cols-4 min-w-8xl h-fit p-12 gap-x-14 gap-y-4 overflow-scroll"
+      class="grid grid-cols-2 xl:grid-cols-4 w-8xl min-h-96 p-12 gap-x-14 gap-y-4 overflow-scroll"
     >
-      @for (rider of orderedRiders(); track rider.number; let index = $index) {
+      @if (!orderedRiders().length) {
+      <p class="col-span-2 xl:col-span-4 text-theme6/70">
+        Drag riders from the right to start your guess
+      </p>
+      } @for (rider of orderedRiders(); track rider.number; let index = $index)
+      {
       <article
         cdkDrag
         class="relative font-secondary inline-flex items-center justify-between w-full h-fit text-2xl font-bold bg-theme3 border-2 border-theme4 rounded-lg p-2 mb-0"
@@ -53,7 +58,7 @@
     [cdkDropListData]="allRiders()"
     [cdkDropListConnectedTo]="[orderedRidersList]"
     (cdkDropListDropped)="drop($event)"
-    class="flex flex-col gap-4 overflow-y-auto max-h-full p-4 w-72 border-l-2 border-theme4"
+    class="flex flex-col shrink-0 gap-4 overflow-y-auto max-h-full p-4 w-72 border-l-2 border-theme4"
   >
     <h2 class="text-lg text-theme6 font-bold font-secondary">
       Riders available:
