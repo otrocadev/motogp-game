@@ -136,9 +136,9 @@ body {
 /* Drag-n-drop */
 
 .cdk-drag-preview {
-  @apply bg-theme3;
+  @apply rounded-lg border-4 border-theme6 bg-theme3;
 }
 
 .cdk-drag-placeholder {
-  @apply bg-theme3 border-dashed border-2 border-theme4;
+  @apply border-dashed border-2 border-theme4 opacity-80;
 }

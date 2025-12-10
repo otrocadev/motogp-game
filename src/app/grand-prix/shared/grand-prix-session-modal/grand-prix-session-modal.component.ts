@@ -13,9 +13,9 @@ import { RiderInfo } from '../../../shared/types/rider.types';
   imports: [CdkDropList, CdkDrag],
   templateUrl: './grand-prix-session-modal.component.html',
   styles: `
-  span:nth-child(4n+2) {margin-top: 0.8rem}
-  span:nth-child(4n+3) {margin-top: 1.2rem}
-  span:nth-child(4n+4) {margin-top: 2rem}
+  article:nth-child(4n+2) {margin-top: 0.8rem}
+  article:nth-child(4n+3) {margin-top: 1.2rem}
+  article:nth-child(4n+4) {margin-top: 2rem}
   `,
 })
 export class GrandPrixSessionModalComponent implements OnInit {
