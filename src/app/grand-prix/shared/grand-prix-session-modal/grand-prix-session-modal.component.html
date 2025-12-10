@@ -1,7 +1,7 @@
 <ul
   cdkDropList
   (cdkDropListDropped)="drop($event)"
-  class="bg-theme1 grid grid-cols-4 w-fit h-fit border border-theme4 rounded-lg shadow py-12 p-12 gap-x-12 gap-y-6 overflow-scroll"
+  class="bg-theme1 grid grid-cols-2 xl:grid-cols-4 w-fit h-fit border border-theme4 rounded-lg shadow py-12 p-12 gap-x-12 gap-y-6 overflow-scroll"
 >
   @for (rider of riders(); track rider.number; let index = $index) {
   <span class="w-full relative p-2 h-fit">
