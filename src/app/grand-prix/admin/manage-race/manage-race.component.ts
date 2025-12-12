@@ -13,7 +13,7 @@ import {
   GrandPrixEvent,
   CreateRaceDialogData,
   CreateRaceForm,
-} from '../../../shared/types/race.types';
+} from '../../types/grand-prix.types';
 import { MapboxViewComponent } from '../../../shared/components/mapbox-view/mapbox-view.component';
 import { UploadImageService } from '../../../shared/data-access/upload-image.service';
 import { ToastNotificationService } from '../../../shared/components/toast-notification/toast-notification.service';

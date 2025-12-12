@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, input, signal, OnInit } from '@angular/core';
 import { baseImgUrl } from '../../../config/endpoints';
-import { RiderInfo } from '../../../shared/types/rider.types';
+import { RiderInfo } from '../../rider.types';
 import { getFactoryLogo } from '../../factory.utils';
 import Atropos from 'atropos';
 import 'atropos/css';

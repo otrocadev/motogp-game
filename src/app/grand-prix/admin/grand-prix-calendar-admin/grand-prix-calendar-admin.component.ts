@@ -21,7 +21,7 @@ import { GrandPrixModalService } from '../../grand-prix-modal.service';
 import {
   EventMode,
   GrandPrixCalendarEvent,
-} from '../../../shared/types/race.types';
+} from '../../types/grand-prix.types';
 import { baseImgUrl } from '../../../config/endpoints';
 
 @Component({

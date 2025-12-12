@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RiderCardComponent } from './rider-card/rider-card.component';
 import { RidersService } from '../riders.service';
-import { RiderInfo } from '../../shared/types/rider.types';
+import { RiderInfo } from '../rider.types';
 
 @Component({
   selector: 'app-riders-list',

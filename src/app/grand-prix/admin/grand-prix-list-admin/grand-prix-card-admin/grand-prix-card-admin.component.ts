@@ -1,7 +1,7 @@
 import { Component, computed, input, output } from '@angular/core';
 import { baseImgUrl } from '../../../../config/endpoints';
 import { getMonthName } from '../../../../shared/utils/utils';
-import { GrandPrixCalendarEvent } from '../../../../shared/types/race.types';
+import { GrandPrixCalendarEvent } from '../../../types/grand-prix.types';
 
 @Component({
   selector: 'app-grand-prix-card-admin',

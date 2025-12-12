@@ -1,7 +1,7 @@
 import { Component, computed, input } from '@angular/core';
 import { baseImgUrl } from '../../../../config/endpoints';
 import { formatDates } from '../../../../shared/utils/utils';
-import { GrandPrixEvent } from '../../../../shared/types/race.types';
+import { GrandPrixEvent } from '../../../types/grand-prix.types';
 import { SessionButtonsNavComponent } from '../session-buttons-nav/session-buttons-nav.component';
 
 @Component({

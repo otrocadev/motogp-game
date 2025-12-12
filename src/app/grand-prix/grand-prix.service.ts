@@ -3,7 +3,7 @@ import { SupabaseService } from '../shared/data-access/supabase.service';
 import {
   GrandPrixEvent,
   GrandPrixCalendarEvent,
-} from '../shared/types/race.types';
+} from './types/grand-prix.types';
 
 @Injectable({
   providedIn: 'root',

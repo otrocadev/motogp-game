@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import type { Top5StandingInfo } from '../../../../shared/types/standing.types';
+import type { Top5StandingInfo } from '../../../../motogp-standings/motogp-standing.types';
 import { baseImgUrl } from '../../../../config/endpoints';
 
 @Component({
