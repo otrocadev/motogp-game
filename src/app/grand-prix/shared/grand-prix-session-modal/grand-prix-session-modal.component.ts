@@ -115,20 +115,22 @@ export class GrandPrixSessionModalComponent implements OnInit {
         await this.grandPrixSessionService.submitSessionResults(
           this.formatetAdminResultsArray()
         );
-        this.dialogRef.close();
         this.toastNotificationService.show('Results submitted successfully');
       } catch (error) {
-        this.toastNotificationService.show('Error submitting results');
+        this.toastNotificationService.show('Error submitting results', 'error');
+      } finally {
+        this.dialogRef.close();
       }
     } else if (this.userType() === 'user') {
       try {
         await this.grandPrixSessionService.submitSessionGuesses(
           this.formatetUserGuessesArray()
         );
-        this.dialogRef.close();
         this.toastNotificationService.show('Guesses submitted successfully');
       } catch (error) {
-        this.toastNotificationService.show('Error submitting guesses');
+        this.toastNotificationService.show('Error submitting guesses', 'error');
+      } finally {
+        this.dialogRef.close();
       }
     }
   }

@@ -6,10 +6,12 @@ import { Injectable, signal } from '@angular/core';
 export class ToastNotificationService {
   toastMessage = signal<string>('');
   showToast = signal<boolean>(false);
+  toastType = signal<'success' | 'error'>('success');
 
-  show(message: string) {
+  show(message: string, type: 'success' | 'error' = 'success') {
     this.toastMessage.set(message);
     this.showToast.set(true);
+    this.toastType.set(type);
     setTimeout(() => {
       this.close();
     }, 3000);
