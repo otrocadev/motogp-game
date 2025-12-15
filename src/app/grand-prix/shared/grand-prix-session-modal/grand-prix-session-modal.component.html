@@ -8,7 +8,15 @@
       class="py-4 px-8 font-secondary text-theme6 font-bold text-2xl bg-theme1 border-b-2 border-theme4"
     >
       {{
-        userType() === "user" ? "Make your guesses" : "Official session results"
+        userType() === "user"
+          ? "Make your guesses on the " +
+            sessionType().slice(0, 1) +
+            sessionType().slice(1).toLocaleLowerCase() +
+            " session"
+          : "Official session results" +
+            sessionType().slice(0, 1) +
+            sessionType().slice(1).toLocaleLowerCase() +
+            " session"
       }}
     </h1>
     <section
