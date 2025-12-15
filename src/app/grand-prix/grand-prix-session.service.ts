@@ -20,8 +20,7 @@ export class GrandPrixSessionService {
       .select();
 
     if (error) {
-      console.error(error);
-      return null;
+      throw new Error(error.message);
     }
     return data;
   }
@@ -33,8 +32,7 @@ export class GrandPrixSessionService {
       .select();
 
     if (error) {
-      console.error(error);
-      return null;
+      throw new Error(error.message);
     }
     return data;
   }

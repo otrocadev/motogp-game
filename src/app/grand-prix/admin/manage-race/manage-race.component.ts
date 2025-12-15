@@ -183,7 +183,10 @@ export class ManageRaceComponent {
         this.dialogRef.close('created');
       } catch (error) {
         this.errorMessage.set('Error creating grand prix');
-        this.toastNotificationService.show('Error creating grand prix');
+        this.toastNotificationService.show(
+          'Error creating grand prix',
+          'error'
+        );
       } finally {
         this.isLoading.set(false);
       }
@@ -197,7 +200,10 @@ export class ManageRaceComponent {
         this.dialogRef.close('updated');
       } catch (error) {
         this.errorMessage.set('Error updating grand prix');
-        this.toastNotificationService.show('Error updating grand prix');
+        this.toastNotificationService.show(
+          'Error updating grand prix',
+          'error'
+        );
       } finally {
         this.isLoading.set(false);
       }

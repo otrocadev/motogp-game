@@ -1,5 +1,7 @@
 <div
-  class="absolute bottom-8 right-8 inline-flex items-center w-full max-w-sm p-4 rounded-xl shadow-lg border border-theme4 bg-theme3 text-theme5"
+  class="absolute bottom-8 right-8 inline-flex items-center w-full max-w-sm p-4 rounded-xl shadow-lg border border-theme4 text-theme5"
+  [class.bg-red-500]="toastNotificationService.toastType() === 'error'"
+  [class.bg-green-500]="toastNotificationService.toastType() === 'success'"
 >
   <div class="ms-3 text-sm font-normal">
     {{ toastNotificationService.toastMessage() }}
