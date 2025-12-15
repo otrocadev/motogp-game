@@ -9,11 +9,12 @@ import { Router } from '@angular/router';
   styles: ``,
 })
 export class UserAuthenticatedMenuComponent {
-  private _authService = inject(AuthService);
   private _router = inject(Router);
+  authService = inject(AuthService);
+  isDropdownOpen = false;
 
   async signOut() {
-    await this._authService.signOut();
+    await this.authService.signOut();
     this._router.navigate(['/auth/log-in']);
   }
 }

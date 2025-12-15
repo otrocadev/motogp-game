@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, input, signal, OnInit } from '@angular/core';
 import { baseImgUrl } from '../../../config/endpoints';
-import { RiderInfo } from '../../../shared/types/rider.types';
+import { RiderInfo } from '../../rider.types';
+import { getFactoryLogo } from '../../factory.utils';
 import Atropos from 'atropos';
 import 'atropos/css';
 
@@ -16,20 +17,7 @@ export class RiderCardComponent implements AfterViewInit, OnInit {
   imgPath = signal('');
 
   async ngOnInit() {
-    let subUrl = '';
-    if (this.rider()?.factory === 'DUCATI') {
-      subUrl = 'logos/ducati_logo.svg';
-    } else if (this.rider()?.factory === 'YAMAHA') {
-      subUrl = 'logos/yamaha_logo.svg';
-    } else if (this.rider()?.factory === 'HONDA') {
-      subUrl = 'logos/honda_logo.svg';
-    } else if (this.rider()?.factory === 'APRILIA') {
-      subUrl = 'logos/aprilia_logo.svg';
-    } else if (this.rider()?.factory === 'KTM') {
-      subUrl = 'logos/ktm_logo.svg';
-    }
-    this.imgPath.set(baseImgUrl + subUrl);
-    console.log(this.imgPath());
+    this.imgPath.set(getFactoryLogo(this.rider()?.factory!));
   }
 
   ngAfterViewInit(): void {

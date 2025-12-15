@@ -5,7 +5,7 @@ import { GrandPrixModalService } from '../../grand-prix-modal.service';
 import {
   GrandPrixCalendarEvent,
   EventMode,
-} from '../../../shared/types/race.types';
+} from '../../types/grand-prix.types';
 import { DateSelectArg } from '@fullcalendar/core';
 
 @Component({

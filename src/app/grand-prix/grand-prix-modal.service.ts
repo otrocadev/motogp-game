@@ -3,7 +3,7 @@ import { Dialog } from '@angular/cdk/dialog';
 import { DateSelectArg } from '@fullcalendar/core';
 import { ManageRaceComponent } from './admin/manage-race/manage-race.component';
 import { DeletionConfirmationModalComponent } from '../shared/components/deletion-confirmation-modal/deletion-confirmation-modal.component';
-import { EventMode } from '../shared/types/race.types';
+import { EventMode } from './types/grand-prix.types';
 
 @Injectable({
   providedIn: 'root',

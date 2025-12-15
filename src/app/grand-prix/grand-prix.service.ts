@@ -3,7 +3,7 @@ import { SupabaseService } from '../shared/data-access/supabase.service';
 import {
   GrandPrixEvent,
   GrandPrixCalendarEvent,
-} from '../shared/types/race.types';
+} from './types/grand-prix.types';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +11,10 @@ import {
 export class GrandPrixService {
   private _supabaseService = inject(SupabaseService);
   private _grandPrixCalendarEvents = signal<GrandPrixCalendarEvent[]>([]);
+  private _grandPrixEvents = signal<GrandPrixEvent[]>([]);
 
   grandPrixCalendarEvents = this._grandPrixCalendarEvents.asReadonly();
+  grandPrixEvents = this._grandPrixEvents.asReadonly();
 
   async getGrandPrixCalendarEvents() {
     const { data, error } = await this._supabaseService.supabaseClient
@@ -46,6 +48,7 @@ export class GrandPrixService {
     });
 
     this._grandPrixCalendarEvents.set(calendarEvents);
+    this._grandPrixEvents.set(data);
     return this._grandPrixCalendarEvents();
   }
 

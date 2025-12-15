@@ -1,12 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { AsideMenuComponent } from '../../shared/components/aside-menu/aside-menu.component';
-import { GrandPrixViewAdminComponent } from '../../grand-prix/admin/grand-prix-view-admin.component';
 import { AsideMenuService } from '../../shared/components/aside-menu/aside-menu.service';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-admin-home',
-  imports: [AsideMenuComponent, GrandPrixViewAdminComponent],
+  imports: [AsideMenuComponent, RouterOutlet],
   templateUrl: './admin-home.component.html',
 })
 export class AdminHomeComponent {

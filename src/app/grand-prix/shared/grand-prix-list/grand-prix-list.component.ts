@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { GrandPrixService } from '../grand-prix.service';
-import { baseImgUrl } from '../../config/endpoints';
+import { GrandPrixService } from '../../grand-prix.service';
+import { baseImgUrl } from '../../../config/endpoints';
 import { GrandPrixCardComponent } from './grand-prix-card/grand-prix-card.component';
 
 @Component({
@@ -11,7 +11,7 @@ import { GrandPrixCardComponent } from './grand-prix-card/grand-prix-card.compon
 })
 export class GrandPrixListComponent {
   grandPrixService = inject(GrandPrixService);
-  grandPrixCalendarEvents = this.grandPrixService.grandPrixCalendarEvents;
+  grandPrixEvents = this.grandPrixService.grandPrixEvents;
   baseImgUrl = baseImgUrl;
 
   ngOnInit() {

@@ -1,8 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AsideMenuComponent } from '../../shared/components/aside-menu/aside-menu.component';
 import { AsideMenuService } from '../../shared/components/aside-menu/aside-menu.service';
-import { RouterOutlet } from '@angular/router';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-user-home',
@@ -25,6 +24,7 @@ export class UserHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.handleMenuOptionChange('home');
+    const currentPath = this._router.url.split('/')[1] || 'home';
+    this.asideMenuService.setMenuOption(currentPath);
   }
 }

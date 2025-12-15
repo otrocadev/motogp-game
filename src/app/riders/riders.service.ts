@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { SupabaseService } from '../shared/data-access/supabase.service';
-import { RiderInfo } from '../shared/types/rider.types';
+import { RiderInfo } from './rider.types';
 
 @Injectable({
   providedIn: 'root',
