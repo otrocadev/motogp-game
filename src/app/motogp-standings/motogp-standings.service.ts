@@ -1,7 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { SupabaseService } from '../shared/data-access/supabase.service';
-import { StandingInfo } from './motogp-standing.types';
-import { Top5StandingInfo } from './motogp-standing.types';
+import { StandingInfo, Top5StandingInfo } from './motogp-standing.types';
 
 @Injectable({
   providedIn: 'root',
