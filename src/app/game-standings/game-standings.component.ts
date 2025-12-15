@@ -1,22 +1,23 @@
 import { Component, inject, OnInit, computed } from '@angular/core';
-import { MotogpStandingsService } from '../motogp-standings.service';
+import { GameStandingsService } from './game-standings.service';
 
 @Component({
-  selector: 'app-motogp-standings',
+  selector: 'app-game-standings',
   imports: [],
-  templateUrl: './motogp-standings.component.html',
+  templateUrl: './game-standings.component.html',
+  styles: ``,
 })
-export class MotogpStandingsComponent implements OnInit {
-  private motogpStandingsService = inject(MotogpStandingsService);
+export class GameStandingsComponent implements OnInit {
+  private gameStandingsService = inject(GameStandingsService);
 
-  standings = this.motogpStandingsService.standings;
+  standings = this.gameStandingsService.standings;
 
   async ngOnInit() {
-    await this.motogpStandingsService.getStandings();
+    await this.gameStandingsService.getStandings();
   }
 
   maxPoints = computed(() =>
-    Math.max(...this.standings().map((standing) => standing.points))
+    Math.max(...this.standings().map((standing) => standing.credits))
   );
 
   pageSize = 12;
