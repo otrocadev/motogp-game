@@ -3,8 +3,8 @@ import { GrandPrixService } from '../../../grand-prix/grand-prix.service';
 import { MotogpStandingsService } from '../../../motogp-standings/motogp-standings.service';
 import { baseImgUrl } from '../../../config/endpoints';
 import { formatDates } from '../../../shared/utils/utils';
-import type { NextGrandPrix } from '../../../shared/types/race.types';
-import type { Top5StandingInfo } from '../../../shared/types/standing.types';
+import type { NextGrandPrix } from '../../../grand-prix/types/grand-prix.types';
+import type { Top5StandingInfo } from '../../../motogp-standings/motogp-standing.types';
 import { Top5StandingsComponent } from './top5-standings/top5-standings.component';
 
 @Component({

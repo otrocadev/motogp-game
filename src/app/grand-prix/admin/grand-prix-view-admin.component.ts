@@ -6,7 +6,7 @@ import { MapboxViewComponent } from '../../shared/components/mapbox-view/mapbox-
 import { MapMarker } from '../../shared/components/mapbox-view/mapbox-view.component';
 import { GrandPrixViewMenuAdminComponent } from './grand-prix-view-menu-admin/grand-prix-view-menu-admin.component';
 import { GrandPrixFiltersAdminComponent } from './grand-prix-filters-admin/grand-prix-filters-admin.component';
-import { GrandPrixCalendarEvent } from '../../shared/types/race.types';
+import { GrandPrixCalendarEvent } from '../types/grand-prix.types';
 
 @Component({
   selector: 'app-grand-prix-view-admin',

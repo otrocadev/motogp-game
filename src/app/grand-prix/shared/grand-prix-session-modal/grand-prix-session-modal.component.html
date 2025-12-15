@@ -1,0 +1,116 @@
+<main
+  class="bg-theme1 overflow-hidden grid grid-cols-[minmax(0,1fr)_18rem] border-2 border-theme4 rounded-lg shadow max-h-[calc(100vh-8rem)] xl:h-[calc(100vw-8rem)] xl:min-w-[1496px]"
+>
+  <div
+    class="flex flex-col overflow-y-hidden h-full bg-cover bg-[url('/images/resources/tarmac.jpg')]"
+  >
+    <h1
+      class="py-4 px-8 font-secondary text-theme6 font-bold text-2xl bg-theme1 border-b-2 border-theme4"
+    >
+      {{
+        userType() === "user" ? "Make your guesses" : "Official session results"
+      }}
+    </h1>
+    <section
+      cdkDropList
+      id="orderedRidersList"
+      #orderedRidersList="cdkDropList"
+      [cdkDropListData]="orderedRiders()"
+      [cdkDropListConnectedTo]="[allRidersList]"
+      (cdkDropListDropped)="drop($event)"
+      cdkDropListOrientation="mixed"
+      class="relative grid grid-cols-2 xl:grid-cols-4 w-8xl min-h-96 p-12 gap-x-14 gap-y-4 overflow-scroll pt-20"
+    >
+      <div
+        class="absolute top-4 w-full h-8 bg-[url('/images/resources/goal-line.svg')] bg-contain border-y-2 border-theme4"
+      ></div>
+      @if (!orderedRiders().length) {
+      <article
+        class="col-span-2 xl:col-span-4 text-theme6 border-dashed border-2 border-theme4 opacity-80 text-center py-12"
+      >
+        Drag the riders to start your guess on this session results
+      </article>
+      } @for (rider of orderedRiders(); track rider.number; let index = $index)
+      {
+      <article
+        cdkDrag
+        class="relative font-secondary inline-flex items-center justify-between w-full h-fit text-2xl font-bold bg-theme3 border-2 border-theme4 rounded-lg p-2 mb-0 cursor-grab"
+      >
+        <div
+          class="absolute -top-6 -left-8 w-72 border-8 border-b-0 border-theme4"
+        >
+          <span class="ml-1 w-8 text-center text-sm">
+            {{ index + 1 }}
+          </span>
+        </div>
+        <div class="flex items-center gap-4 w-54 l-2">
+          <span
+            class="relative text-3xl bottom-2 -rotate-6 font-bold text-theme6"
+          >
+            {{ rider.number }}
+          </span>
+          <span class="">
+            <p class="text-xs font-bold text-theme5">{{ rider.name }}</p>
+            <p class="text-xs font-extrabold text-theme5">
+              {{ rider.surname }}
+            </p>
+          </span>
+        </div>
+      </article>
+      }
+    </section>
+    <section class="w-full flex items-center justify-center">
+      <button
+        [class]="
+          !orderedRiders().length
+            ? 'w-fit bg-theme6/80 text-theme1 text-xl font-bold font-secondary rounded-lg p-4 opacity-90 cursor-not-allowed'
+            : 'w-fit bg-theme6 text-theme1 text-xl font-bold font-secondary rounded-lg p-4 cursor-pointer'
+        "
+        (click)="onSubmit()"
+      >
+        {{
+          userType() === "user"
+            ? "Submit your guesses"
+            : "Submit official session results"
+        }}
+      </button>
+    </section>
+  </div>
+  <div
+    class="flex flex-col shrink-0 gap-4 max-h-full overflow-hidden p-4 w-72 border-l-2 border-theme4"
+  >
+    <h2 class="sticky top-0 z-10 text-lg text-theme6 font-bold font-secondary">
+      Riders available:
+    </h2>
+    <aside
+      cdkDropList
+      id="allRidersList"
+      #allRidersList="cdkDropList"
+      [cdkDropListData]="allRiders()"
+      [cdkDropListConnectedTo]="[orderedRidersList]"
+      (cdkDropListDropped)="drop($event)"
+      class="flex flex-col shrink-0 gap-4 max-h-full overflow-y-scroll w-full"
+    >
+      @for (rider of allRiders(); track rider.number; let index = $index) {
+      <section
+        cdkDrag
+        class="font-secondary inline-flex items-center justify-between w-full h-fit text-2xl font-bold bg-theme3 border-2 border-theme4 rounded-lg p-2 mb-0 cursor-grab"
+      >
+        <div class="flex items-center gap-4 w-54 l-2">
+          <span
+            class="relative text-5xl bottom-2 -rotate-6 font-bold text-theme6"
+          >
+            {{ rider.number }}
+          </span>
+          <span class="">
+            <p class="text-sm font-bold text-theme5">{{ rider.name }}</p>
+            <p class="text-sm font-extrabold text-theme5">
+              {{ rider.surname }}
+            </p>
+          </span>
+        </div>
+      </section>
+      }
+    </aside>
+  </div>
+</main>

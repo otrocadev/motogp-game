@@ -14,7 +14,7 @@ export type NextGrandPrix = {
 };
 
 export interface GrandPrixEvent {
-  id?: string;
+  id?: number;
   name: string;
   location: string;
   circuit: string;

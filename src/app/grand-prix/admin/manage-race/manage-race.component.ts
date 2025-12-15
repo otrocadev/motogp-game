@@ -13,7 +13,7 @@ import {
   GrandPrixEvent,
   CreateRaceDialogData,
   CreateRaceForm,
-} from '../../../shared/types/race.types';
+} from '../../types/grand-prix.types';
 import { MapboxViewComponent } from '../../../shared/components/mapbox-view/mapbox-view.component';
 import { UploadImageService } from '../../../shared/data-access/upload-image.service';
 import { ToastNotificationService } from '../../../shared/components/toast-notification/toast-notification.service';
@@ -148,7 +148,7 @@ export class ManageRaceComponent {
 
   private patchEventData(): GrandPrixEvent {
     const eventData = {
-      id: this.data.eventId!,
+      id: parseInt(this.data.eventId!, 10),
       name: this.form.value.name!.toUpperCase(),
       location: this.form.value.location!.toUpperCase(),
       circuit: this.form.value.circuit!.toUpperCase(),
