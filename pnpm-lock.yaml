@@ -56,6 +56,9 @@ dependencies:
   '@types/mapbox__mapbox-gl-geocoder':
     specifier: ^5.1.0
     version: 5.1.0
+  atropos:
+    specifier: ^2.0.2
+    version: 2.0.2
   dotenv:
     specifier: ^17.2.3
     version: 17.2.3
@@ -4695,6 +4698,11 @@ packages:
 
   /asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
+    dev: false
+
+  /atropos@2.0.2:
+    resolution: {integrity: sha512-8f0u0hEOlBTWTSvzY17TcHuQjxUIpkTBq70/I4+UF5B43ORtOoRjm8TPBYEgLM8Ba9AWf6PDtkagbYoybdjaKg==}
+    engines: {node: '>= 12.0.0'}
     dev: false
 
   /autoprefixer@10.4.20(postcss@8.5.2):

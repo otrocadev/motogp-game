@@ -1,0 +1,53 @@
+<article class="w-80">
+  <div class="atropos rider-card">
+    <div class="atropos-scale">
+      <div class="atropos-rotate">
+        <div class="atropos-inner">
+          <div
+            class="w-full aspect-5/7 border-4 border-theme4 bg-[url('/images/cart-bg.jpg')] bg-cover relative rounded-3xl overflow-hidden"
+          >
+            <div
+              class="relative bg-gray-800/45 backdrop-blur-sm w-full h-full flex flex-col items-center justify-start"
+            >
+              <img
+                data-atropos-offset="-10"
+                class="w-xl max-w-none mt-8"
+                [src]="baseImgUrl + rider()?.img_url"
+                alt=""
+              />
+              <section
+                class="absolute left-0 bottom-0 w-full p-4 bg-theme2/90 border-t-4 border-theme4"
+              >
+                <h2
+                  class="font-secondary inline-flex items-center justify-between w-full text-2xl font-bold text-theme6 gap-4"
+                  data-atropos-offset="5"
+                >
+                  <div class="flex items-center gap-4 max-w-32">
+                    <span
+                      class="relative text-6xl -rotate-6 font-bold text-theme6"
+                    >
+                      {{ rider()?.number }}
+                    </span>
+                    <span class="">
+                      <p class="text-lg font-bold text-theme5">
+                        {{ rider()?.name }}
+                      </p>
+                      <p class="text-lg font-extrabold text-theme5">
+                        {{ rider()?.surname }}
+                      </p>
+                    </span>
+                  </div>
+                  <img
+                    [src]="imgPath()"
+                    class="flex text-lg text-theme5 font-light w-12"
+                    data-atropos-offset="5"
+                  />
+                </h2>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
