@@ -7,7 +7,9 @@
     <h1
       class="py-4 px-8 font-secondary text-theme6 font-bold text-2xl bg-theme1 border-b-2 border-theme4"
     >
-      Your guesses:
+      {{
+        userType() === "user" ? "Make your guesses" : "Official session results"
+      }}
     </h1>
     <section
       cdkDropList
@@ -66,7 +68,11 @@
         "
         (click)="onSubmit()"
       >
-        Submit your guesses!
+        {{
+          userType() === "user"
+            ? "Submit your guesses"
+            : "Submit official session results"
+        }}
       </button>
     </section>
   </div>

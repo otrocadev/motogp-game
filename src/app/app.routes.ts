@@ -75,5 +75,21 @@ export const routes: Routes = [
       import('./home-page/admin-home/admin-home.component').then(
         (m) => m.AdminHomeComponent
       ),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./grand-prix/admin/grand-prix-view-admin.component').then(
+            (m) => m.GrandPrixViewAdminComponent
+          ),
+      },
+      {
+        path: 'sessions',
+        loadComponent: () =>
+          import(
+            './grand-prix/shared/grand-prix-list/grand-prix-list.component'
+          ).then((m) => m.GrandPrixListComponent),
+      },
+    ],
   },
 ];
