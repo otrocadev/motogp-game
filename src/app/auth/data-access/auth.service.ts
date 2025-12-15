@@ -1,6 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { SupabaseService } from '../../shared/data-access/supabase.service';
-import { environment } from '../../../environments/environment';
+
 import {
   SignInWithPasswordCredentials,
   SignUpWithPasswordCredentials,
@@ -19,6 +19,7 @@ export class AuthService {
     name: string | null;
     surname: string | null;
     role: 'admin' | 'user' | null;
+    credits: number | null;
   } | null>(null);
 
   isSessionActive = this._isSessionActive.asReadonly();
@@ -34,7 +35,7 @@ export class AuthService {
   }
 
   async updateUserInfo(userId: string | undefined) {
-    const { data, error, status } = await this._supabaseClient
+    const { data, error } = await this._supabaseClient
       .from('users')
       .select('*')
       .eq('id', userId)
@@ -53,6 +54,7 @@ export class AuthService {
         name: data.name,
         surname: data.surname,
         role: 'admin',
+        credits: data.credits,
       });
     } else {
       this._user.set({
@@ -62,6 +64,7 @@ export class AuthService {
         name: data.name,
         surname: data.surname,
         role: 'user',
+        credits: data.credits,
       });
     }
   }
