@@ -7,10 +7,11 @@ import type { NextGrandPrix } from '../../../grand-prix/types/grand-prix.types';
 import type { Top5StandingInfo } from '../../../motogp-standings/motogp-standing.types';
 import { Top5StandingsComponent } from './top5-standings/top5-standings.component';
 import { NextGpCardComponent } from './next-gp-card/next-gp-card.component';
+import { CreditsPageComponent } from '../../../credits-page/credits-page.component';
 
 @Component({
   selector: 'app-user-home-summary-page',
-  imports: [Top5StandingsComponent, NextGpCardComponent],
+  imports: [Top5StandingsComponent, NextGpCardComponent, CreditsPageComponent],
   templateUrl: './user-home-summary-page.component.html',
 })
 export class UserHomeSummaryPageComponent {
