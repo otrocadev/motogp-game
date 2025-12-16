@@ -37,6 +37,7 @@ export class GrandPrixSessionModalComponent implements OnInit {
   sessionType = signal<SessionType>('RACE');
   userId = signal<string>('');
   userType = signal<string>('user');
+  isLoading = signal<boolean>(false);
 
   // add condition to check if the session already in the BBDD
   constructor(
@@ -110,6 +111,11 @@ export class GrandPrixSessionModalComponent implements OnInit {
   }
 
   async onSubmit() {
+    if (!this.orderedRiders().length) {
+      this.toastNotificationService.show('Please order the riders', 'error');
+      return;
+    }
+    this.isLoading.set(true);
     if (this.userType() === 'admin') {
       try {
         await this.grandPrixSessionService.submitSessionResults(
@@ -119,6 +125,7 @@ export class GrandPrixSessionModalComponent implements OnInit {
       } catch (error) {
         this.toastNotificationService.show('Error submitting results', 'error');
       } finally {
+        this.isLoading.set(false);
         this.dialogRef.close();
       }
     } else if (this.userType() === 'user') {
@@ -130,6 +137,7 @@ export class GrandPrixSessionModalComponent implements OnInit {
       } catch (error) {
         this.toastNotificationService.show('Error submitting guesses', 'error');
       } finally {
+        this.isLoading.set(false);
         this.dialogRef.close();
       }
     }

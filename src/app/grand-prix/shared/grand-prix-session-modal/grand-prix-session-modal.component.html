@@ -4,21 +4,44 @@
   <div
     class="flex flex-col overflow-y-hidden h-full bg-cover bg-[url('/images/resources/tarmac.jpg')]"
   >
-    <h1
-      class="py-4 px-8 font-secondary text-theme6 font-bold text-2xl bg-theme1 border-b-2 border-theme4"
-    >
-      {{
-        userType() === "user"
-          ? "Make your guesses on the " +
-            sessionType().slice(0, 1) +
-            sessionType().slice(1).toLocaleLowerCase() +
-            " session"
-          : "Official session results" +
-            sessionType().slice(0, 1) +
-            sessionType().slice(1).toLocaleLowerCase() +
-            " session"
-      }}
-    </h1>
+    <section class="font-secondary flex justify-between">
+      <span
+        class="flex justify-center items-center rounded-br-2xl text-theme6 font-bold text-2xl bg-theme1 border-b-2 border-r-2 border-theme4"
+      >
+        <h1 class="px-4">
+          {{
+            userType() === "user"
+              ? "Make your guesses on the " +
+                sessionType().slice(0, 1) +
+                sessionType().slice(1).toLocaleLowerCase() +
+                " session"
+              : "Official session results" +
+                sessionType().slice(0, 1) +
+                sessionType().slice(1).toLocaleLowerCase() +
+                " session"
+          }}
+        </h1>
+      </span>
+      <span class="flex p-4">
+        <button
+          [class]="
+            !orderedRiders().length || isLoading()
+              ? 'w-fit bg-theme6/90 text-theme1 text-xl font-bold font-secondary rounded-lg p-4 opacity-90 cursor-not-allowed'
+              : 'w-fit bg-theme6 text-theme1 text-xl font-bold font-secondary rounded-lg p-4 cursor-pointer'
+          "
+          [disabled]="!orderedRiders().length || isLoading()"
+          (click)="onSubmit()"
+        >
+          {{
+            isLoading()
+              ? "Loading..."
+              : userType() === "user"
+              ? "Submit your guesses"
+              : "Submit official session results"
+          }}
+        </button>
+      </span>
+    </section>
     <section
       cdkDropList
       id="orderedRidersList"
@@ -66,22 +89,6 @@
         </div>
       </article>
       }
-    </section>
-    <section class="w-full flex items-center justify-center">
-      <button
-        [class]="
-          !orderedRiders().length
-            ? 'w-fit bg-theme6/80 text-theme1 text-xl font-bold font-secondary rounded-lg p-4 opacity-90 cursor-not-allowed'
-            : 'w-fit bg-theme6 text-theme1 text-xl font-bold font-secondary rounded-lg p-4 cursor-pointer'
-        "
-        (click)="onSubmit()"
-      >
-        {{
-          userType() === "user"
-            ? "Submit your guesses"
-            : "Submit official session results"
-        }}
-      </button>
     </section>
   </div>
   <div

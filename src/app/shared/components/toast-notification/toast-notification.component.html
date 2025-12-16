@@ -1,5 +1,5 @@
 <div
-  class="absolute bottom-8 right-8 inline-flex items-center w-full max-w-sm p-4 rounded-xl shadow-lg border border-theme4 text-theme5"
+  class="fixed bottom-8 right-8 inline-flex items-center w-full max-w-sm p-4 rounded-xl shadow-lg border border-theme4 text-theme5 z-9999"
   [class.bg-red-500]="toastNotificationService.toastType() === 'error'"
   [class.bg-green-500]="toastNotificationService.toastType() === 'success'"
 >
