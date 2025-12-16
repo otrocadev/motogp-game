@@ -1,0 +1,117 @@
+<main class="w-full p-4">
+  <h1 class="font-secondary text-3xl mb-4 text-theme6 text-shadow-lg font-bold">
+    Game Standings
+  </h1>
+  <!-- <div
+    class="w-full bg-theme1 rounded-lg overflow-hidden border-2 border-theme4"
+  >
+    <table class="w-full text-sm text-left">
+      <thead
+        class="bg-theme3 font-secondary text-theme6 uppercase border-b-2 border-theme4"
+      >
+        <tr>
+          <th scope="col" class="px-4 py-3">pos</th>
+          <th scope="col" class="px-4 py-3">user</th>
+          <th scope="col" class="px-4 py-3 text-center">gap</th>
+          <th scope="col" class="px-4 py-3">points</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (standing of standings(); track standing.username; let i = $index)
+        {
+        <tr class="border-b border-theme4 text-theme5">
+          <th
+            scope="row"
+            class="px-4 py-3 font-secondary text-theme6 italic text-lg"
+          >
+            {{ i + 1 }}
+          </th>
+          <td class="px-4 py-3 inline-flex gap-2 items-center">
+            {{ standing.username }}
+          </td>
+          <td class="px-4 py-3 text-center italic">
+            {{ standing.credits! - maxPoints() }}
+          </td>
+          <td
+            class="px-4 py-3 font-secondary text-xl font-extrabold text-theme6"
+          >
+            {{ standing.credits }}
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    <div
+      class="flex justify-around items-center border-t bg-theme3 border-theme4"
+    >
+      <section class="flex gap-2 justify-center">
+        Showing
+        <span class="italic">
+          {{
+            currentPage === totalPages() - 1
+              ? standings().length - currentPage * pageSize
+              : pageSize
+          }}
+        </span>
+        of <span class="italic">{{ standings().length }}</span> results
+      </section>
+      <section class="flex gap-2 justify-center p-2">
+        <button
+          class="p-2 rounded-full bg-theme4 text-theme1 cursor-pointer"
+          (click)="prevPage()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-left"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M5 12l14 0" />
+            <path d="M5 12l4 4" />
+            <path d="M5 12l4 -4" />
+          </svg>
+        </button>
+        <span class="inline-flex text-xs bg-theme4 rounded-lg">
+          @for (page of pages(); track page) {
+          <button
+            class="w-8 bg-theme4 rounded-lg text-theme1 cursor-pointer"
+            [class]="page === currentPage ? 'bg-theme6 scale-110' : 'bg-theme4'"
+            (click)="currentPage = page"
+          >
+            {{ page + 1 }}
+          </button>
+          }
+        </span>
+        <button
+          class="p-2 rounded-full bg-theme4 text-theme1 cursor-pointer"
+          (click)="nextPage()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-right"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M5 12l14 0" />
+            <path d="M15 16l4 -4" />
+            <path d="M15 8l4 4" />
+          </svg>
+        </button>
+      </section>
+    </div>
+  </div> -->
+</main>
