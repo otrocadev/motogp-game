@@ -26,8 +26,6 @@ export class GrandPrixSessionService {
   }
 
   async submitSessionResults(guessesData: AdminGuess[]) {
-    console.log('Sending data:', JSON.stringify(guessesData, null, 2));
-
     const { error: insertError, data: insertedData } =
       await this._supabaseService.supabaseClient
         .from('session_results')

@@ -36,7 +36,6 @@ export class MotogpStandingsComponent implements OnInit {
   }
 
   nextPage() {
-    console.log('next page');
     if (this.currentPage < this.totalPages() - 1) {
       this.currentPage++;
     }
