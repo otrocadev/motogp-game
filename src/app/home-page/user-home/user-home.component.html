@@ -1,10 +1,12 @@
-<main class="flex h-[calc(100vh-4rem)]">
-  <aside class="shrink-0 sticky top-16 h-[calc(100vh-4rem)] overflow-hidden">
+<main class="grid grid-cols-[1fr_5fr] h-[calc(100vh-4rem)]">
+  <aside
+    class="sticky top-16 h-[calc(100vh-4rem)] overflow-y-scroll overflow-x-auto"
+  >
     <app-aside-menu>
       <button
         (click)="handleMenuOptionChange('home')"
         [class]="menuOption() === 'home' ? 'bg-theme6 text-theme1' : ''"
-        class="w-64 overflow-hidden inline-flex gap-2 cursor-pointer items-center py-2 px-4 rounded-2xl hover:bg-theme6 hover:text-theme1"
+        class="w-full text-nowrap overflow-hidden inline-flex gap-2 cursor-pointer items-center py-2 px-4 rounded-2xl hover:bg-theme6 hover:text-theme1"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +30,7 @@
       <button
         (click)="handleMenuOptionChange('grand-prix')"
         [class]="menuOption() === 'grand-prix' ? 'bg-theme6 text-theme1' : ''"
-        class="w-64 overflow-hidden inline-flex gap-2 cursor-pointer items-center py-2 px-4 rounded-2xl hover:bg-theme6 hover:text-theme1"
+        class="w-full text-nowrap overflow-hidden inline-flex gap-2 cursor-pointer items-center py-2 px-4 rounded-2xl hover:bg-theme6 hover:text-theme1"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +59,7 @@
         [class]="
           menuOption() === 'motogp-standings' ? 'bg-theme6 text-theme1' : ''
         "
-        class="w-64 overflow-hidden inline-flex gap-2 cursor-pointer items-center py-2 px-4 rounded-2xl hover:bg-theme6 hover:text-theme1"
+        class="w-full text-nowrap overflow-hidden inline-flex gap-2 cursor-pointer items-center py-2 px-4 rounded-2xl hover:bg-theme6 hover:text-theme1"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +88,7 @@
         [class]="
           menuOption() === 'game-standings' ? 'bg-theme6 text-theme1' : ''
         "
-        class="w-64 overflow-hidden inline-flex gap-2 cursor-pointer items-center py-2 px-4 rounded-2xl hover:bg-theme6 hover:text-theme1"
+        class="w-full text-nowrap overflow-hidden inline-flex gap-2 cursor-pointer items-center py-2 px-4 rounded-2xl hover:bg-theme6 hover:text-theme1"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +112,7 @@
       <button
         (click)="handleMenuOptionChange('riders')"
         [class]="menuOption() === 'riders' ? 'bg-theme6 text-theme1' : ''"
-        class="w-64 overflow-hidden inline-flex gap-2 cursor-pointer items-center py-2 px-4 rounded-2xl hover:bg-theme6 hover:text-theme1"
+        class="w-full text-nowrap overflow-hidden inline-flex gap-2 cursor-pointer items-center py-2 px-4 rounded-2xl hover:bg-theme6 hover:text-theme1"
       >
         <svg
           width="32"
@@ -132,7 +134,7 @@
       </button>
     </app-aside-menu>
   </aside>
-  <content class="flex-1 p-4 overflow-y-auto">
+  <content class="p-4 overflow-y-auto">
     <router-outlet></router-outlet>
   </content>
 </main>
