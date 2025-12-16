@@ -3,41 +3,8 @@
     Home
   </h1>
   <div class="grid grid-cols-1 sm:grid-cols-2 grid-rows-3 gap-4">
-    <section
-      class="bg-theme1 p-4 rounded-lg border-2 border-theme4 flex flex-col justify-between gap-2 row-span-1"
-    >
-      <article>
-        <div class="flex items-center gap-2">
-          <img class="w-10 h-10" src="{{ gp().imageSrc }}" alt="" />
-          <span class="italic text-xl text-theme4">{{
-            gp().grandPrixDates
-          }}</span>
-        </div>
-        <h2 class="font-secondary text-6xl font-bold text-theme6">
-          {{ gp().name }}
-        </h2>
-      </article>
-      <span class="text-xl text-theme5 inline-flex items-center gap-2">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="icon icon-tabler icons-tabler-outline icon-tabler-map-pin"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
-          <path
-            d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"
-          />
-        </svg>
-        {{ gp().location }}</span
-      >
+    <section class="row-span-1">
+      <app-next-gp-card [nextGrandPrix]="nextGrandPrix()"></app-next-gp-card>
     </section>
     <section class="row-span-2">
       <app-top5-standings [top5riders]="top5Riders()"></app-top5-standings>
