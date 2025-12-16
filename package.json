@@ -28,6 +28,7 @@
     "@tailwindcss/postcss": "^4.1.17",
     "@types/mapbox__mapbox-gl-geocoder": "^5.1.0",
     "atropos": "^2.0.2",
+    "chart.js": "^4.5.1",
     "dotenv": "^17.2.3",
     "mapbox-gl": "^3.16.0",
     "postcss": "^8.5.6",
