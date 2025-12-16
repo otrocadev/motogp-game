@@ -2,9 +2,22 @@
   class="text-2xl flex flex-col bg-theme1 rounded-lg overflow-hidden border-2 border-theme4"
 >
   <div
-    class="p-4 font-bold italic bg-theme3 font-secondary text-theme6 uppercase border-b-2 border-theme4"
+    class="p-4 font-bold italic bg-theme3 text-theme6 flex items-center gap-2 uppercase border-b-2 border-theme4"
   >
-    TOP 5 CHAMPIONSHIP RIDERS
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="36"
+      height="36"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      class="icon icon-tabler icons-tabler-filled icon-tabler-play-card-5"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path
+        d="M17 2a3 3 0 0 1 3 3v14a3 3 0 0 1 -3 3h-10a3 3 0 0 1 -3 -3v-14a3 3 0 0 1 3 -3zm.01 16h-.01a1 1 0 0 0 0 2h.01a1 1 0 0 0 0 -2m-3.01 -10h-4a1 1 0 0 0 -1 1v3a1 1 0 0 0 1 1h3v1h-3a1 1 0 0 0 0 2h3a2 2 0 0 0 2 -2v-1l-.005 -.15a2 2 0 0 0 -1.995 -1.85h-2v-1h3a1 1 0 0 0 0 -2m-6.99 -4h-.01a1 1 0 1 0 0 2h.01a1 1 0 1 0 0 -2"
+      />
+    </svg>
+    Top riders
   </div>
   <table class="w-full">
     <tbody>
@@ -20,7 +33,7 @@
           </span>
           <span>{{ rider.name.slice(0, 1) + ". " + rider.surname }}</span>
         </td>
-        <td>
+        <td class="text-center text-theme6">
           {{ rider.points }}
         </td>
       </tr>
