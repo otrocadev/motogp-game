@@ -6,17 +6,19 @@ import { formatDates } from '../../../shared/utils/utils';
 import type { NextGrandPrix } from '../../../grand-prix/types/grand-prix.types';
 import type { Top5StandingInfo } from '../../../motogp-standings/motogp-standing.types';
 import { Top5StandingsComponent } from './top5-standings/top5-standings.component';
+import { NextGpCardComponent } from './next-gp-card/next-gp-card.component';
+import { CreditsPageComponent } from '../../../credits-page/credits-page.component';
 
 @Component({
   selector: 'app-user-home-summary-page',
-  imports: [Top5StandingsComponent],
+  imports: [Top5StandingsComponent, NextGpCardComponent, CreditsPageComponent],
   templateUrl: './user-home-summary-page.component.html',
 })
 export class UserHomeSummaryPageComponent {
   private _grandPrixService = inject(GrandPrixService);
   private _motogpStandingsService = inject(MotogpStandingsService);
   baseImgUrl = baseImgUrl;
-  nextGrandPrix = signal<NextGrandPrix | null>(null);
+  nextGrandPrix = signal<NextGrandPrix>({} as NextGrandPrix);
   top5riders = signal<Top5StandingInfo[]>([]);
 
   async ngOnInit() {

@@ -6,12 +6,13 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { DIALOG_DATA } from '@angular/cdk/dialog';
+import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { RidersService } from '../../../riders/riders.service';
 import { AuthService } from '../../../auth/data-access/auth.service';
 import { GrandPrixSessionService } from '../../grand-prix-session.service';
 import { RiderInfo } from '../../../riders/rider.types';
 import { UserGuess, SessionType, AdminGuess } from '../../types/guess.types';
+import { ToastNotificationService } from '../../../shared/components/toast-notification/toast-notification.service';
 
 @Component({
   selector: 'app-grand-prix-session-modal',
@@ -27,12 +28,16 @@ export class GrandPrixSessionModalComponent implements OnInit {
   private ridersService = inject(RidersService);
   private authService = inject(AuthService);
   private grandPrixSessionService = inject(GrandPrixSessionService);
+  private toastNotificationService = inject(ToastNotificationService);
+  dialogRef = inject(DialogRef);
+
   orderedRiders = signal<RiderInfo[]>([]);
   allRiders = signal<RiderInfo[]>([]);
   grandPrixId = signal<number>(0);
   sessionType = signal<SessionType>('RACE');
   userId = signal<string>('');
   userType = signal<string>('user');
+  isLoading = signal<boolean>(false);
 
   // add condition to check if the session already in the BBDD
   constructor(
@@ -105,15 +110,36 @@ export class GrandPrixSessionModalComponent implements OnInit {
     return formattedData;
   }
 
-  onSubmit() {
+  async onSubmit() {
+    if (!this.orderedRiders().length) {
+      this.toastNotificationService.show('Please order the riders', 'error');
+      return;
+    }
+    this.isLoading.set(true);
     if (this.userType() === 'admin') {
-      this.grandPrixSessionService.submitSessionResults(
-        this.formatetAdminResultsArray()
-      );
+      try {
+        await this.grandPrixSessionService.submitSessionResults(
+          this.formatetAdminResultsArray()
+        );
+        this.toastNotificationService.show('Results submitted successfully');
+      } catch (error) {
+        this.toastNotificationService.show('Error submitting results', 'error');
+      } finally {
+        this.isLoading.set(false);
+        this.dialogRef.close();
+      }
     } else if (this.userType() === 'user') {
-      this.grandPrixSessionService.submitSessionGuesses(
-        this.formatetUserGuessesArray()
-      );
+      try {
+        await this.grandPrixSessionService.submitSessionGuesses(
+          this.formatetUserGuessesArray()
+        );
+        this.toastNotificationService.show('Guesses submitted successfully');
+      } catch (error) {
+        this.toastNotificationService.show('Error submitting guesses', 'error');
+      } finally {
+        this.isLoading.set(false);
+        this.dialogRef.close();
+      }
     }
   }
 }

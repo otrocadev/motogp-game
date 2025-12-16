@@ -35,10 +35,17 @@ export const routes: Routes = [
           ).then((m) => m.GrandPrixListComponent),
       },
       {
-        path: 'standings',
+        path: 'motogp-standings',
         loadComponent: () =>
-          import('./motogp-standings/user/motogp-standings.component').then(
+          import('./motogp-standings/motogp-standings.component').then(
             (m) => m.MotogpStandingsComponent
+          ),
+      },
+      {
+        path: 'game-standings',
+        loadComponent: () =>
+          import('./game-standings/game-standings.component').then(
+            (m) => m.GameStandingsComponent
           ),
       },
       {

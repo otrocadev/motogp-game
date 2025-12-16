@@ -1,4 +1,4 @@
-import { Component, input, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ToastNotificationService } from '../toast-notification/toast-notification.service';
 
 @Component({
