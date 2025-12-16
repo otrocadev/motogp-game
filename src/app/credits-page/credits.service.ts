@@ -27,6 +27,7 @@ export class CreditsService {
       `
       )
       .eq('user_id', user.id)
+      .order('2026_grand_prixes(end_date)', { ascending: false })
       .limit(5);
 
     if (error) {
